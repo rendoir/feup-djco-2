@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4324108137798350}
   - component: {fileID: 137081196724618660}
-  - component: {fileID: 1596611241}
   m_Layer: 0
   m_Name: Barbarian Wyder
   m_TagString: Untagged
@@ -121,20 +120,6 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.27948382, y: -0.019828975, z: 0.00000071525574}
     m_Extent: {x: 0.8476794, y: 0.29246682, z: 0.9239605}
   m_DirtyAABB: 0
---- !u!64 &1596611241
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1022246661671576}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300000, guid: 006a8310361e17a42a3af42b9a2e3756, type: 3}
 --- !u!1 &1070290838494802
 GameObject:
   m_ObjectHideFlags: 0
@@ -458,6 +443,8 @@ GameObject:
   - component: {fileID: 4400326549755546}
   - component: {fileID: 95804848747135216}
   - component: {fileID: 1947473625}
+  - component: {fileID: 340658333}
+  - component: {fileID: 340658332}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -517,8 +504,35 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  m_Constraints: 112
+  m_CollisionDetection: 1
+--- !u!136 &340658333
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1327342949782858}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.2658082
+  m_Height: 1.5593837
+  m_Direction: 1
+  m_Center: {x: 0.006207794, y: 0.6926159, z: 0}
+--- !u!114 &340658332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1327342949782858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3b7cd1438638ec428f9bbca520f6ce8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
 --- !u!1 &1373352948634146
 GameObject:
   m_ObjectHideFlags: 0

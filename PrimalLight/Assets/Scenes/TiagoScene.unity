@@ -112,39 +112,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &340658328 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1327342949782858, guid: 14dd171a52655a84e80e7e6c77e81813,
-    type: 3}
-  m_PrefabInstance: {fileID: 1241578436}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &340658332
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 340658328}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3b7cd1438638ec428f9bbca520f6ce8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Speed: 10
---- !u!136 &340658333
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 340658328}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.2658082
-  m_Height: 1.5593837
-  m_Direction: 1
-  m_Center: {x: 0.006207794, y: 0.6926159, z: 0}
 --- !u!1 &1198306416
 GameObject:
   m_ObjectHideFlags: 0
@@ -280,43 +247,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4400326549755546, guid: 14dd171a52655a84e80e7e6c77e81813, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1947473625, guid: 14dd171a52655a84e80e7e6c77e81813, type: 3}
-      propertyPath: m_UseGravity
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1947473625, guid: 14dd171a52655a84e80e7e6c77e81813, type: 3}
-      propertyPath: m_IsKinematic
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1947473625, guid: 14dd171a52655a84e80e7e6c77e81813, type: 3}
-      propertyPath: m_CollisionDetection
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1947473625, guid: 14dd171a52655a84e80e7e6c77e81813, type: 3}
-      propertyPath: m_Mass
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1947473625, guid: 14dd171a52655a84e80e7e6c77e81813, type: 3}
-      propertyPath: m_Drag
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1947473625, guid: 14dd171a52655a84e80e7e6c77e81813, type: 3}
-      propertyPath: m_Constraints
-      value: 112
-      objectReference: {fileID: 0}
-    - target: {fileID: 137081196724618660, guid: 14dd171a52655a84e80e7e6c77e81813,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1596611241, guid: 14dd171a52655a84e80e7e6c77e81813, type: 3}
-      propertyPath: m_Convex
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1596611241, guid: 14dd171a52655a84e80e7e6c77e81813, type: 3}
-      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

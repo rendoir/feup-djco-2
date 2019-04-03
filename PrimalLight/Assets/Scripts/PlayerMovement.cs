@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovementTest : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
-    public float Speed = 5.0f;
+    public float speed = 5.0f;
 
     private Rigidbody rb;
 
@@ -16,10 +16,10 @@ public class PlayerMovementTest : MonoBehaviour
 
     void FixedUpdate()
     {
-        float moveHorizontal = Input.GetAxis("Horizontal");
-        float moveVertical = Input.GetAxis("Vertical");
+        Vector3 input = new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
 
-        Vector3 movement = (new Vector3(moveHorizontal, 0.0f, moveVertical))*Speed;
+        Vector3 movement = input * speed;
+        movement = Vector3.ClampMagnitude(movement, speed);
         movement.y = rb.velocity.y;
 
         rb.velocity = movement;
