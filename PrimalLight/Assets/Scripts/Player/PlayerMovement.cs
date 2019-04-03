@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
     public Vector3 footOffset = new Vector3(0.1f, 0f, 0f);
     public float groundDistance = 0.1f;
 
-    public bool isOnGround;
+    private bool isOnGround;
 
     private Rigidbody rb;
 
@@ -32,10 +32,10 @@ public class PlayerMovement : MonoBehaviour
     void PhysicsCheck()
     {
         //Default values
-		isOnGround = false;
+        isOnGround = false;
 
-		//Cast rays for the left and right foot
-		bool leftCheck  = Physics.Raycast(transform.position + footOffset, -Vector3.up, groundDistance);
+        //Cast rays for the left and right foot
+        bool leftCheck  = Physics.Raycast(transform.position + footOffset, -Vector3.up, groundDistance);
         bool rightCheck = Physics.Raycast(transform.position - footOffset, -Vector3.up, groundDistance);
         //Debug.DrawRay(transform.position + footOffset, -Vector3.up * groundDistance, leftCheck ? Color.red : Color.green);
         //Debug.DrawRay(transform.position - footOffset, -Vector3.up * groundDistance, leftCheck ? Color.red : Color.green);
