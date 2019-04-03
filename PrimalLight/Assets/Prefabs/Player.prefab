@@ -537,6 +537,9 @@ MonoBehaviour:
   airMovementMultiplier: 0.5
   footOffset: {x: 0.1, y: 0, z: 0}
   groundDistance: 0.1
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 1024
   isOnGround: 0
 --- !u!1 &1373352948634146
 GameObject:
