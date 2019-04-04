@@ -173,7 +173,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 713548782}
-  m_LocalRotation: {x: -0.14521314, y: 1.09327714e-10, z: -7.4489737e-10, w: -0.9894004}
+  m_LocalRotation: {x: -0.14521314, y: 1.0932773e-10, z: -7.4489737e-10, w: -0.9894004}
   m_LocalPosition: {x: 0.45, y: 2, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -258,7 +258,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1198306416}
-  m_LocalRotation: {x: -0.14521314, y: 1.09327714e-10, z: -7.4489737e-10, w: -0.9894004}
+  m_LocalRotation: {x: -0.14521314, y: 1.0932773e-10, z: -7.4489737e-10, w: -0.9894004}
   m_LocalPosition: {x: 0.45, y: 2, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -374,6 +374,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1947473625, guid: 14dd171a52655a84e80e7e6c77e81813, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1947473625, guid: 14dd171a52655a84e80e7e6c77e81813, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1947473625, guid: 14dd171a52655a84e80e7e6c77e81813, type: 3}
+      propertyPath: m_Interpolate
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 340658332, guid: 14dd171a52655a84e80e7e6c77e81813, type: 3}
+      propertyPath: jumpForce
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 340658332, guid: 14dd171a52655a84e80e7e6c77e81813, type: 3}
+      propertyPath: movementSpeed
+      value: 50
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14dd171a52655a84e80e7e6c77e81813, type: 3}
 --- !u!1 &1435607032
@@ -389,7 +409,7 @@ GameObject:
   - component: {fileID: 1435607034}
   - component: {fileID: 1435607033}
   - component: {fileID: 1435607037}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -463,7 +483,7 @@ Transform:
   m_GameObject: {fileID: 1435607032}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.6557814, y: 0.47, z: -6.13}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
@@ -476,14 +496,14 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1435607032}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 500
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  m_Constraints: 126
+  m_CollisionDetection: 1
 --- !u!1 &1500496227
 GameObject:
   m_ObjectHideFlags: 3
@@ -660,7 +680,7 @@ GameObject:
   - component: {fileID: 1904188762}
   - component: {fileID: 1904188761}
   - component: {fileID: 1904188765}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}

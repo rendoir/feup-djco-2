@@ -37,11 +37,11 @@ public class PlayerMovement : MonoBehaviour
     void PhysicsCheck()
     {
         //Default values
-		isOnGround = false;
+        isOnGround = false;
 
-		//Cast rays for the left and right foot
+        //Cast rays for the left and right foot
         int mask = 1 << groundLayer.value;
-		bool leftCheck  = Physics.Raycast(transform.position + footOffset, -Vector3.up, groundDistance, mask);
+        bool leftCheck  = Physics.Raycast(transform.position + footOffset, -Vector3.up, groundDistance, mask);
         bool rightCheck = Physics.Raycast(transform.position - footOffset, -Vector3.up, groundDistance, mask);
         //Debug.DrawRay(transform.position + footOffset, -Vector3.up * groundDistance, leftCheck ? Color.red : Color.green);
         //Debug.DrawRay(transform.position - footOffset, -Vector3.up * groundDistance, leftCheck ? Color.red : Color.green);
@@ -55,19 +55,19 @@ public class PlayerMovement : MonoBehaviour
         Vector3 input = new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
         bool jumpPressed = Input.GetButtonDown("Jump");
 
-
         //Walk
         Vector3 velocity = input * movementSpeed;
         if(!isOnGround) 
             velocity *= airMovementMultiplier; //Limit walk control in the air
         velocity = Vector3.ClampMagnitude(velocity, movementSpeed); //Clamp velocity
         velocity.y = rb.velocity.y;
-        rb.velocity = velocity;
 
+        rb.velocity = velocity;
 
         //Jump
         if(jumpPressed && isOnGround)
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            
     }
 
     void Animate()
