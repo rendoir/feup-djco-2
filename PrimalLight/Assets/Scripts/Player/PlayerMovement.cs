@@ -13,30 +13,36 @@ public class PlayerMovement : MonoBehaviour
     [Header("Physics")]
     public Vector3 footOffset = new Vector3(0.1f, 0f, 0f);
     public float groundDistance = 0.1f;
+    public LayerMask groundLayer;
 
-    private bool isOnGround;
+    public bool isOnGround;
 
     private Rigidbody rb;
+    private Animator anim;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        anim = GetComponent<Animator>();
+        groundLayer = LayerMask.NameToLayer("Ground");
     }
 
     void FixedUpdate()
     {
         PhysicsCheck();
         Move();
+        Animate();
     }
 
     void PhysicsCheck()
     {
         //Default values
-        isOnGround = false;
+		isOnGround = false;
 
-        //Cast rays for the left and right foot
-        bool leftCheck  = Physics.Raycast(transform.position + footOffset, -Vector3.up, groundDistance);
-        bool rightCheck = Physics.Raycast(transform.position - footOffset, -Vector3.up, groundDistance);
+		//Cast rays for the left and right foot
+        int mask = 1 << groundLayer.value;
+		bool leftCheck  = Physics.Raycast(transform.position + footOffset, -Vector3.up, groundDistance, mask);
+        bool rightCheck = Physics.Raycast(transform.position - footOffset, -Vector3.up, groundDistance, mask);
         //Debug.DrawRay(transform.position + footOffset, -Vector3.up * groundDistance, leftCheck ? Color.red : Color.green);
         //Debug.DrawRay(transform.position - footOffset, -Vector3.up * groundDistance, leftCheck ? Color.red : Color.green);
 
@@ -62,5 +68,16 @@ public class PlayerMovement : MonoBehaviour
         //Jump
         if(jumpPressed && isOnGround)
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+    }
+
+    void Animate()
+    {
+        Vector3 velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+        float movementSpeed = velocity.magnitude;
+        float jumpingSpeed = Mathf.Abs(Mathf.Clamp(1.0f/rb.velocity.y, -1f, 1f));
+
+        anim.SetFloat("movementSpeed", movementSpeed);
+        anim.SetBool("isJumping", !isOnGround);
+        anim.SetFloat("jumpingSpeed", jumpingSpeed);
     }
 }
