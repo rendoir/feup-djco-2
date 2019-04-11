@@ -24,7 +24,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
-        groundLayer = LayerMask.NameToLayer("Ground");
+        groundLayer = LayerMask.NameToLayer("Surface");
     }
 
     void FixedUpdate()
