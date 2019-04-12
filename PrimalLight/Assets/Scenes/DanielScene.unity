@@ -215,7 +215,7 @@ GameObject:
   - component: {fileID: 174063843}
   - component: {fileID: 174063845}
   m_Layer: 0
-  m_Name: Point Light
+  m_Name: Realtime Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -266,14 +266,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 174063842}
-  m_LocalRotation: {x: -0, y: -0.3711071, z: -0, w: 0.92859006}
-  m_LocalPosition: {x: 0, y: 2, z: -3}
+  m_LocalRotation: {x: -0, y: -0.37110713, z: -0, w: 0.9285901}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1014510528}
   - {fileID: 1588243333}
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_Father: {fileID: 301992958}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -43.568, z: 0}
 --- !u!114 &174063845
 MonoBehaviour:
@@ -301,6 +301,113 @@ MonoBehaviour:
   NoiseIntensityOffset: 0.2
   NoiseVelocity: {x: 0.75, y: 0.75}
   MaxRayLength: 400
+--- !u!1 &301992957
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 301992958}
+  - component: {fileID: 301992959}
+  m_Layer: 0
+  m_Name: AppleOfEden
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &301992958
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 301992957}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2, z: -3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 174063844}
+  - {fileID: 1652425393}
+  - {fileID: 449088498}
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &301992959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 301992957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29cd34c11a2b4c4adbf3cf8c3b42b409, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionTrigger: {fileID: 449088500}
+--- !u!1 &449088497
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 449088498}
+  - component: {fileID: 449088499}
+  - component: {fileID: 449088500}
+  m_Layer: 0
+  m_Name: Interaction Trigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &449088498
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 449088497}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 301992958}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &449088499
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 449088497}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 4, z: 1}
+  m_Center: {x: 0, y: 0, z: -1}
+--- !u!114 &449088500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 449088497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90b91a1110cbe577a9941df5e5408520, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1001 &1014510527
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -310,7 +417,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100000, guid: 1df9d78798e5811c388291422f24e88e, type: 3}
       propertyPath: m_Name
-      value: AppleOfEden
+      value: Model
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 1df9d78798e5811c388291422f24e88e, type: 3}
       propertyPath: m_IsActive
@@ -330,19 +437,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 1df9d78798e5811c388291422f24e88e, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: 0.12278774
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 1df9d78798e5811c388291422f24e88e, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.7071068
+      value: 0.6963643
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 1df9d78798e5811c388291422f24e88e, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.7071068
+      value: 0.6963643
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 1df9d78798e5811c388291422f24e88e, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
+      value: -0.12278774
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 1df9d78798e5811c388291422f24e88e, type: 3}
       propertyPath: m_RootOrder
@@ -358,7 +465,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 1df9d78798e5811c388291422f24e88e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 180
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 1df9d78798e5811c388291422f24e88e, type: 3}
       propertyPath: m_LocalScale.y
@@ -552,6 +659,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 340658332, guid: 14dd171a52655a84e80e7e6c77e81813, type: 3}
+      propertyPath: groundLayer.m_Bits
+      value: 1024
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14dd171a52655a84e80e7e6c77e81813, type: 3}
 --- !u!1 &1479554122
@@ -654,7 +765,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100000, guid: 589a0677c4d9fd34b8a685e62b31ad67, type: 3}
       propertyPath: m_Name
-      value: AppleOfEdenFlip
+      value: ModelFlip
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 589a0677c4d9fd34b8a685e62b31ad67, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -869,7 +980,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100000, guid: 589a0677c4d9fd34b8a685e62b31ad67, type: 3}
       propertyPath: m_Name
-      value: AppleOfEdenFlip
+      value: ModelFlip
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 589a0677c4d9fd34b8a685e62b31ad67, type: 3}
       propertyPath: m_IsActive
@@ -889,19 +1000,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 589a0677c4d9fd34b8a685e62b31ad67, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.068698674
+      value: 0.12276631
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 589a0677c4d9fd34b8a685e62b31ad67, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.7037617
+      value: 0.6962427
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 589a0677c4d9fd34b8a685e62b31ad67, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.70376164
+      value: 0.69648576
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 589a0677c4d9fd34b8a685e62b31ad67, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.068698645
+      value: -0.12280917
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 589a0677c4d9fd34b8a685e62b31ad67, type: 3}
       propertyPath: m_RootOrder
@@ -917,7 +1028,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 589a0677c4d9fd34b8a685e62b31ad67, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 168.84901
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 589a0677c4d9fd34b8a685e62b31ad67, type: 3}
       propertyPath: m_LocalScale.x
@@ -929,7 +1040,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 589a0677c4d9fd34b8a685e62b31ad67, type: 3}
       propertyPath: m_LocalScale.z
-      value: 50
+      value: 50.00001
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 589a0677c4d9fd34b8a685e62b31ad67, type: 3}
@@ -970,7 +1081,7 @@ GameObject:
   - component: {fileID: 1652425393}
   - component: {fileID: 1652425392}
   m_Layer: 0
-  m_Name: Point Light Bake
+  m_Name: Static Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1022,12 +1133,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1652425391}
   m_LocalRotation: {x: -0, y: -0.06820909, z: -0, w: 0.99767107}
-  m_LocalPosition: {x: 0, y: 2, z: -3}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2141809215}
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_Father: {fileID: 301992958}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: -7.8220005, z: 0}
 --- !u!1 &1660497808
 GameObject:

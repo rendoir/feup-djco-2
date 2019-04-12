@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -24,7 +21,6 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
-        groundLayer = LayerMask.NameToLayer("Surface");
     }
 
     void FixedUpdate()
@@ -40,9 +36,8 @@ public class PlayerMovement : MonoBehaviour
         isOnGround = false;
 
         //Cast rays for the left and right foot
-        int mask = 1 << groundLayer.value;
-        bool leftCheck  = Physics.Raycast(transform.position + footOffset, -Vector3.up, groundDistance, mask);
-        bool rightCheck = Physics.Raycast(transform.position - footOffset, -Vector3.up, groundDistance, mask);
+        bool leftCheck  = Physics.Raycast(transform.position + footOffset, -Vector3.up, groundDistance, groundLayer.value);
+        bool rightCheck = Physics.Raycast(transform.position - footOffset, -Vector3.up, groundDistance, groundLayer.value);
         //Debug.DrawRay(transform.position + footOffset, -Vector3.up * groundDistance, leftCheck ? Color.red : Color.green);
         //Debug.DrawRay(transform.position - footOffset, -Vector3.up * groundDistance, leftCheck ? Color.red : Color.green);
 
