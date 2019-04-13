@@ -842,7 +842,7 @@ PrefabInstance:
     - target: {fileID: 2300000, guid: 589a0677c4d9fd34b8a685e62b31ad67, type: 3}
       propertyPath: m_LightmapParameters
       value: 
-      objectReference: {fileID: 15203, guid: 0000000000000000f000000000000000, type: 0}
+      objectReference: {fileID: 15200, guid: 0000000000000000f000000000000000, type: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 589a0677c4d9fd34b8a685e62b31ad67, type: 3}
 --- !u!1 &1538998468
