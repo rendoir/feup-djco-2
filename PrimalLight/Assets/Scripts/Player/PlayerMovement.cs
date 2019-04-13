@@ -25,6 +25,12 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        if( GameManager.IsInputCaptured() ) {
+            StopPlayer();
+            Animate();
+            return;
+        }
+
         PhysicsCheck();
         Move();
         Animate();
@@ -74,5 +80,12 @@ public class PlayerMovement : MonoBehaviour
         anim.SetFloat("movementSpeed", movementSpeed);
         anim.SetBool("isJumping", !isOnGround);
         anim.SetFloat("jumpingSpeed", jumpingSpeed);
+    }
+
+    void StopPlayer()
+    {
+        Vector3 stopVelocity = Vector3.zero;
+        stopVelocity.y = rb.velocity.y;
+        rb.velocity = stopVelocity;
     }
 }
