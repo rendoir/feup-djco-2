@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -56,8 +57,18 @@ public class PlayerMovement : MonoBehaviour
         Vector3 input = new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
         bool jumpPressed = Input.GetButtonDown("Jump");
 
+        // the movement direction is the way the came is facing
+        Vector3 Direction = Camera.main.transform.forward * input.z +
+                            Vector3.Cross(Camera.main.transform.forward, Vector3.up) *  -input.x;
+
+        //rotates the player to face in the camera direction if he is moving
+        if(Math.Abs(input.x) > 0.0f || Math.Abs(input.z) > 0.0f)
+        {
+            transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, Camera.main.transform.localEulerAngles.y, transform.localEulerAngles.z);
+        }
+
         //Walk
-        Vector3 velocity = input * movementSpeed;
+        Vector3 velocity = Direction * movementSpeed;
         if(!isOnGround) 
             velocity *= airMovementMultiplier; //Limit walk control in the air
         velocity = Vector3.ClampMagnitude(velocity, movementSpeed); //Clamp velocity
