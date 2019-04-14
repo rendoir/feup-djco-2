@@ -350,8 +350,13 @@ MonoBehaviour:
   interactionTrigger: {fileID: 449088500}
   appleOfEden: {fileID: 174063842}
   matchTransform: {fileID: 1652425393}
+  isPuzzleComplete: 0
   isPlayerInteracting: 0
   allowableError: 5
+  fadeTime: 0.5
+  towardsSpeed: 5
+  rotateSpeed: 1.5
+  resetSpeed: 50
 --- !u!1 &449088497
 GameObject:
   m_ObjectHideFlags: 0

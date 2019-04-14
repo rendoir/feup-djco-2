@@ -6,25 +6,36 @@ public class AppleOfEden : MonoBehaviour, InteractionObserver
     public InteractionTrigger interactionTrigger;
     public GameObject appleOfEden;
     public Transform matchTransform;
+    private Quaternion initialRotation;
 
     public bool isPuzzleComplete;
     public bool isPlayerInteracting;
+    private bool playerCancelled;
     
     public float allowableError = 5f;
     public float fadeTime = 0.5f;
     public float towardsSpeed = 5f;
     public float rotateSpeed = 1.5f;
+    public float resetSpeed = 50f;
 
     void Start() {
         interactionTrigger.SetObserver(this);
         isPlayerInteracting = false;
         isPuzzleComplete = false;
+        playerCancelled = false;
+        initialRotation = appleOfEden.transform.rotation;
     }
 
     void FixedUpdate() {
         if(isPuzzleComplete) {
             //After the puzzle is complete, rotate towards the target to match exactly with it
             appleOfEden.transform.rotation = Quaternion.RotateTowards(appleOfEden.transform.rotation, matchTransform.rotation, Time.deltaTime * towardsSpeed);
+            return;
+        }
+
+        if(playerCancelled) {
+            //When player cancels the puzze, reset the rotation 
+            appleOfEden.transform.rotation = Quaternion.RotateTowards(appleOfEden.transform.rotation, initialRotation, Time.deltaTime * resetSpeed);
             return;
         }
             
@@ -47,6 +58,7 @@ public class AppleOfEden : MonoBehaviour, InteractionObserver
         if(isPuzzleComplete)
             return;
 
+        playerCancelled = isPlayerInteracting;
         //Pressing the interact key should toggle the boolean
         //This means the player can try to solve the puzzle or cancel
         isPlayerInteracting = !isPlayerInteracting;
