@@ -43,9 +43,10 @@ public class AppleOfEden : MonoBehaviour, InteractionObserver
             return;
 
         //Rotate AoE
-        float xAngle = Input.GetAxis("Vertical") * rotateSpeed;
-        float yAngle = Input.GetAxis("Horizontal") * rotateSpeed;
-        appleOfEden.transform.Rotate(xAngle, yAngle, 0f, Space.World);
+        float xAngle = Input.GetAxis("Rotation") * rotateSpeed;
+        float yAngle = Input.GetAxis("Vertical") * rotateSpeed;
+        float zAngle = Input.GetAxis("Horizontal") * rotateSpeed;
+        appleOfEden.transform.Rotate(xAngle, yAngle, zAngle, Space.Self);
 
         //Check if it matches
         float angle = Quaternion.Angle(matchTransform.rotation, appleOfEden.transform.rotation);
