@@ -4,6 +4,7 @@ using System.Collections.Generic;
 public class InteractionTrigger : MonoBehaviour
 {
     public LayerMask playerLayer;
+    public GameObject tooltip;
     private InteractionObserver observer;
 
     private bool isPlayerInside;
@@ -13,10 +14,12 @@ public class InteractionTrigger : MonoBehaviour
         isPlayerInside = false;
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        if(Input.GetKeyDown(KeyCode.E) && isPlayerInside)
+        if(Input.GetKeyDown(KeyCode.E) && isPlayerInside) {
             observer.OnPlayerInteract();
+            tooltip.SetActive(false);
+        }
     }
 
     public void SetObserver(InteractionObserver obs) {
@@ -25,13 +28,17 @@ public class InteractionTrigger : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if(Utils.MaskContainsLayer(playerLayer, other.gameObject.layer))
+        if(Utils.MaskContainsLayer(playerLayer, other.gameObject.layer)) {
             isPlayerInside = true;
+            tooltip.SetActive(true);
+        }
     }
 
     void OnTriggerExit(Collider other)
     {
-        if(Utils.MaskContainsLayer(playerLayer, other.gameObject.layer))
+        if(Utils.MaskContainsLayer(playerLayer, other.gameObject.layer)) {
             isPlayerInside = false;
+            tooltip.SetActive(false);
+        }
     }
 }

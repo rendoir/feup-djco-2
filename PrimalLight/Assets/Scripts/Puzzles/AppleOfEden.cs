@@ -70,6 +70,7 @@ public class AppleOfEden : MonoBehaviour, InteractionObserver
         //Debug.Log("Puzzle complete");
         isPuzzleComplete = true;
         isPlayerInteracting = false;
+        interactionTrigger.gameObject.SetActive(false);
         StartCoroutine(FreeInput());
     }
 
