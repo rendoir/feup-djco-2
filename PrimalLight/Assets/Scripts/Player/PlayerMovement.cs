@@ -3,10 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MovingObject
 {
     [Header("Movement")]
     public float movementSpeed = 5.0f;
+    public float pushingSpeed = 2.5f;
     public float jumpForce = 5f;
     public float airMovementMultiplier = 0.5f;
 
@@ -16,15 +17,19 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask groundLayer;
 
     public bool isOnGround;
+    public bool pushing = false;
 
-    private Rigidbody rb;
+    private bool pushButton;
+
     private Animator anim;
+    private GameObject pushableObject = null;
 
-    void Start()
+    protected override void Start()
     {
-        rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
         groundLayer = LayerMask.NameToLayer("Ground");
+
+        base.Start();
     }
 
     void FixedUpdate()
@@ -54,6 +59,10 @@ public class PlayerMovement : MonoBehaviour
         //Input
         Vector3 input = new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
         bool jumpPressed = Input.GetButtonDown("Jump");
+        pushButton = Input.GetButtonDown("Fire1");
+
+        if(pushing)
+    		return;
 
         //Walk
         Vector3 velocity = input * movementSpeed;
@@ -70,6 +79,53 @@ public class PlayerMovement : MonoBehaviour
             
     }
 
+	protected IEnumerator ClampToSpot (System.Action<bool> done, Vector3 targetPos, Quaternion targetRot, float inverseTransitionTime){
+		int count = 2;
+        StartCoroutine(SmoothMovement((bool end) => { count--;  }, targetPos,inverseTransitionTime));
+		StartCoroutine(SmoothRotation((bool end) => { count--;  }, targetRot, 100));
+        while(count > 0) {
+            yield return null;
+        }
+		done(true);
+	}
+
+    // Animation Events
+
+    void StopPushingEnd(){
+    	pushing = false;
+    }
+
+    void StartPushingEnd(){
+    	PushableObjectPad pad = pushableObject.GetComponent<PushableObjectPad>();
+    	Vector3 endPos = rb.position+pad.endPosOffset;
+    	float inverseMoveTime = pushingSpeed/pad.endPosOffset.magnitude;
+    	pushableObject.transform.parent.GetComponent<PushableObject>().Push(pad.endPosOffset,inverseMoveTime);
+    	StartCoroutine(SmoothMovement((bool done) => {
+    			anim.SetTrigger("stopPushing");
+    	},endPos,inverseMoveTime));
+    }
+
+    // Triggers
+
+    void OnTriggerStay(Collider other)
+    {
+        if (other.tag == "PushableObjectPad")
+        {
+            //Push
+	        if(!pushing && isOnGround && pushButton){
+	        	rb.velocity = Vector3.zero;
+                pushing = true;
+	        	pushableObject = other.gameObject;
+                PushableObjectPad pad = pushableObject.GetComponent<PushableObjectPad>();
+	        	Vector3 targetPos = pad.transform.position + pad.relStartPos;
+	        	Quaternion targetRot = Quaternion.Euler(transform.eulerAngles.x, pad.yRot, transform.eulerAngles.z);
+	        	StartCoroutine(ClampToSpot((bool end) => {
+	        		anim.SetTrigger("startPushing");
+	        	},targetPos,targetRot,1));
+	        }
+        }
+    }
+
     void Animate()
     {
         Vector3 velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
@@ -79,5 +135,6 @@ public class PlayerMovement : MonoBehaviour
         anim.SetFloat("movementSpeed", movementSpeed);
         anim.SetBool("isJumping", !isOnGround);
         anim.SetFloat("jumpingSpeed", jumpingSpeed);
+        anim.SetFloat("pushingSpeed", pushingSpeed);
     }
 }
