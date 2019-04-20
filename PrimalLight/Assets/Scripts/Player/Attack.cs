@@ -4,12 +4,14 @@ using DigitalRuby.LightningBolt;
 public class Attack : MonoBehaviour
 {
     public LightningBoltScript lightning;
+    public LineRenderer lineRenderer;
+    public ParticleSystem impactEffect;
     public LayerMask ignoreMask;
     public float maxDistance = 20f;
 
     void Start()
     {
-        lightning.gameObject.SetActive(false);
+        SetEnabled(false);
     }
 
     void FixedUpdate()
@@ -23,12 +25,16 @@ public class Attack : MonoBehaviour
 
             //If it hits an object, stick to it
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, ignoreMask)) {
-                float pw = (hit.point - transform.position).magnitude;
+                Vector3 directionToPlayer = hit.point - transform.position;
+                
+                float pw = directionToPlayer.magnitude;
                 if(pw > maxDistance)
                     miss = true;
 
                 lightning.EndPosition = hit.point;
-                lightning.gameObject.SetActive(true);
+                impactEffect.transform.position = hit.point;
+                impactEffect.transform.rotation = Quaternion.LookRotation(-directionToPlayer);
+                SetEnabled(true, true);
             } else miss = true;
             
             if(miss) {
@@ -53,10 +59,20 @@ public class Attack : MonoBehaviour
                 Vector3 w = Camera.main.transform.position + cw * u_vector;
 
                 lightning.EndPosition = w;
-                lightning.gameObject.SetActive(true);
+                SetEnabled(true);
             }
         } else {
-            lightning.gameObject.SetActive(false);
+            SetEnabled(false);
         }
+    }
+
+    private void SetEnabled(bool enable, bool enableEffect = false) {
+        lightning.enabled = enable;
+        lineRenderer.enabled = enable;
+        
+        if(enable && enableEffect && (!impactEffect.isPlaying || impactEffect.isStopped))
+            impactEffect.Play();
+        else if((!enable || !enableEffect) && impactEffect.isPlaying && !impactEffect.isStopped) 
+            impactEffect.Stop();
     }
 }
