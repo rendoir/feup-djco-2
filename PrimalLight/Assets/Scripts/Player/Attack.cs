@@ -6,6 +6,8 @@ public class Attack : MonoBehaviour
     public LightningBoltScript lightning;
     public LineRenderer lineRenderer;
     public ParticleSystem impactEffect;
+    public Light glowLight;
+    public float effectOffset = 0.5f;
     public LayerMask ignoreMask;
     public float maxDistance = 20f;
 
@@ -32,8 +34,9 @@ public class Attack : MonoBehaviour
                     miss = true;
 
                 lightning.EndPosition = hit.point;
-                impactEffect.transform.position = hit.point;
+                impactEffect.transform.position = hit.point - directionToPlayer.normalized*effectOffset;
                 impactEffect.transform.rotation = Quaternion.LookRotation(-directionToPlayer);
+                glowLight.transform.position = hit.point - directionToPlayer.normalized*effectOffset;
                 SetEnabled(true, true);
             } else miss = true;
             
@@ -68,7 +71,8 @@ public class Attack : MonoBehaviour
 
     private void SetEnabled(bool enable, bool enableEffect = false) {
         lightning.enabled = enable;
-        lineRenderer.enabled = enable;
+        lineRenderer.enabled = enable && enableEffect;
+        glowLight.enabled = enable;
         
         if(enable && enableEffect && (!impactEffect.isPlaying || impactEffect.isStopped))
             impactEffect.Play();
