@@ -13,6 +13,7 @@ public class Attack : MonoBehaviour
 
     void Start()
     {
+        glowLight.gameObject.SetActive(true);
         SetEnabled(false);
     }
 
