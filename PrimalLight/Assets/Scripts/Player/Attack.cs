@@ -38,6 +38,7 @@ public class Attack : MonoBehaviour
                 impactEffect.transform.position = hit.point - directionToPlayer.normalized*effectOffset;
                 impactEffect.transform.rotation = Quaternion.LookRotation(-directionToPlayer);
                 glowLight.transform.position = hit.point - directionToPlayer.normalized*effectOffset;
+                glowLight.intensity = Random.Range(0.5f,3f);
                 SetEnabled(true, true);
             } else miss = true;
             
@@ -72,8 +73,8 @@ public class Attack : MonoBehaviour
 
     private void SetEnabled(bool enable, bool enableEffect = false) {
         lightning.enabled = enable;
-        lineRenderer.enabled = enable && enableEffect;
-        glowLight.enabled = enable;
+        lineRenderer.enabled = enable;
+        glowLight.enabled = enable && enableEffect;
         
         if(enable && enableEffect && (!impactEffect.isPlaying || impactEffect.isStopped))
             impactEffect.Play();
