@@ -7,6 +7,7 @@ public class AppleOfEden : MonoBehaviour, InteractionObserver
     public GameObject appleOfEden;
     public Transform matchTransform;
     private Quaternion initialRotation;
+    public GameObject tooltip;
 
     public bool isPuzzleComplete;
     public bool isPlayerInteracting;
@@ -14,9 +15,12 @@ public class AppleOfEden : MonoBehaviour, InteractionObserver
     
     public float allowableError = 5f;
     public float fadeTime = 0.5f;
+    public float tooltipTime = 4f;
     public float towardsSpeed = 5f;
     public float rotateSpeed = 1.5f;
     public float resetSpeed = 50f;
+
+    private float tooltipTimeCounter;
 
     void Start() {
         interactionTrigger.SetObserver(this);
@@ -24,6 +28,7 @@ public class AppleOfEden : MonoBehaviour, InteractionObserver
         isPuzzleComplete = false;
         playerCancelled = false;
         initialRotation = appleOfEden.transform.rotation;
+        tooltipTimeCounter = tooltipTime;
     }
 
     void FixedUpdate() {
@@ -60,14 +65,17 @@ public class AppleOfEden : MonoBehaviour, InteractionObserver
             return;
 
         playerCancelled = isPlayerInteracting;
+        tooltipTimeCounter = tooltipTime;
         //Pressing the interact key should toggle the boolean
         //This means the player can try to solve the puzzle or cancel
         isPlayerInteracting = !isPlayerInteracting;
         GameManager.CaptureInput(isPlayerInteracting);
+        
+        tooltip.SetActive(true);
+        StartCoroutine(HideTooltip());
     }
 
     public void OnPuzzleComplete() {
-        //Debug.Log("Puzzle complete");
         isPuzzleComplete = true;
         isPlayerInteracting = false;
         interactionTrigger.gameObject.SetActive(false);
@@ -77,5 +85,11 @@ public class AppleOfEden : MonoBehaviour, InteractionObserver
     public IEnumerator FreeInput() {
         yield return new WaitForSeconds(fadeTime);
         GameManager.CaptureInput(false);
+    }
+
+    public IEnumerator HideTooltip() {
+        if(isPlayerInteracting && !playerCancelled && isPuzzleComplete)
+            yield return new WaitForSeconds(tooltipTime);
+        tooltip.SetActive(false);
     }
 }
