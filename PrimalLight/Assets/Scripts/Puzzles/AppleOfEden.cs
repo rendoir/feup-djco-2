@@ -88,7 +88,7 @@ public class AppleOfEden : MonoBehaviour, InteractionObserver
     }
 
     public IEnumerator HideTooltip() {
-        if(isPlayerInteracting && !playerCancelled && isPuzzleComplete)
+        if(isPlayerInteracting && !playerCancelled && !isPuzzleComplete)
             yield return new WaitForSeconds(tooltipTime);
         tooltip.SetActive(false);
     }
