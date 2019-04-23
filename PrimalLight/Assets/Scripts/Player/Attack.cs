@@ -10,11 +10,13 @@ public class Attack : MonoBehaviour
     public float effectOffset = 0.5f;
     public LayerMask ignoreMask;
     public float maxDistance = 20f;
+    public Vector3 offset;
 
     void Start()
     {
         glowLight.gameObject.SetActive(true);
         SetEnabled(false);
+        lightning.StartPosition = offset;
     }
 
     void FixedUpdate()

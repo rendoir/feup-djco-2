@@ -9999,6 +9999,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1041
   maxDistance: 20
+  offset: {x: 0, y: 0, z: 0}
 --- !u!1 &1373352948634146
 GameObject:
   m_ObjectHideFlags: 0
@@ -11190,26 +11191,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lightning
       objectReference: {fileID: 0}
-    - target: {fileID: 1615701647860445648, guid: 250a0d8560ab2074f9dd950cb3e77021,
-        type: 3}
-      propertyPath: StartObject
-      value: 
-      objectReference: {fileID: 1327342949782858}
-    - target: {fileID: 1615701647860445648, guid: 250a0d8560ab2074f9dd950cb3e77021,
-        type: 3}
-      propertyPath: Generations
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1615701647860445648, guid: 250a0d8560ab2074f9dd950cb3e77021,
-        type: 3}
-      propertyPath: Duration
-      value: 0.025
-      objectReference: {fileID: 0}
-    - target: {fileID: 1615701647860445648, guid: 250a0d8560ab2074f9dd950cb3e77021,
-        type: 3}
-      propertyPath: ChaosFactor
-      value: 0.075
-      objectReference: {fileID: 0}
     - target: {fileID: 1615701647849499610, guid: 250a0d8560ab2074f9dd950cb3e77021,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11309,6 +11290,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Parameters.colorGradient.key1.b
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1615701647860445648, guid: 250a0d8560ab2074f9dd950cb3e77021,
+        type: 3}
+      propertyPath: StartObject
+      value: 
+      objectReference: {fileID: 1327342949782858}
+    - target: {fileID: 1615701647860445648, guid: 250a0d8560ab2074f9dd950cb3e77021,
+        type: 3}
+      propertyPath: Generations
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1615701647860445648, guid: 250a0d8560ab2074f9dd950cb3e77021,
+        type: 3}
+      propertyPath: Duration
+      value: 0.025
+      objectReference: {fileID: 0}
+    - target: {fileID: 1615701647860445648, guid: 250a0d8560ab2074f9dd950cb3e77021,
+        type: 3}
+      propertyPath: ChaosFactor
+      value: 0.075
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 250a0d8560ab2074f9dd950cb3e77021, type: 3}
