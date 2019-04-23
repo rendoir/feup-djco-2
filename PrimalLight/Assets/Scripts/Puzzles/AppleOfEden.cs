@@ -69,7 +69,9 @@ public class AppleOfEden : MonoBehaviour, InteractionObserver
         //Pressing the interact key should toggle the boolean
         //This means the player can try to solve the puzzle or cancel
         isPlayerInteracting = !isPlayerInteracting;
-        GameManager.CaptureInput(isPlayerInteracting);
+        if(isPlayerInteracting)
+            GameManager.CaptureInput(true);
+        else StartCoroutine(FreeInput());
         
         tooltip.SetActive(true);
         StartCoroutine(HideTooltip());
