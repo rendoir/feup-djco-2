@@ -9952,9 +9952,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.2658082
-  m_Height: 1.5593837
+  m_Height: 1.4754057
   m_Direction: 1
-  m_Center: {x: 0.006207794, y: 0.6926159, z: 0}
+  m_Center: {x: 0.006207794, y: 0.73460495, z: 0}
 --- !u!114 &340658332
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11190,26 +11190,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lightning
       objectReference: {fileID: 0}
-    - target: {fileID: 1615701647860445648, guid: 250a0d8560ab2074f9dd950cb3e77021,
-        type: 3}
-      propertyPath: StartObject
-      value: 
-      objectReference: {fileID: 1327342949782858}
-    - target: {fileID: 1615701647860445648, guid: 250a0d8560ab2074f9dd950cb3e77021,
-        type: 3}
-      propertyPath: Generations
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1615701647860445648, guid: 250a0d8560ab2074f9dd950cb3e77021,
-        type: 3}
-      propertyPath: Duration
-      value: 0.025
-      objectReference: {fileID: 0}
-    - target: {fileID: 1615701647860445648, guid: 250a0d8560ab2074f9dd950cb3e77021,
-        type: 3}
-      propertyPath: ChaosFactor
-      value: 0.075
-      objectReference: {fileID: 0}
     - target: {fileID: 1615701647849499610, guid: 250a0d8560ab2074f9dd950cb3e77021,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11310,8 +11290,46 @@ PrefabInstance:
       propertyPath: m_Parameters.colorGradient.key1.b
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1615701647860445648, guid: 250a0d8560ab2074f9dd950cb3e77021,
+        type: 3}
+      propertyPath: StartObject
+      value: 
+      objectReference: {fileID: 1327342949782858}
+    - target: {fileID: 1615701647860445648, guid: 250a0d8560ab2074f9dd950cb3e77021,
+        type: 3}
+      propertyPath: Generations
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1615701647860445648, guid: 250a0d8560ab2074f9dd950cb3e77021,
+        type: 3}
+      propertyPath: Duration
+      value: 0.025
+      objectReference: {fileID: 0}
+    - target: {fileID: 1615701647860445648, guid: 250a0d8560ab2074f9dd950cb3e77021,
+        type: 3}
+      propertyPath: ChaosFactor
+      value: 0.075
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 250a0d8560ab2074f9dd950cb3e77021, type: 3}
+--- !u!120 &619496686 stripped
+LineRenderer:
+  m_CorrespondingSourceObject: {fileID: 1615701647858930414, guid: 250a0d8560ab2074f9dd950cb3e77021,
+    type: 3}
+  m_PrefabInstance: {fileID: 1615701648322713088}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &609887838 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1615701647849418846, guid: 250a0d8560ab2074f9dd950cb3e77021,
+    type: 3}
+  m_PrefabInstance: {fileID: 1615701648322713088}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &610074074 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1615701647849499610, guid: 250a0d8560ab2074f9dd950cb3e77021,
+    type: 3}
+  m_PrefabInstance: {fileID: 1615701648322713088}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &620095440 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1615701647860445648, guid: 250a0d8560ab2074f9dd950cb3e77021,
@@ -11324,21 +11342,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfb4d413de9f1d541915329635c9f2bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!120 &619496686 stripped
-LineRenderer:
-  m_CorrespondingSourceObject: {fileID: 1615701647858930414, guid: 250a0d8560ab2074f9dd950cb3e77021,
-    type: 3}
-  m_PrefabInstance: {fileID: 1615701648322713088}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &610074074 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1615701647849499610, guid: 250a0d8560ab2074f9dd950cb3e77021,
-    type: 3}
-  m_PrefabInstance: {fileID: 1615701648322713088}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &609887838 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1615701647849418846, guid: 250a0d8560ab2074f9dd950cb3e77021,
-    type: 3}
-  m_PrefabInstance: {fileID: 1615701648322713088}
-  m_PrefabAsset: {fileID: 0}
