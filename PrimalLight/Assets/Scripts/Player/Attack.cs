@@ -10,7 +10,8 @@ public class Attack : MonoBehaviour
     public float effectOffset = 0.5f;
     public LayerMask ignoreMask;
     public float maxDistance = 20f;
-    public Vector3 offset;
+    public float rayOffsetY = 0.7f;
+    public float rayOffsetForward = 0.9f;
     public Animator animator;
     public float animationDelay = 2f;
     private float animationDelayCounter = -1f;
@@ -21,7 +22,6 @@ public class Attack : MonoBehaviour
     {
         glowLight.gameObject.SetActive(true);
         SetEnabled(false);
-        lightning.StartPosition = offset;
     }
 
     void FixedUpdate()
@@ -121,15 +121,18 @@ public class Attack : MonoBehaviour
     }
 
     private void Rotate() {
-        /*Vector3 newDirection = Vector3.RotateTowards(transform.forward, 
-            lightning.EndPosition,
-            rotateSpeed * Time.deltaTime, 0.0f);
-        newDirection.y = transform.forward.y;
-        transform.rotation = Quaternion.LookRotation(newDirection);
+        if(isFiring) {
+            /*Vector3 newForward = lightning.EndPosition;
+            newForward.y = 0;
+            transform.rotation = Quaternion.LookRotation(newForward.normalized);*/
+            
+            Vector3 _direction = (lightning.EndPosition - transform.position).normalized;
+            _direction.y = 0;
+            Quaternion _lookRotation = Quaternion.LookRotation(_direction);
+            transform.rotation = Quaternion.Slerp(transform.rotation, _lookRotation, Time.deltaTime * rotateSpeed);
+        }
 
-        lightning.StartPosition = Vector3.RotateTowards(lightning.StartPosition, 
-            new Vector3(lightning.EndPosition.x, lightning.StartPosition.y, lightning.EndPosition.z),
-            rotateSpeed * Time.deltaTime, 0.0f);
-        */
+        lightning.StartPosition = transform.forward * rayOffsetForward;
+        lightning.StartPosition.y = rayOffsetY;
     }
 }
