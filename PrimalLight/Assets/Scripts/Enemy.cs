@@ -14,7 +14,7 @@ public class Enemy : MonoBehaviour
 
     void FixedUpdate()
     {
-        Debug.Log(health); //TODO Remove
+        //Debug.Log(health);
     }
 
     public void OnHit() {

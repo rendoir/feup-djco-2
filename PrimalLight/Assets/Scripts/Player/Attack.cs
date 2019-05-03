@@ -11,6 +11,7 @@ public class Attack : MonoBehaviour
     public LayerMask ignoreMask;
     public float maxDistance = 20f;
     public Vector3 offset;
+    public Animator animator;
 
     void Start()
     {
@@ -23,6 +24,7 @@ public class Attack : MonoBehaviour
     {
         //If user fires lightning
         if(Input.GetKey(KeyCode.Mouse0)) {
+            animator.SetBool("isAttacking", true);
             //Cast ray from camera to the mouse position
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
@@ -70,6 +72,7 @@ public class Attack : MonoBehaviour
                 SetEnabled(true);
             }
         } else {
+            animator.SetBool("isAttacking", false);
             SetEnabled(false);
         }
     }
