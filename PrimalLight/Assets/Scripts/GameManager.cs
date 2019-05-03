@@ -23,6 +23,10 @@ public class GameManager : MonoBehaviour
 		DontDestroyOnLoad(gameObject);
 	}
 
+	void Start() {
+		Cursor.lockState = CursorLockMode.Locked;
+	}
+
     public static void CaptureInput(bool shouldCapture) {
         current.isInputCaptured = shouldCapture;
     }
