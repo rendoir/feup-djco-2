@@ -689,12 +689,12 @@ PrefabInstance:
     - target: {fileID: 7783066640656053879, guid: 844af1052bca09349b82b6a4b29d16f0,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.030896468
+      value: 0.03089647
       objectReference: {fileID: 0}
     - target: {fileID: 7783066640656053879, guid: 844af1052bca09349b82b6a4b29d16f0,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.00042975703
+      value: 0.00042975706
       objectReference: {fileID: 0}
     - target: {fileID: 7783066640656053879, guid: 844af1052bca09349b82b6a4b29d16f0,
         type: 3}
@@ -888,6 +888,26 @@ PrefabInstance:
     - target: {fileID: 4400326549755546, guid: 14dd171a52655a84e80e7e6c77e81813, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1127796202, guid: 14dd171a52655a84e80e7e6c77e81813, type: 3}
+      propertyPath: offset.y
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1127796202, guid: 14dd171a52655a84e80e7e6c77e81813, type: 3}
+      propertyPath: offset.z
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1127796202, guid: 14dd171a52655a84e80e7e6c77e81813, type: 3}
+      propertyPath: offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1127796202, guid: 14dd171a52655a84e80e7e6c77e81813, type: 3}
+      propertyPath: animationDelay
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1127796202, guid: 14dd171a52655a84e80e7e6c77e81813, type: 3}
+      propertyPath: rotateSpeed
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14dd171a52655a84e80e7e6c77e81813, type: 3}

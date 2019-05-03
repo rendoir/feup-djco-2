@@ -12,6 +12,10 @@ public class Attack : MonoBehaviour
     public float maxDistance = 20f;
     public Vector3 offset;
     public Animator animator;
+    public float animationDelay = 2f;
+    private float animationDelayCounter = -1f;
+    private bool isFiring = false;
+    public float rotateSpeed = 20f;
 
     void Start()
     {
@@ -22,9 +26,16 @@ public class Attack : MonoBehaviour
 
     void FixedUpdate()
     {
+        isFiring = Input.GetKey(KeyCode.Mouse0);
+        
+        Animate();
+        PhysicsCheck();
+        Rotate();
+    }
+
+    private void PhysicsCheck() {
         //If user fires lightning
-        if(Input.GetKey(KeyCode.Mouse0)) {
-            animator.SetBool("isAttacking", true);
+        if(isFiring) {
             //Cast ray from camera to the mouse position
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
@@ -72,17 +83,18 @@ public class Attack : MonoBehaviour
                 SetEnabled(true);
             }
         } else {
-            animator.SetBool("isAttacking", false);
             SetEnabled(false);
         }
     }
 
     private void SetEnabled(bool enable, bool enableEffect = false) {
-        lightning.enabled = enable;
-        lineRenderer.enabled = enable;
-        glowLight.enabled = enable && enableEffect;
+        bool inDelay = animationDelayCounter < animationDelay;
+
+        lightning.enabled = enable && !inDelay;
+        lineRenderer.enabled = enable && !inDelay;
+        glowLight.enabled = enable && enableEffect && !inDelay;
         
-        if(enable && enableEffect && (!impactEffect.isPlaying || impactEffect.isStopped))
+        if(enable && enableEffect && !inDelay && (!impactEffect.isPlaying || impactEffect.isStopped))
             impactEffect.Play();
         else if((!enable || !enableEffect) && impactEffect.isPlaying && !impactEffect.isStopped) 
             impactEffect.Stop();
@@ -93,5 +105,31 @@ public class Attack : MonoBehaviour
         Enemy enemy = obj.GetComponent<Enemy>();
         if(enemy)
             enemy.OnHit();
+    }
+
+    private void Animate() {
+        if(isFiring) {
+            animator.SetBool("isAttacking", true);
+            if(animationDelayCounter >= 0f) {
+                animationDelayCounter += Time.deltaTime;
+                animationDelayCounter = Mathf.Min(animationDelayCounter, animationDelay);
+            } else animationDelayCounter = 0f;
+        } else {
+            animationDelayCounter = -1f;
+            animator.SetBool("isAttacking", false);
+        }
+    }
+
+    private void Rotate() {
+        /*Vector3 newDirection = Vector3.RotateTowards(transform.forward, 
+            lightning.EndPosition,
+            rotateSpeed * Time.deltaTime, 0.0f);
+        newDirection.y = transform.forward.y;
+        transform.rotation = Quaternion.LookRotation(newDirection);
+
+        lightning.StartPosition = Vector3.RotateTowards(lightning.StartPosition, 
+            new Vector3(lightning.EndPosition.x, lightning.StartPosition.y, lightning.EndPosition.z),
+            rotateSpeed * Time.deltaTime, 0.0f);
+        */
     }
 }
