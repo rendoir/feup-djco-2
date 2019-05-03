@@ -42,6 +42,7 @@ public class Attack : MonoBehaviour
                 glowLight.transform.position = hit.point - directionToPlayer.normalized*effectOffset;
                 glowLight.intensity = Random.Range(0.5f,3f);
                 SetEnabled(true, true);
+                OnHit(hit);
             } else miss = true;
             
             if(miss) {
@@ -82,5 +83,12 @@ public class Attack : MonoBehaviour
             impactEffect.Play();
         else if((!enable || !enableEffect) && impactEffect.isPlaying && !impactEffect.isStopped) 
             impactEffect.Stop();
+    }
+
+    private void OnHit(RaycastHit hit) {
+        GameObject obj = hit.transform.gameObject;
+        Enemy enemy = obj.GetComponent<Enemy>();
+        if(enemy)
+            enemy.OnHit();
     }
 }
