@@ -7,7 +7,7 @@ public class Attack : MonoBehaviour
     public LineRenderer lineRenderer;
     public ParticleSystem impactEffect;
     public Light glowLight;
-    public float effectOffset = 0.5f;
+    public float effectOffset = 0.1f;
     public LayerMask ignoreMask;
     public float maxDistance = 20f;
     public float rayOffsetY = 0.7f;
@@ -122,10 +122,6 @@ public class Attack : MonoBehaviour
 
     private void Rotate() {
         if(isFiring) {
-            /*Vector3 newForward = lightning.EndPosition;
-            newForward.y = 0;
-            transform.rotation = Quaternion.LookRotation(newForward.normalized);*/
-            
             Vector3 _direction = (lightning.EndPosition - transform.position).normalized;
             _direction.y = 0;
             Quaternion _lookRotation = Quaternion.LookRotation(_direction);
