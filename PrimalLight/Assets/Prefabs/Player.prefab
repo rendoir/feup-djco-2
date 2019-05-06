@@ -9999,8 +9999,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1041
   maxDistance: 20
-  offset: {x: 0.45, y: 0.45, z: 0}
+  rayOffsetY: 0.7
+  rayOffsetForward: 0.9
   animator: {fileID: 95804848747135216}
+  animationDelay: 0.25
+  rotateSpeed: 20
 --- !u!1 &1373352948634146
 GameObject:
   m_ObjectHideFlags: 0

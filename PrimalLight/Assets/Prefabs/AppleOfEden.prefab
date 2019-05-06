@@ -204,7 +204,7 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 1847
+    m_Bits: 5943
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
@@ -345,6 +345,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sphere
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 1c2d1e1831f1d86958fe43f5cd150aa1, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 1c2d1e1831f1d86958fe43f5cd150aa1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0
@@ -404,7 +408,7 @@ PrefabInstance:
     - target: {fileID: 2300000, guid: 1c2d1e1831f1d86958fe43f5cd150aa1, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: c462bd387e175f9209c54068c66a22d3, type: 2}
+      objectReference: {fileID: 2100000, guid: e766e35c05bbd4d6482cd737f11bc0bb, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c2d1e1831f1d86958fe43f5cd150aa1, type: 3}
 --- !u!4 &173517365527991840 stripped
