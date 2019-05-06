@@ -37,7 +37,7 @@ public class Attack : MonoBehaviour
         //If user fires lightning
         if(isFiring) {
             //Cast ray from camera to the mouse position
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
             RaycastHit hit;
             bool miss = false;
 
