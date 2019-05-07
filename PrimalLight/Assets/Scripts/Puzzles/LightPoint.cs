@@ -49,15 +49,7 @@ public class LightPoint : MonoBehaviour, InteractionObserver
         DrawPredictedReflectionPattern(laserClone.transform.position + laserClone.transform.forward * 0.75f, laserClone.transform.forward, 0);
     }
 
-    void OnDrawGizmos()
-    {
-        Handles.color = Color.red;
-        Handles.ArrowHandleCap(0, this.transform.position + this.transform.forward * 0.25f, this.transform.rotation, 0.5f, EventType.Repaint);
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(this.transform.position, 0.25f);
 
-        
-    }
 
     private void DrawPredictedReflectionPattern(Vector3 position, Vector3 direction, int refletionsMade)
     {
@@ -68,17 +60,21 @@ public class LightPoint : MonoBehaviour, InteractionObserver
 
         Vector3 startingPosition = position;
 
+        int layer_mask = LayerMask.GetMask("mirror");
+
         Ray ray = new Ray(position, direction);
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, maxStepDistance))
+        if (Physics.Raycast(ray, out hit, maxStepDistance, layer_mask))
         {
             direction = Vector3.Reflect(direction, hit.normal);
             position = hit.point;
             // Debug.Log(hit.point);
         }
-        else
+        else if(!Physics.Raycast(ray, out hit, maxStepDistance))
         {
             position += direction * maxStepDistance;
+        }else{
+            position = hit.point;
         }
 
         
@@ -103,7 +99,6 @@ public class LightPoint : MonoBehaviour, InteractionObserver
      
 
         laserClone = (GameObject) Instantiate(laserObject, transform.position, transform.rotation);
-        Debug.Log(laserClone.gameObject);
         
 
         Laser laser = laserClone.GetComponent<Laser>();
@@ -113,7 +108,6 @@ public class LightPoint : MonoBehaviour, InteractionObserver
         laserLR.transform.position = transform.position;
         laserLR.SetPosition(0, transform.position);
         laserLR.positionCount = maxReflectionCount + 1;
-        Debug.Log(laserLR.positionCount);
         DrawPredictedReflectionPattern(this.transform.position + this.transform.forward * 0.75f, this.transform.forward, 0);
 
         Input.ResetInputAxes();
