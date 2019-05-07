@@ -146,6 +146,9 @@ public class PlayerMovement : MovingObject
         float movementSpeed = velocity.magnitude;
         float jumpingSpeed = Mathf.Abs(Mathf.Clamp(1.0f/rb.velocity.y, -1f, 1f));
 
+        anim.SetFloat("horizontal", Input.GetAxis("Horizontal"));
+        anim.SetFloat("vertical", Input.GetAxis("Vertical"));
+
         anim.SetFloat("movementSpeed", movementSpeed);
         anim.SetBool("isJumping", !isOnGround);
         anim.SetFloat("jumpingSpeed", jumpingSpeed);
