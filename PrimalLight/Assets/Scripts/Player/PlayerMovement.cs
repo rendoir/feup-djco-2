@@ -63,7 +63,10 @@ public class PlayerMovement : MovingObject
         //Input
         Vector3 input = new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
         bool jumpPressed = Input.GetButtonDown("Jump");
-        pushButton = Input.GetButtonDown("Fire1");
+        pushButton = Input.GetButtonDown("Interact");
+
+        if(pushing)
+    		return;
 
         // the movement direction is the way the came is facing
         Vector3 Direction = Camera.main.transform.forward * input.z +
@@ -74,9 +77,6 @@ public class PlayerMovement : MovingObject
         {
             transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, Camera.main.transform.localEulerAngles.y, transform.localEulerAngles.z);
         }
-
-        if(pushing)
-    		return;
 
         //Walk
         Vector3 velocity = Direction * movementSpeed;
@@ -127,10 +127,12 @@ public class PlayerMovement : MovingObject
         {
             //Push
 	        if(!pushing && isOnGround && pushButton){
+                PushableObjectPad pad = other.gameObject.GetComponent<PushableObjectPad>();
+                if(!pad.CanPush())
+                    return;
 	        	rb.velocity = Vector3.zero;
                 pushing = true;
 	        	pushableObject = other.gameObject;
-                PushableObjectPad pad = pushableObject.GetComponent<PushableObjectPad>();
 	        	Vector3 targetPos = pad.transform.position + pad.relStartPos;
 	        	Quaternion targetRot = Quaternion.Euler(transform.eulerAngles.x, pad.yRot, transform.eulerAngles.z);
 	        	StartCoroutine(ClampToSpot((bool end) => {
