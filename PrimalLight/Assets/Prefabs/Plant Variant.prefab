@@ -43,6 +43,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialHealth: 20
   healthLoss: 5
+  meshRenderer: {fileID: 305122681365380268}
 --- !u!1001 &305122681360201484
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -98,19 +99,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 400022, guid: d4cfca1e53abdab518036538ac567e51, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 4.66
-      objectReference: {fileID: 0}
     - target: {fileID: 9500000, guid: d4cfca1e53abdab518036538ac567e51, type: 3}
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: deb2e9668c217227988d140678ce8c72, type: 2}
+    - target: {fileID: 400022, guid: d4cfca1e53abdab518036538ac567e51, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 4.66
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d4cfca1e53abdab518036538ac567e51, type: 3}
 --- !u!1 &305122681360101804 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: d4cfca1e53abdab518036538ac567e51,
+    type: 3}
+  m_PrefabInstance: {fileID: 305122681360201484}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &305122681365380268 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 13700000, guid: d4cfca1e53abdab518036538ac567e51,
     type: 3}
   m_PrefabInstance: {fileID: 305122681360201484}
   m_PrefabAsset: {fileID: 0}
