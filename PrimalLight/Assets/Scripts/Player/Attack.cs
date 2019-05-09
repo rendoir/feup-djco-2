@@ -42,7 +42,7 @@ public class Attack : MonoBehaviour
             bool miss = false;
 
             //If it hits an object, stick to it
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, ignoreMask)) {
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, ignoreMask, QueryTriggerInteraction.Ignore)) {
                 Vector3 directionToPlayer = hit.point - transform.position;
                 
                 float pw = directionToPlayer.magnitude;

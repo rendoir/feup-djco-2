@@ -36,12 +36,9 @@ public class Enemy : MonoBehaviour
         health -= Time.deltaTime * healthLoss;
 
         //Enemy died
-        if (health < 0)
-        {
+        if (health < 0) {
             if (!isDead)
-            {
                 OnDeath();
-            }
 
             health = 0;
         }
