@@ -796,6 +796,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4ac75a5a2729e5c6abbbe49a20508ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cooldown: 2
+  forwardBallOffset: 0.75
+  upBallOffset: 0.75
+  ballPrefab: {fileID: 6801711022126049753, guid: 023fef9ced483c1df887a9ffd8893c82,
+    type: 3}
   cloudPrefab: {fileID: 8014589121582920173, guid: bc4edb7ef812fc9a68a1eb1a4a79602f,
     type: 3}
 --- !u!1001 &1348279838

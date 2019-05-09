@@ -13,7 +13,7 @@ public class Enemy : MonoBehaviour
     private Material material;
 
     private bool isHit;
-    private bool isDead;
+    public bool isDead;
 
     void Start()
     {
