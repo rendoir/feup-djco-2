@@ -138,5 +138,7 @@ public class Attack : MonoBehaviour
 
     public void OnDeath() {
         isDead = true;
+        animator.SetBool("isAttacking", false);
+        SetEnabled(false);
     }
 }

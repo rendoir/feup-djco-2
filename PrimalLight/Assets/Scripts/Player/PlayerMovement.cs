@@ -171,5 +171,6 @@ public class PlayerMovement : MovingObject
 
 	public void OnDeath() {
 		isDead = true;
+		StopPlayer();
 	}
 }
