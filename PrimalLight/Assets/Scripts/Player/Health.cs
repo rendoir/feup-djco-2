@@ -7,16 +7,13 @@ public class Health : MonoBehaviour
     public float initialHealth = 20f;
 
     private bool isDead;
+    private Animator anim;
 
     void Start()
     {
+        anim = GetComponent<Animator>();
         health = initialHealth;
         isDead = false;
-    }
-
-    void FixedUpdate()
-    {
-
     }
 
     public void OnHit(float healthLoss)
@@ -26,14 +23,15 @@ public class Health : MonoBehaviour
         //Enemy died
         if (health < 0) {
             if (!isDead)
-                OnDeath();
+                BroadcastMessage("OnDeath");
 
             health = 0;
         }
     }
 
-    void OnDeath()
+    public void OnDeath()
     {
         isDead = true;
+        anim.SetTrigger("isDead");
     }
 }
