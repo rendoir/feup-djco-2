@@ -24,6 +24,8 @@ public class PlayerMovement : MovingObject
 	private Animator anim;
 	private GameObject pushableObject = null;
 
+	private bool isDead = false;
+
 	protected override void Start()
 	{
 		anim = GetComponent<Animator>();
@@ -33,6 +35,9 @@ public class PlayerMovement : MovingObject
 
 	void FixedUpdate()
 	{
+		if(isDead)
+			return;
+
 		if( GameManager.IsInputCaptured() ) {
 			StopPlayer();
 			Animate();
@@ -162,5 +167,9 @@ public class PlayerMovement : MovingObject
 		Vector3 stopVelocity = Vector3.zero;
 		stopVelocity.y = rb.velocity.y;
 		rb.velocity = stopVelocity;
+	}
+
+	public void OnDeath() {
+		isDead = true;
 	}
 }

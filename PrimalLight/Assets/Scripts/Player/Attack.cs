@@ -17,6 +17,7 @@ public class Attack : MonoBehaviour
     private float animationDelayCounter = -1f;
     private bool isFiring = false;
     public float rotateSpeed = 20f;
+    private bool isDead = false;
 
     void Start()
     {
@@ -26,6 +27,9 @@ public class Attack : MonoBehaviour
 
     void FixedUpdate()
     {
+        if(isDead)
+            return;
+
         isFiring = Input.GetKey(KeyCode.Mouse0);
         
         Animate();
@@ -130,5 +134,9 @@ public class Attack : MonoBehaviour
 
         lightning.StartPosition = transform.forward * rayOffsetForward;
         lightning.StartPosition.y = rayOffsetY;
+    }
+
+    public void OnDeath() {
+        isDead = true;
     }
 }

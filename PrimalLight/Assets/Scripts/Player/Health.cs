@@ -23,15 +23,15 @@ public class Health : MonoBehaviour
         //Enemy died
         if (health < 0) {
             if (!isDead)
-                OnDeath();
+                BroadcastMessage("OnDeath");
 
             health = 0;
         }
     }
 
-    void OnDeath()
+    public void OnDeath()
     {
         isDead = true;
-        //anim.SetBool("isDead", isDead);
+        anim.SetTrigger("isDead");
     }
 }

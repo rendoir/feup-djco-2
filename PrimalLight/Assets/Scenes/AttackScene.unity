@@ -131,6 +131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialHealth: 20
+  deadAnimation: {fileID: 7400000, guid: 29bab9a89367b619bb8383a020ab9a23, type: 3}
 --- !u!1 &307515910
 GameObject:
   m_ObjectHideFlags: 0
@@ -772,6 +773,7 @@ MonoBehaviour:
   healthLoss: 5
   meshRenderer: {fileID: 1583272364}
   animationControl: {fileID: 1045114059}
+  isDead: 0
 --- !u!114 &1045114059 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114075587891432594, guid: fc9ece646c03b5d4f8c2d3adfb6ffa0e,
@@ -796,12 +798,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4ac75a5a2729e5c6abbbe49a20508ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemy: {fileID: 0}
   cooldown: 2
   forwardBallOffset: 0.75
   upBallOffset: 0.75
   ballPrefab: {fileID: 6801711022126049753, guid: 023fef9ced483c1df887a9ffd8893c82,
-    type: 3}
-  cloudPrefab: {fileID: 8014589121582920173, guid: bc4edb7ef812fc9a68a1eb1a4a79602f,
     type: 3}
 --- !u!1001 &1348279838
 PrefabInstance:
