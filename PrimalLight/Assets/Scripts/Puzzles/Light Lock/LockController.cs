@@ -10,7 +10,7 @@ public class LockController : MonoBehaviour
 
     [Header("Lock Properties")]
     public Color Solution;
-    public float SolutionAcceptableError;
+    public float SolutionAcceptableError = 0.05f;
 
     private Renderer CurrentColorIndicatorRenderer;
     private Renderer IntendedColorIndicatorRenderer;
@@ -41,8 +41,11 @@ public class LockController : MonoBehaviour
     {
         this.CurrentColor = color;
         this.setCurrentColorIndicatorColor();
-        //TODO: use acceptable color range with error
-        if (this.CurrentColor == Solution)
+        
+        Debug.Log(this.CurrentColor+" vs "+this.Solution);
+        if (Math.Abs(this.CurrentColor.r - Solution.r) <= SolutionAcceptableError 
+            && Math.Abs(this.CurrentColor.g - Solution.g) <= SolutionAcceptableError
+            && Math.Abs(this.CurrentColor.b - Solution.b) <= SolutionAcceptableError)
         {
             this.isSolved = true;
         }
