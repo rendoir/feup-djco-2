@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8638967618642803941}
   - component: {fileID: 8638967618642803938}
-  - component: {fileID: 3423281788643457416}
   m_Layer: 0
   m_Name: Mixing Station
   m_TagString: Untagged
@@ -47,23 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Locks: []
---- !u!114 &3423281788643457416
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8638967618642803940}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04e0803ced961084ea4e42a41f372018, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Locks:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  canister: {fileID: 8638967619480958996}
 --- !u!1 &8638967619480958996
 GameObject:
   m_ObjectHideFlags: 0

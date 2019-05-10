@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CanisterController : MonoBehaviour
 {
@@ -11,13 +9,16 @@ public class CanisterController : MonoBehaviour
     [Header("Canister Properties")]
     public Color CanisterColor;
     public int TotalCanisterFluid = 100;
+    public float ExtractionRate = 0.01f;
     private int CurrentCanisterFluid;
 
     private MixingStationController mxController;
+    private Renderer canisRenderer;
 
     // Start is called before the first frame update
     void Start()
     {
+        this.canisRenderer = Canister.GetComponent<Renderer>();
         this.setColor(CanisterColor);
         this.mxController = this.MixingStation.GetComponent<MixingStationController>();
 
@@ -26,12 +27,33 @@ public class CanisterController : MonoBehaviour
 
     private void setColor(Color color)
     {
-        Renderer renderer = Canister.GetComponent<Renderer>();
-        renderer.material.shader = Shader.Find("_Color");
-        renderer.material.SetColor("_Color", color);
+        canisRenderer.material.shader = Shader.Find("_Color");
+        canisRenderer.material.SetColor("_Color", color);
 
         //Find the Specular shader and change its Color to red
-        renderer.material.shader = Shader.Find("Specular");
-        renderer.material.SetColor("_SpecColor", color);
+        canisRenderer.material.shader = Shader.Find("Specular");
+        canisRenderer.material.SetColor("_SpecColor", color);
+    }
+
+    public void addColor()
+    {
+        Color delta = CanisterColor;
+        delta.r *= ExtractionRate;
+        delta.g *= ExtractionRate;
+        delta.b *= ExtractionRate;
+        this.mxController.addColor(delta);
+        this.CanisterColor -= delta;
+        this.setColor(CanisterColor);
+    }
+
+    public void removeColor()
+    {
+        Color delta = CanisterColor;
+        delta.r *= ExtractionRate;
+        delta.g *= ExtractionRate;
+        delta.b *= ExtractionRate;
+        this.mxController.removeColor(delta);
+        this.CanisterColor += delta;
+        this.setColor(CanisterColor);
     }
 }

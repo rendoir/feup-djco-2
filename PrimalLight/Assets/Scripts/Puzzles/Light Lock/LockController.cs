@@ -30,8 +30,6 @@ public class LockController : MonoBehaviour
         this.setIntendedColorIndicatorColor();
         this.setCurrentColorIndicatorColor();
         this.setStatusindicatorColor();
-
-        this.setColor(Solution);
     }
 
     public Color getCurrentColor()
@@ -39,7 +37,7 @@ public class LockController : MonoBehaviour
         return this.CurrentColor;
     }
 
-    public void setColor(Color color)
+    private void setColor(Color color)
     {
         this.CurrentColor = color;
         this.setCurrentColorIndicatorColor();
@@ -98,5 +96,15 @@ public class LockController : MonoBehaviour
         //Find the Specular shader and change its Color to red
         this.StatusIndicatorRenderer.material.shader = Shader.Find("Specular");
         this.StatusIndicatorRenderer.material.SetColor("_SpecColor", indicatorColor);
+    }
+
+    public void addColor(Color delta)
+    {
+        this.setColor(this.CurrentColor+delta);
+    }
+
+    public void removeColor(Color delta)
+    {
+        this.setColor(this.CurrentColor-delta);
     }
 }
