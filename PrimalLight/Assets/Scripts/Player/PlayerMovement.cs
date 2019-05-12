@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MovingObject
+public class PlayerMovement : MovingObject, DeathObserver
 {
 	[Header("Movement")]
 	public float movementSpeed = 5.0f;
@@ -28,6 +28,7 @@ public class PlayerMovement : MovingObject
 
 	protected override void Start()
 	{
+		GameManager.RegisterDeathObserver(this);
 		anim = GetComponent<Animator>();
 
 		base.Start();
@@ -169,7 +170,7 @@ public class PlayerMovement : MovingObject
 		rb.velocity = stopVelocity;
 	}
 
-	public void OnDeath() {
+	public void OnPlayerDeath() {
 		isDead = true;
 		StopPlayer();
 	}

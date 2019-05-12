@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Health : MonoBehaviour
+public class Health : MonoBehaviour, DeathObserver
 {
     [Header("Health")]
     private float health;
@@ -14,6 +14,7 @@ public class Health : MonoBehaviour
         anim = GetComponent<Animator>();
         health = initialHealth;
         isDead = false;
+        GameManager.RegisterDeathObserver(this);
     }
 
     public void OnHit(float healthLoss)
@@ -23,13 +24,13 @@ public class Health : MonoBehaviour
         //Enemy died
         if (health < 0) {
             if (!isDead)
-                BroadcastMessage("OnDeath");
+                GameManager.PlayerDied();
 
             health = 0;
         }
     }
 
-    public void OnDeath()
+    public void OnPlayerDeath()
     {
         isDead = true;
         anim.SetTrigger("isDead");

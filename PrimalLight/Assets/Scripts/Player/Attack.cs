@@ -1,7 +1,7 @@
 using UnityEngine;
 using DigitalRuby.LightningBolt;
 
-public class Attack : MonoBehaviour
+public class Attack : MonoBehaviour, DeathObserver
 {
     public LightningBoltScript lightning;
     public LineRenderer lineRenderer;
@@ -23,6 +23,7 @@ public class Attack : MonoBehaviour
     {
         glowLight.gameObject.SetActive(true);
         SetEnabled(false);
+        GameManager.RegisterDeathObserver(this);
     }
 
     void FixedUpdate()
@@ -136,7 +137,7 @@ public class Attack : MonoBehaviour
         lightning.StartPosition.y = rayOffsetY;
     }
 
-    public void OnDeath() {
+    public void OnPlayerDeath() {
         isDead = true;
         animator.SetBool("isAttacking", false);
         SetEnabled(false);

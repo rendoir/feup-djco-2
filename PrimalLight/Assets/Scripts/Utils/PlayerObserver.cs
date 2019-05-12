@@ -5,3 +5,7 @@ public interface InteractionObserver
 {
     void OnPlayerInteract(); 
 }
+
+public interface DeathObserver {
+    void OnPlayerDeath();
+}
