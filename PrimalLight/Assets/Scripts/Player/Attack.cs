@@ -31,6 +31,11 @@ public class Attack : MonoBehaviour, DeathObserver
         if(isDead)
             return;
 
+        if(GameManager.IsInputCaptured()) {
+            StopAttack();
+            return;
+        }
+
         isFiring = Input.GetKey(KeyCode.Mouse0);
         
         Animate();
@@ -139,6 +144,10 @@ public class Attack : MonoBehaviour, DeathObserver
 
     public void OnPlayerDeath() {
         isDead = true;
+        StopAttack();
+    }
+
+    public void StopAttack() {
         animator.SetBool("isAttacking", false);
         SetEnabled(false);
     }
