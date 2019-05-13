@@ -30,9 +30,20 @@ public class Health : MonoBehaviour, DeathObserver
         }
     }
 
+    public void ResetHealth() 
+    {
+        health = initialHealth;
+    }
+
     public void OnPlayerDeath()
     {
         isDead = true;
         anim.SetTrigger("isDead");
     }
+
+    public void OnPlayerAlive() {
+        ResetHealth();
+		isDead = false;
+        anim.SetTrigger("isAlive");
+	}
 }

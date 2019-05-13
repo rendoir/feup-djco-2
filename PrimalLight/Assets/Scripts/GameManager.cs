@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
@@ -7,8 +8,12 @@ public class GameManager : MonoBehaviour
 	static GameManager current;
     bool isInputCaptured;
 
+	//Player
+	GameObject player;
+
 	//Handle player dying
 	List<DeathObserver> deathObservers = new List<DeathObserver>();
+	public float restartTime = 6f;
 
 	void Awake()
 	{
@@ -25,6 +30,9 @@ public class GameManager : MonoBehaviour
 
 		//Persist this object between scene reloads
 		DontDestroyOnLoad(gameObject);
+
+		//Find Player
+		player = GameObject.FindGameObjectWithTag("Player");
 	}
 
 	void Start() {
@@ -40,10 +48,21 @@ public class GameManager : MonoBehaviour
     }
 
 	public static void PlayerDied() {
-		foreach (DeathObserver obs in current.deathObservers) {
+		foreach (DeathObserver obs in current.deathObservers)
 			obs.OnPlayerDeath();
-		}
+
+		//Restart
+		current.StartCoroutine(current.RestartPlayer());
 	}
+
+	private IEnumerator RestartPlayer() {
+        yield return new WaitForSeconds(current.restartTime);
+
+		//TODO - Add checkpoints
+		
+		foreach (DeathObserver obs in current.deathObservers)
+			obs.OnPlayerAlive();
+    }
 
 	public static void RegisterDeathObserver(DeathObserver obs) {
 		current.deathObservers.Add(obs);

@@ -147,6 +147,10 @@ public class Attack : MonoBehaviour, DeathObserver
         StopAttack();
     }
 
+    public void OnPlayerAlive() {
+		isDead = false;
+	}
+
     public void StopAttack() {
         animator.SetBool("isAttacking", false);
         SetEnabled(false);

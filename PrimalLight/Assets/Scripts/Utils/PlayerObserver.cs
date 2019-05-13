@@ -8,4 +8,5 @@ public interface InteractionObserver
 
 public interface DeathObserver {
     void OnPlayerDeath();
+    void OnPlayerAlive();
 }

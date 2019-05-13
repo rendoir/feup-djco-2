@@ -175,4 +175,8 @@ public class PlayerMovement : MovingObject, DeathObserver
 		isDead = true;
 		StopPlayer();
 	}
+
+	public void OnPlayerAlive() {
+		isDead = false;
+	}
 }
