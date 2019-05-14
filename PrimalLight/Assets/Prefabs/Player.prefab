@@ -9970,10 +9970,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 5
   pushingSpeed: 2.5
-  jumpForce: 5
+  jumpForce: 275
   airMovementMultiplier: 0.5
   footOffset: {x: 0.1, y: 0, z: 0}
-  groundDistance: 0.1
+  groundDistance: 0.05
   groundLayer:
     serializedVersion: 2
     m_Bits: 1024
