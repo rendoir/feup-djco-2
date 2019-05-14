@@ -6,6 +6,7 @@ public class PoisonEnemy : EnemyAttack
     private float cooldownCounter = 0f;
     public float forwardBallOffset;
     public float upBallOffset;
+    public float force = 0.5f;
     public GameObject ballPrefab;
 
     protected override void UpdateAttack() {
@@ -13,7 +14,7 @@ public class PoisonEnemy : EnemyAttack
         if(cooldownCounter > cooldown) {
             cooldownCounter = 0f;
             GameObject obj = Instantiate(ballPrefab, transform.position + transform.forward * forwardBallOffset + transform.up * upBallOffset, transform.rotation);
-            obj.GetComponent<Rigidbody>().AddForce(transform.forward * 5f + transform.up * 5f, ForceMode.Impulse);
+            obj.GetComponent<Rigidbody>().AddForce(transform.forward * force + transform.up * force, ForceMode.Impulse);
         }
     }
 }

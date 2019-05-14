@@ -36,11 +36,12 @@ public class PlayerMovement : MovingObject, DeathObserver
 
 	void FixedUpdate()
 	{
-		if(isDead)
+		if(isDead) {
+			StopPlayer();
 			return;
+		}
 
 		if( GameManager.IsInputCaptured() ) {
-			StopPlayer();
 			PhysicsCheck();
 			Animate();
 			return;

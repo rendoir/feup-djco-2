@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -10,9 +11,12 @@ public class GameManager : MonoBehaviour
 
 	//Player
 	GameObject player;
+	Vector3 initialPosition;
+	Quaternion initialRotation;
 
 	//Handle player dying
 	List<DeathObserver> deathObservers = new List<DeathObserver>();
+	GameObject[] checkpoints;
 	public float restartTime = 6f;
 
 	void Awake()
@@ -30,14 +34,27 @@ public class GameManager : MonoBehaviour
 
 		//Persist this object between scene reloads
 		DontDestroyOnLoad(gameObject);
-
-		//Find Player
-		player = GameObject.FindGameObjectWithTag("Player");
 	}
 
 	void Start() {
-		Cursor.lockState = CursorLockMode.Locked;
+		//Cursor.lockState = CursorLockMode.Locked;
 	}
+
+	void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+	void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+		//Find Player
+		player = GameObject.FindGameObjectWithTag("Player");
+		initialPosition = player.transform.position;
+		initialRotation = player.transform.localRotation;
+
+		//Find Checkpoints
+		checkpoints = GameObject.FindGameObjectsWithTag("Checkpoint");
+    }
 
     public static void CaptureInput(bool shouldCapture) {
         current.isInputCaptured = shouldCapture;
@@ -57,12 +74,31 @@ public class GameManager : MonoBehaviour
 
 	private IEnumerator RestartPlayer() {
         yield return new WaitForSeconds(current.restartTime);
-
-		//TODO - Add checkpoints
 		
+		MovePlayerToClosestCheckpoint();
+
+		//Notify observers that the player is alive
 		foreach (DeathObserver obs in current.deathObservers)
 			obs.OnPlayerAlive();
     }
+
+	public void MovePlayerToClosestCheckpoint()
+	{
+		//If no checkpoints in the scene, move to initial position
+		Vector3 closestCheckpoint = initialPosition;
+		float currentDistance = Vector3.Distance(closestCheckpoint, player.transform.position);
+		
+		foreach(GameObject checkpoint in checkpoints) {
+			float checkpointDistance = Vector3.Distance(checkpoint.transform.position, player.transform.position);
+			if(checkpointDistance < currentDistance) {
+				closestCheckpoint = checkpoint.transform.position;
+				currentDistance = checkpointDistance;
+			}
+		}
+
+		player.transform.position = closestCheckpoint;
+		player.transform.localRotation = initialRotation;
+	} 
 
 	public static void RegisterDeathObserver(DeathObserver obs) {
 		current.deathObservers.Add(obs);
