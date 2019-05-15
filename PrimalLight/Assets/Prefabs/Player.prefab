@@ -9968,9 +9968,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3b7cd1438638ec428f9bbca520f6ce8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 5
+  movementSpeed: 3
   pushingSpeed: 2.5
   jumpForce: 275
+  sprintMultiplier: 2
   airMovementMultiplier: 0.5
   footOffset: {x: 0.1, y: 0, z: 0}
   groundDistance: 0.05
@@ -9979,6 +9980,7 @@ MonoBehaviour:
     m_Bits: 1024
   isOnGround: 0
   pushing: 0
+  sprint: 0
 --- !u!114 &1127796202
 MonoBehaviour:
   m_ObjectHideFlags: 0
