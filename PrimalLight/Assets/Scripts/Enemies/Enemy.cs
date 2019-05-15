@@ -14,12 +14,14 @@ public class Enemy : MonoBehaviour
 
     private bool isHit;
     public bool isDead;
+    public bool inConflict;
 
     void Start()
     {
         health = initialHealth;
         isHit = false;
         isDead = false;
+        inConflict = false;
         material = meshRenderer.material;
     }
 

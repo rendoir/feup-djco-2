@@ -10,7 +10,7 @@ public abstract class EnemyAttack : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(!enemy.isDead) {
+        if(!enemy.isDead && enemy.inConflict) {
             UpdateAttack();
         }
     }
