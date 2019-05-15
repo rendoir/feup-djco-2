@@ -6,9 +6,10 @@ using UnityEngine;
 public class PlayerMovement : MovingObject, DeathObserver
 {
 	[Header("Movement")]
-	public float movementSpeed = 5.0f;
+	public float movementSpeed = 3f;
 	public float pushingSpeed = 2.5f;
 	public float jumpForce = 5f;
+	public float sprintMultiplier = 2f;
 	public float airMovementMultiplier = 0.5f;
 
 	[Header("Physics")]
@@ -18,6 +19,8 @@ public class PlayerMovement : MovingObject, DeathObserver
 
 	public bool isOnGround;
 	public bool pushing = false;
+	public float sprint;
+	private Vector3 input;
 
 	private bool pushButton;
 
@@ -69,9 +72,10 @@ public class PlayerMovement : MovingObject, DeathObserver
 	void Move()
 	{
 		//Input
-		Vector3 input = new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
+		input = new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
 		bool jumpPressed = Input.GetButtonDown("Jump");
 		pushButton = Input.GetButtonDown("Interact");
+		sprint = Input.GetAxis("Sprint");
 
 		if(pushing)
 			return;
@@ -87,10 +91,13 @@ public class PlayerMovement : MovingObject, DeathObserver
 		}
 
 		//Walk
-		Vector3 velocity = Direction * movementSpeed;
+		float finalSpeed = movementSpeed;
+		finalSpeed += finalSpeed*sprint*(sprintMultiplier-1); //Increase speed while sprinting
 		if(!isOnGround) 
-			velocity *= airMovementMultiplier; //Limit walk control in the air
-		velocity = Vector3.ClampMagnitude(velocity, movementSpeed); //Clamp velocity
+			finalSpeed *= airMovementMultiplier; //Limit walk control in the air
+		
+		Vector3 velocity = Direction.normalized * finalSpeed;
+		velocity = Vector3.ClampMagnitude(velocity, finalSpeed); //Clamp velocity
 		velocity.y = rb.velocity.y;
 
 		rb.velocity = velocity;
@@ -98,7 +105,6 @@ public class PlayerMovement : MovingObject, DeathObserver
 		//Jump
 		if(jumpPressed && isOnGround)
 			rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-			
 	}
 
 	protected IEnumerator ClampToSpot (System.Action<bool> done, Vector3 targetPos, Quaternion targetRot, float inverseTransitionTime){
@@ -153,13 +159,15 @@ public class PlayerMovement : MovingObject, DeathObserver
 	void Animate()
 	{
 		Vector3 velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
-		float movementSpeed = velocity.magnitude;
+		float magnitude = velocity.magnitude;
 		float jumpingSpeed = Mathf.Abs(Mathf.Clamp(1.0f/rb.velocity.y, -1f, 1f));
 
-		anim.SetFloat("horizontal", !GameManager.IsInputCaptured() ? Input.GetAxis("Horizontal") : 0f);
-		anim.SetFloat("vertical", !GameManager.IsInputCaptured() ? Input.GetAxis("Vertical") : 0f);
+		Vector3 blend = input / sprintMultiplier + input * sprint / sprintMultiplier;
 
-		anim.SetFloat("movementSpeed", movementSpeed > 0 ? movementSpeed : 1f);
+		anim.SetFloat("horizontal", !GameManager.IsInputCaptured() ? blend.x : 0f);
+		anim.SetFloat("vertical", !GameManager.IsInputCaptured() ? blend.z : 0f);
+
+		//anim.SetFloat("movementSpeed", magnitude > Mathf.Epsilon ? magnitude : 1f);
 		anim.SetBool("isJumping", !isOnGround);
 		anim.SetFloat("jumpingSpeed", jumpingSpeed);
 		anim.SetFloat("pushingSpeed", pushingSpeed);

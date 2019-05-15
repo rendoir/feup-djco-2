@@ -27,7 +27,6 @@ public class EnemyMovement : MonoBehaviour
         float distance = Vector3.Distance(target.position, transform.position);
 
         if(distance <= lookRadius) {
-            enemy.inConflict = true;
             agent.isStopped = false;
             agent.SetDestination(target.position);
             anim.SetBool("isWalking", true);
@@ -36,6 +35,8 @@ public class EnemyMovement : MonoBehaviour
                 Stop();
                 FaceTarget();
             }
+
+            enemy.inConflict = true;
         } else {
             Stop();
         }
