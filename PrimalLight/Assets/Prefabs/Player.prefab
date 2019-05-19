@@ -9973,11 +9973,10 @@ MonoBehaviour:
   jumpForce: 275
   sprintMultiplier: 2
   airMovementMultiplier: 0.5
-  footOffset: {x: 0.1, y: 0, z: 0}
-  groundDistance: 0.05
   groundLayer:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 1025
+  playerColllider: {fileID: 340658333}
   isOnGround: 0
   pushing: 0
   sprint: 0

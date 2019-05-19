@@ -13,9 +13,9 @@ public class PlayerMovement : MovingObject, DeathObserver
 	public float airMovementMultiplier = 0.5f;
 
 	[Header("Physics")]
-	public Vector3 footOffset = new Vector3(0.1f, 0f, 0f);
 	public float groundDistance = 0.1f;
 	public LayerMask groundLayer;
+	public CapsuleCollider playerColllider;
 
 	public bool isOnGround;
 	public bool pushing = false;
@@ -28,11 +28,14 @@ public class PlayerMovement : MovingObject, DeathObserver
 	private GameObject pushableObject = null;
 
 	private bool isDead = false;
+	public float jumpCooldown = 0.1f;
+	private float jumpCooldownCounter;
 
 	protected override void Start()
 	{
 		GameManager.RegisterDeathObserver(this);
 		anim = GetComponent<Animator>();
+		jumpCooldownCounter = 0f;
 
 		base.Start();
 	}
@@ -57,16 +60,10 @@ public class PlayerMovement : MovingObject, DeathObserver
 
 	void PhysicsCheck()
 	{
-		//Default values
-		isOnGround = false;
-
-		//Cast rays for the left and right foot
-		bool leftCheck  = Physics.Raycast(transform.position + footOffset, -Vector3.up, groundDistance, groundLayer.value);
-		bool rightCheck = Physics.Raycast(transform.position - footOffset, -Vector3.up, groundDistance, groundLayer.value);
-		//Debug.DrawRay(transform.position + footOffset, -Vector3.up * groundDistance, leftCheck ? Color.red : Color.green);
-		//Debug.DrawRay(transform.position - footOffset, -Vector3.up * groundDistance, leftCheck ? Color.red : Color.green);
-
-		isOnGround = leftCheck || rightCheck;
+		isOnGround = Physics.CheckCapsule(playerColllider.bounds.center,
+			new Vector3(playerColllider.bounds.center.x, playerColllider.bounds.min.y - groundDistance, playerColllider.bounds.center.z),
+			playerColllider.radius,
+			groundLayer.value);
 	}
 
 	void Move()
@@ -103,8 +100,11 @@ public class PlayerMovement : MovingObject, DeathObserver
 		rb.velocity = velocity;
 
 		//Jump
-		if(jumpPressed && isOnGround)
+		jumpCooldownCounter += Time.fixedDeltaTime;
+		if(jumpPressed && isOnGround && jumpCooldownCounter >= jumpCooldown) {
+			jumpCooldownCounter = 0f;
 			rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+		}
 	}
 
 	protected IEnumerator ClampToSpot (System.Action<bool> done, Vector3 targetPos, Quaternion targetRot, float inverseTransitionTime){
