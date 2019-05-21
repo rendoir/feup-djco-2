@@ -8,6 +8,7 @@ public class PushableObjectPad : MonoBehaviour
 	public Vector3 relStartPos;
 	public Vector3 endPosOffset;
 	public float yRot = 0;
+    public string direction;
 	private PushableObject objectScript;
 
     // Start is called before the first frame update
