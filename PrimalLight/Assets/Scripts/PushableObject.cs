@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class PushableObject : MovingObject
 {
-
-	public Vector3 relMinBound;
-	public Vector3 relMaxBound;
-	public GameObject target; 
+    public bool bounded;
+    public Vector3 relMinBound;
+    public Vector3 relMaxBound;
+	public GameObject target;
 	private Vector3 initPos;
 
 	protected override void Start(){
@@ -16,7 +16,6 @@ public class PushableObject : MovingObject
 	}
 
     public void Push(Vector3 endPosOffset, float inverseMoveTime){
-    	// Check bounds
     	Vector3 endPos = rb.position+endPosOffset;
     	StartCoroutine(SmoothMovement( (bool done) => {}, endPos, inverseMoveTime));
     }
@@ -39,6 +38,6 @@ public class PushableObject : MovingObject
 
     public bool CanPush(Vector3 endPosOffset){
     	Vector3 endPos = rb.position+endPosOffset;
-    	return CheckInBounds(endPos-initPos);
+    	return bounded ? true : CheckInBounds(endPos-initPos);
     }
 }
