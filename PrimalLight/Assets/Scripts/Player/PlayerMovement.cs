@@ -49,6 +49,7 @@ public class PlayerMovement : MovingObject, DeathObserver
 
 		if( GameManager.IsInputCaptured() ) {
 			PhysicsCheck();
+			StopPlayer();
 			Animate();
 			return;
 		}
