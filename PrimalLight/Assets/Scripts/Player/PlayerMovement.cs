@@ -22,7 +22,7 @@ public class PlayerMovement : MovingObject, DeathObserver
 	public float sprint;
 	private Vector3 input;
 
-	private bool pushButton;
+	private bool interactButton;
 
 	private Animator anim;
 	private GameObject pushableObject = null;
@@ -49,6 +49,7 @@ public class PlayerMovement : MovingObject, DeathObserver
 
 		if( GameManager.IsInputCaptured() ) {
 			PhysicsCheck();
+			StopPlayer();
 			Animate();
 			return;
 		}
@@ -71,7 +72,7 @@ public class PlayerMovement : MovingObject, DeathObserver
 		//Input
 		input = new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
 		bool jumpPressed = Input.GetButtonDown("Jump");
-		pushButton = Input.GetButtonDown("Interact");
+		interactButton = Input.GetButtonDown("Interact");
 		sprint = Input.GetAxis("Sprint");
 
 		if(pushing)
@@ -140,7 +141,7 @@ public class PlayerMovement : MovingObject, DeathObserver
 		if (other.tag == "PushableObjectPad")
 		{
 			//Push
-			if(!pushing && isOnGround && pushButton){
+			if(!pushing && isOnGround && interactButton){
 				PushableObjectPad pad = other.gameObject.GetComponent<PushableObjectPad>();
 				if(!pad.CanPush())
 					return;
@@ -154,6 +155,14 @@ public class PlayerMovement : MovingObject, DeathObserver
 				},targetPos,targetRot,1));
 			}
 		}
+		else if (other.tag == "Pillar"){
+			if(isOnGround && interactButton){
+				PushableObjectPad pad = other.gameObject.GetComponent<PushableObjectPad>();
+				Pillar pillar = other.gameObject.transform.parent.GetComponent<Pillar>();
+				pillar.Move(pad.direction);
+			}
+		}
+
 	}
 
 	void Animate()

@@ -19,6 +19,9 @@ public class GameManager : MonoBehaviour
 	GameObject[] checkpoints;
 	public float restartTime = 6f;
 
+	//Artifacts
+	private int rewards = 0;
+
 	void Awake()
 	{
 		//If a Game Manager exists and this isn't it...
@@ -106,5 +109,9 @@ public class GameManager : MonoBehaviour
 
 	public static void RegisterDeathObserver(DeathObserver obs) {
 		current.deathObservers.Add(obs);
+	}
+
+	public static void OnRewardObtained() {
+		current.rewards++;
 	}
 }

@@ -5,10 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
+    path: Assets/Scenes/AppleOfEden.unity
+    guid: 758ab105ab19f039894be2761d23805d
+  - enabled: 0
     path: Assets/Scenes/AttackScene.unity
     guid: 9165c24fe7e1ff9f09773f746f7a6392
   - enabled: 1
-    path: Assets/Scenes/AppleOfEden.unity
-    guid: 758ab105ab19f039894be2761d23805d
+    path: Assets/Scenes/Cave.unity
+    guid: d26713d609161f953a874ccac9f6599d
   m_configObjects: {}

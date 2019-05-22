@@ -1,4 +1,5 @@
 using UnityEngine;
+using Cinemachine;
 using System.Collections;
 
 public class AppleOfEden : MonoBehaviour, InteractionObserver
@@ -8,6 +9,8 @@ public class AppleOfEden : MonoBehaviour, InteractionObserver
     public Transform matchTransform;
     private Quaternion initialRotation;
     public GameObject tooltip;
+    public CinemachineFreeLook appleCamera;
+    public ChestReward reward;
 
     public bool isPuzzleComplete;
     public bool isPlayerInteracting;
@@ -69,9 +72,15 @@ public class AppleOfEden : MonoBehaviour, InteractionObserver
         //Pressing the interact key should toggle the boolean
         //This means the player can try to solve the puzzle or cancel
         isPlayerInteracting = !isPlayerInteracting;
-        if(isPlayerInteracting)
+        if(isPlayerInteracting) {
             GameManager.CaptureInput(true);
-        else StartCoroutine(FreeInput());
+            EnableCamera();
+        }
+        else {
+            StartCoroutine(FreeInput());
+            DisableCamera();
+        }
+
         
         tooltip.SetActive(true);
         StartCoroutine(HideTooltip());
@@ -82,6 +91,8 @@ public class AppleOfEden : MonoBehaviour, InteractionObserver
         isPlayerInteracting = false;
         interactionTrigger.gameObject.SetActive(false);
         StartCoroutine(FreeInput());
+        DisableCamera();
+        reward.OnReward();
     }
 
     public IEnumerator FreeInput() {
@@ -93,5 +104,13 @@ public class AppleOfEden : MonoBehaviour, InteractionObserver
         if(isPlayerInteracting && !playerCancelled && !isPuzzleComplete)
             yield return new WaitForSeconds(tooltipTime);
         tooltip.SetActive(false);
+    }
+
+    public void DisableCamera() {
+        appleCamera.m_Priority = 0;
+    }
+
+    public void EnableCamera() {
+        appleCamera.m_Priority = 100;
     }
 }
