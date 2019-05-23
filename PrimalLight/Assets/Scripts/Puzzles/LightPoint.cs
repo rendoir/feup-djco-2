@@ -21,11 +21,13 @@ public class LightPoint : MonoBehaviour, InteractionObserver
     public float removeLaserTime = 3f;
 
     public GameObject laserObject;
+    public LayerMask mirrorMask;
+    public GameObject target;
 
     private GameObject laserClone;
-
     private LineRenderer laserLR;
     private float tooltipTimeCounter;
+    private Coroutine inputCoroutine;
 
 
     void Start() {
@@ -34,7 +36,7 @@ public class LightPoint : MonoBehaviour, InteractionObserver
         isPuzzleComplete = false;
         playerCancelled = false;
         tooltipTimeCounter = tooltipTime;
-        
+        inputCoroutine = null;
     }
 
     void FixedUpdate(){
@@ -43,11 +45,7 @@ public class LightPoint : MonoBehaviour, InteractionObserver
             return;
         }
 
-        if (playerCancelled)
-        {
-            // //When player cancels the puzze, reset the rotation 
-            // Destroy(laserClone.gameObject);
-            playerCancelled = false;
+        if (playerCancelled) {
             return;
         }
 
@@ -72,15 +70,13 @@ public class LightPoint : MonoBehaviour, InteractionObserver
 
         Vector3 startingPosition = position;
 
-        int layer_mask = LayerMask.GetMask("mirror");
-
         Ray ray = new Ray(position, direction);
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, maxStepDistance, layer_mask))
+        if (Physics.Raycast(ray, out hit, maxStepDistance, mirrorMask))
         {
             direction = Vector3.Reflect(direction, hit.normal);
             position = hit.point;
-            if(hit.collider.gameObject.name == "Target")
+            if(hit.collider.gameObject == target)
                 StartCoroutine(OnPuzzleComplete());
         }
         else if(!Physics.Raycast(ray, out hit, maxStepDistance))
@@ -107,18 +103,19 @@ public class LightPoint : MonoBehaviour, InteractionObserver
         tooltipTimeCounter = tooltipTime;
 
         isPlayerInteracting = !isPlayerInteracting;
-        if(isPlayerInteracting)
+        if(isPlayerInteracting) {
+            if(inputCoroutine != null)
+                StopCoroutine(inputCoroutine);
             GameManager.CaptureInput(true);
-        else StartCoroutine(FreeInput());
+        } else inputCoroutine = StartCoroutine(FreeInput());
+
+        tooltip.SetActive(true);
+        StartCoroutine(HideTooltip());
 
         if(playerCancelled){
             Destroy(laserClone);
             return;
         }
-    
-        tooltip.SetActive(true);
-        StartCoroutine(HideTooltip());
-     
 
         laserClone = (GameObject) Instantiate(laserObject, transform.position, transform.rotation);
         
@@ -130,10 +127,7 @@ public class LightPoint : MonoBehaviour, InteractionObserver
         laserLR.transform.position = transform.position;
         laserLR.SetPosition(0, transform.position);
         laserLR.positionCount = maxReflectionCount + 1;
-        DrawPredictedReflectionPattern(this.transform.position + this.transform.forward * 0.75f, this.transform.forward, 0);
-
-        Input.ResetInputAxes();
-        
+        DrawPredictedReflectionPattern(this.transform.position + this.transform.forward * 0.75f, this.transform.forward, 0);        
     }
 
     public IEnumerator OnPuzzleComplete() {

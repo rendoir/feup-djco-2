@@ -24,6 +24,7 @@ public class AppleOfEden : MonoBehaviour, InteractionObserver
     public float resetSpeed = 50f;
 
     private float tooltipTimeCounter;
+    private Coroutine inputCoroutine;
 
     void Start() {
         interactionTrigger.SetObserver(this);
@@ -73,11 +74,13 @@ public class AppleOfEden : MonoBehaviour, InteractionObserver
         //This means the player can try to solve the puzzle or cancel
         isPlayerInteracting = !isPlayerInteracting;
         if(isPlayerInteracting) {
+            if(inputCoroutine != null)
+                StopCoroutine(inputCoroutine);
             GameManager.CaptureInput(true);
             EnableCamera();
         }
         else {
-            StartCoroutine(FreeInput());
+            inputCoroutine = StartCoroutine(FreeInput());
             DisableCamera();
         }
 
