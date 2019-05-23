@@ -9,11 +9,7 @@ public class Laser : MonoBehaviour
     public void Start()
     {
         lr = GetComponent<LineRenderer>();
-        lr.startWidth = 0.03f;
-        lr.endWidth = 0.03f;
         lr.SetPosition(0, transform.position);
-        lr.startColor = Color.red;
-        lr.endColor = Color.red;
     }
 
     // Update is called once per frame
