@@ -16,7 +16,7 @@ public class InteractionTrigger : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(Input.GetKeyDown(KeyCode.E) && isPlayerInside) {
+        if(GameInput.interactPressed && isPlayerInside) {
             observer.OnPlayerInteract();
             tooltip.SetActive(false);
         }

@@ -36,7 +36,7 @@ public class Attack : MonoBehaviour, DeathObserver
             return;
         }
 
-        isFiring = Input.GetKey(KeyCode.Mouse0);
+        isFiring = GameInput.attackHeld;
         
         Animate();
         PhysicsCheck();

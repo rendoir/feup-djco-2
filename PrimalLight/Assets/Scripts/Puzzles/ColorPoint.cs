@@ -53,28 +53,28 @@ public class ColorPoint : MonoBehaviour, InteractionObserver
         if (!isPlayerInteracting)
             return;
 
-        if (Input.GetKeyDown(KeyCode.G))
+        if (GameInput.colorInput.G)
         {
             //Alter the color          
             altColor.g += 0.1f;
             //Assign the changed color to the material.
             rend.material.color = altColor;
         }
-        if (Input.GetKeyDown(KeyCode.R))
+        if (GameInput.colorInput.R)
         {
             //Alter the color           
             altColor.r += 0.1f;
             //Assign the changed color to the material. 
             rend.material.color = altColor;
         }
-        if (Input.GetKeyDown(KeyCode.B))
+        if (GameInput.colorInput.B)
         {
             //Alter the color            
             altColor.b += 0.1f;
             //Assign the changed color to the material. 
             rend.material.color = altColor;
         }
-        if (Input.GetKeyDown(KeyCode.A))
+        if (GameInput.colorInput.A)
         {
             //Alter the color          
             altColor.a += 0.1f;

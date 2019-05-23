@@ -10,15 +10,15 @@ public class LightLockInputHandler : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.R))
+        if (GameInput.colorInput.R)
         {
             RedCanister.GetComponent<CanisterController>().addColor();
         }
-        if (Input.GetKeyDown(KeyCode.G))
+        if (GameInput.colorInput.G)
         {
             GreenCanister.GetComponent<CanisterController>().addColor();
         }
-        if (Input.GetKeyDown(KeyCode.B))
+        if (GameInput.colorInput.B)
         {
             BlueCanister.GetComponent<CanisterController>().addColor();
         }

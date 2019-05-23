@@ -51,9 +51,9 @@ public class AppleOfEden : MonoBehaviour, InteractionObserver
             return;
 
         //Rotate AoE
-        float xAngle = Input.GetAxis("Rotation") * rotateSpeed;
-        float yAngle = Input.GetAxis("Vertical") * rotateSpeed;
-        float zAngle = Input.GetAxis("Horizontal") * rotateSpeed;
+        float xAngle = GameInput.rotation * rotateSpeed;
+        float yAngle = GameInput.vertical * rotateSpeed;
+        float zAngle = GameInput.horizontal * rotateSpeed;
         appleOfEden.transform.Rotate(xAngle, yAngle, zAngle, Space.Self);
 
         //Check if it matches

@@ -70,10 +70,10 @@ public class PlayerMovement : MovingObject, DeathObserver
 	void Move()
 	{
 		//Input
-		input = new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
-		bool jumpPressed = Input.GetButtonDown("Jump");
-		interactButton = Input.GetButtonDown("Interact");
-		sprint = Input.GetAxis("Sprint");
+		input = new Vector3(GameInput.horizontal, 0.0f, GameInput.vertical);
+		bool jumpPressed = GameInput.jumpPressed;
+		interactButton = GameInput.interactPressed;
+		sprint = GameInput.sprint;
 
 		if(pushing)
 			return;

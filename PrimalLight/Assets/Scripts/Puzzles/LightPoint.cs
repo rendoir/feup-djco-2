@@ -55,9 +55,9 @@ public class LightPoint : MonoBehaviour, InteractionObserver
             return;
 
         //Rotate LightPoint
-        float zAngle = Input.GetAxis("Rotation") * -rotateSpeed;
-        float yAngle = Input.GetAxis("Horizontal") * rotateSpeed;
-        float xAngle = Input.GetAxis("Vertical") * -rotateSpeed;
+        float zAngle = GameInput.rotation * -rotateSpeed;
+        float yAngle = GameInput.horizontal * rotateSpeed;
+        float xAngle = GameInput.vertical * -rotateSpeed;
         laserClone.transform.Rotate(xAngle, yAngle, zAngle, Space.World);
         DrawPredictedReflectionPattern(laserClone.transform.position + laserClone.transform.forward * 0.75f, laserClone.transform.forward, 0);
     }
