@@ -812,7 +812,7 @@ PrefabInstance:
     - target: {fileID: 7783066640558758298, guid: 844af1052bca09349b82b6a4b29d16f0,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.013900994
+      value: -0.013900996
       objectReference: {fileID: 0}
     - target: {fileID: 7783066640558758298, guid: 844af1052bca09349b82b6a4b29d16f0,
         type: 3}
@@ -822,7 +822,7 @@ PrefabInstance:
     - target: {fileID: 7783066640558758298, guid: 844af1052bca09349b82b6a4b29d16f0,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.00043002772
+      value: 0.00043002778
       objectReference: {fileID: 0}
     - target: {fileID: 7783066640558758298, guid: 844af1052bca09349b82b6a4b29d16f0,
         type: 3}
@@ -1507,12 +1507,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 914578096}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &974632437 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 2300000, guid: b93d3d43dc9872492bff5ed962635d2c,
-    type: 3}
-  m_PrefabInstance: {fileID: 60517122}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1009160638
 GameObject:
   m_ObjectHideFlags: 0
@@ -1882,7 +1876,7 @@ MonoBehaviour:
   greenCanisterFluid: {fileID: 914578096}
   blueCanisterFluid: {fileID: 305671678}
   portal: {fileID: 75172277}
-  beam: {fileID: 974632437}
+  beam: {fileID: 2106143481}
   pointLight: {fileID: 1882841422}
   extractionRate: 0.1
   epsilon: 1e-14
@@ -2219,6 +2213,12 @@ Transform:
   m_Father: {fileID: 1522781222}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &2106143481 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2300000, guid: b93d3d43dc9872492bff5ed962635d2c,
+    type: 3}
+  m_PrefabInstance: {fileID: 60517122}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2123817567
 PrefabInstance:
   m_ObjectHideFlags: 0
