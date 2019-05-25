@@ -21,6 +21,7 @@ public class PortalPuzzle : MonoBehaviour
     public float extractionRate = 0.1f;
     public float epsilon = 1e-14f;
     private float initialCanisterScale;
+    private float initialCanisterPosition;
 
 
     void Start() {
@@ -30,6 +31,7 @@ public class PortalPuzzle : MonoBehaviour
         InitCanister(greenCanisterFluid, Color.green);
         InitCanister(blueCanisterFluid, Color.blue);
         initialCanisterScale = redCanisterFluid.transform.localScale.y;
+        initialCanisterPosition = redCanisterFluid.transform.localPosition.y;
     }
 
     void InitCanister(GameObject canister, Color color) {
@@ -68,8 +70,13 @@ public class PortalPuzzle : MonoBehaviour
         float extraction = extractionRate * Time.fixedDeltaTime * sign;
         float yScale = canisterFluid.transform.localScale.y - extraction * initialCanisterScale;
         yScale = Mathf.Clamp(yScale, epsilon, initialCanisterScale);
+        float yPosition;
+        if(sign > 0)
+            yPosition = initialCanisterPosition - (initialCanisterScale - yScale);
+        else yPosition = initialCanisterPosition + (yScale - initialCanisterScale);
 
         currentColor += color * extraction;
         canisterFluid.transform.localScale = new Vector3(canisterFluid.transform.localScale.x, yScale, canisterFluid.transform.localScale.z);
+        canisterFluid.transform.localPosition = new Vector3(canisterFluid.transform.localPosition.x, yPosition, canisterFluid.transform.localPosition.z);
     }
 }
