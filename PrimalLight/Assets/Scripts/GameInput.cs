@@ -18,7 +18,7 @@ public class GameInput : MonoBehaviour
 		public bool R;
 		public bool G;
 		public bool B;
-		public bool A;
+		public bool remove;
 	}
 	
 	bool readyToClear;								//Bool used to keep input in sync
@@ -64,13 +64,13 @@ public class GameInput : MonoBehaviour
 			return;
 
 		//Reset all inputs
-		jumpPressed		= false;
-        attackHeld      = false;
-        interactPressed = false;
-		colorInput.R 	= false;
-		colorInput.G 	= false;
-		colorInput.B 	= false;
-		colorInput.A 	= false;
+		jumpPressed		  = false;
+        attackHeld        = false;
+        interactPressed   = false;
+		colorInput.R 	  = false;
+		colorInput.G 	  = false;
+		colorInput.B 	  = false;
+		colorInput.remove = false;
 		
 		readyToClear	= false;
 	}
@@ -86,7 +86,7 @@ public class GameInput : MonoBehaviour
 		colorInput.R = colorInput.R || Input.GetKey(KeyCode.R);
 		colorInput.G = colorInput.G || Input.GetKey(KeyCode.G);
 		colorInput.B = colorInput.B || Input.GetKey(KeyCode.B);
-		colorInput.A = colorInput.A || Input.GetKey(KeyCode.A);
+		colorInput.remove = colorInput.remove || Input.GetKey(KeyCode.LeftAlt);
 	}
 
     void ProcessAxis()

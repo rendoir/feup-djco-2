@@ -74,13 +74,6 @@ public class ColorPoint : MonoBehaviour, InteractionObserver
             //Assign the changed color to the material. 
             rend.material.color = altColor;
         }
-        if (GameInput.colorInput.A)
-        {
-            //Alter the color          
-            altColor.a += 0.1f;
-            //Assign the changed color to the material. 
-            rend.material.color = altColor;
-        }
     }
     
 
