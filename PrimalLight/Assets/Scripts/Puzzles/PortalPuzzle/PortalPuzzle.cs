@@ -17,14 +17,17 @@ public class PortalPuzzle : MonoBehaviour
     public Light pointLight; 
 
     [Header("Puzzle")]
-    private Color currentColor;
     public float extractionRate = 0.1f;
     public float epsilon = 1e-14f;
+    public float acceptableError = 0.05f;
+    private Color currentColor;
+    private bool isPuzzleComplete;
     private float initialCanisterScale;
     private float initialCanisterPosition;
 
 
     void Start() {
+        isPuzzleComplete = false;
         currentColor = Color.black;
         matchingSurfaceRenderer.material.SetColor("_EmissionColor", matchingColor);
         InitCanister(redCanisterFluid, Color.red);
@@ -41,8 +44,12 @@ public class PortalPuzzle : MonoBehaviour
     }
 
     void FixedUpdate() {
+        if(isPuzzleComplete)
+            return;
+
         HandleInput();
         UpdateWithCurrentColor();
+        CheckCompleteness();
     }
 
     void HandleInput() {
@@ -63,7 +70,15 @@ public class PortalPuzzle : MonoBehaviour
         currentColor.b = Mathf.Clamp(currentColor.b, 0f, 1f);
         portal.material.SetColor("_EmissionColor", currentColor * 0.5f);
         beam.material.SetColor("_Color", currentColor);
+        beam.material.SetColor("_EmissionColor", currentColor);
         pointLight.color = currentColor;
+    }
+
+    void CheckCompleteness() {
+        if (Mathf.Abs(currentColor.r - matchingColor.r) <= acceptableError 
+            && Mathf.Abs(currentColor.g - matchingColor.g) <= acceptableError
+            && Mathf.Abs(currentColor.b - matchingColor.b) <= acceptableError)
+                OnPuzzleComplete();
     }
 
     void OnColorChanged(GameObject canisterFluid, Color color, int sign) {
@@ -78,5 +93,9 @@ public class PortalPuzzle : MonoBehaviour
         currentColor += color * extraction;
         canisterFluid.transform.localScale = new Vector3(canisterFluid.transform.localScale.x, yScale, canisterFluid.transform.localScale.z);
         canisterFluid.transform.localPosition = new Vector3(canisterFluid.transform.localPosition.x, yPosition, canisterFluid.transform.localPosition.z);
+    }
+
+    void OnPuzzleComplete() {
+        isPuzzleComplete = true;
     }
 }
