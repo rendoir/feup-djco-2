@@ -1,4 +1,5 @@
 using UnityEngine;
+using Cinemachine;
 using System.Collections;
 
 public class PortalPuzzle : MonoBehaviour, InteractionObserver
@@ -33,6 +34,7 @@ public class PortalPuzzle : MonoBehaviour, InteractionObserver
     public GameObject tooltip;
     public float tooltipTime = 4f;
     private Coroutine tooltipCoroutine;
+    public CinemachineFreeLook portalCamera;
 
 
     void Start() {
@@ -111,7 +113,7 @@ public class PortalPuzzle : MonoBehaviour, InteractionObserver
         isPuzzleComplete = true;
         isPlayerInteracting = false;
         Destroy(GetComponent<InteractionTrigger>());
-        //DisableCamera();
+        DisableCamera();
     }
 
     public void OnPlayerInteract() {
@@ -122,10 +124,10 @@ public class PortalPuzzle : MonoBehaviour, InteractionObserver
         //This means the player can try to solve the puzzle or cancel
         isPlayerInteracting = !isPlayerInteracting;
         if(isPlayerInteracting) {
-            //EnableCamera();
+            EnableCamera();
         }
         else {
-            //DisableCamera();
+            DisableCamera();
         }
 
         if(tooltipCoroutine != null) 
@@ -146,7 +148,15 @@ public class PortalPuzzle : MonoBehaviour, InteractionObserver
         if(Utils.MaskContainsLayer(playerLayer, other.gameObject.layer)) {
             isPlayerInteracting = false;
             tooltip.SetActive(false);
-            //DisableCamera();
+            DisableCamera();
         }
+    }
+    
+    public void DisableCamera() {
+        portalCamera.m_Priority = 0;
+    }
+
+    public void EnableCamera() {
+        portalCamera.m_Priority = 100;
     }
 }
