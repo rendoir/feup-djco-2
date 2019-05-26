@@ -23,8 +23,8 @@ public class AppleOfEden : MonoBehaviour, InteractionObserver
     public float rotateSpeed = 1.5f;
     public float resetSpeed = 50f;
 
-    private float tooltipTimeCounter;
     private Coroutine inputCoroutine;
+    private Coroutine tooltipCoroutine;
 
     void Start() {
         interactionTrigger.SetObserver(this);
@@ -32,7 +32,6 @@ public class AppleOfEden : MonoBehaviour, InteractionObserver
         isPuzzleComplete = false;
         playerCancelled = false;
         initialRotation = appleOfEden.transform.rotation;
-        tooltipTimeCounter = tooltipTime;
     }
 
     void FixedUpdate() {
@@ -69,7 +68,6 @@ public class AppleOfEden : MonoBehaviour, InteractionObserver
             return;
 
         playerCancelled = isPlayerInteracting;
-        tooltipTimeCounter = tooltipTime;
         //Pressing the interact key should toggle the boolean
         //This means the player can try to solve the puzzle or cancel
         isPlayerInteracting = !isPlayerInteracting;
@@ -84,9 +82,11 @@ public class AppleOfEden : MonoBehaviour, InteractionObserver
             DisableCamera();
         }
 
+        if(tooltipCoroutine != null) 
+            StopCoroutine(tooltipCoroutine);
         
         tooltip.SetActive(true);
-        StartCoroutine(HideTooltip());
+        tooltipCoroutine = StartCoroutine(HideTooltip());
     }
 
     public void OnPuzzleComplete() {

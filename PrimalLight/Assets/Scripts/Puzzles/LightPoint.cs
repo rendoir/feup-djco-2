@@ -28,6 +28,7 @@ public class LightPoint : MonoBehaviour, InteractionObserver
     private LineRenderer laserLR;
     private float tooltipTimeCounter;
     private Coroutine inputCoroutine;
+    private Coroutine tooltipCoroutine;
 
 
     void Start() {
@@ -109,8 +110,11 @@ public class LightPoint : MonoBehaviour, InteractionObserver
             GameManager.CaptureInput(true);
         } else inputCoroutine = StartCoroutine(FreeInput());
 
+        if(tooltipCoroutine != null) 
+            StopCoroutine(tooltipCoroutine);
+
         tooltip.SetActive(true);
-        StartCoroutine(HideTooltip());
+        tooltipCoroutine = StartCoroutine(HideTooltip());
 
         if(playerCancelled){
             Destroy(laserClone);

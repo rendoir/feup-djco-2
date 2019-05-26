@@ -8,17 +8,20 @@ public class InteractionTrigger : MonoBehaviour
     private InteractionObserver observer;
 
     private bool isPlayerInside;
+    private bool isPlayerInteracting;
 
     void Start()
     {
         isPlayerInside = false;
+        isPlayerInteracting = false;
     }
 
     void FixedUpdate()
     {
         if(GameInput.interactPressed && isPlayerInside) {
+            isPlayerInteracting = !isPlayerInteracting;
             observer.OnPlayerInteract();
-            tooltip.SetActive(false);
+            tooltip.SetActive(!isPlayerInteracting && isPlayerInside);
         }
     }
 
@@ -37,6 +40,7 @@ public class InteractionTrigger : MonoBehaviour
     void OnTriggerExit(Collider other)
     {
         if(Utils.MaskContainsLayer(playerLayer, other.gameObject.layer)) {
+            isPlayerInteracting = false;
             isPlayerInside = false;
             tooltip.SetActive(false);
         }

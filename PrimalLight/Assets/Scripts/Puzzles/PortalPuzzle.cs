@@ -1,6 +1,7 @@
 using UnityEngine;
+using System.Collections;
 
-public class PortalPuzzle : MonoBehaviour
+public class PortalPuzzle : MonoBehaviour, InteractionObserver
 {
     [Header("Matching Color")]
     public Color matchingColor;
@@ -22,11 +23,21 @@ public class PortalPuzzle : MonoBehaviour
     public float acceptableError = 0.05f;
     private Color currentColor;
     private bool isPuzzleComplete;
+    private bool isPlayerInteracting;
     private float initialCanisterScale;
     private float initialCanisterPosition;
 
+    [Header("UI")]
+    public LayerMask playerLayer;
+    public InteractionTrigger interactionTrigger;
+    public GameObject tooltip;
+    public float tooltipTime = 4f;
+    private Coroutine tooltipCoroutine;
+
 
     void Start() {
+        interactionTrigger.SetObserver(this);
+        tooltipCoroutine = null;
         isPuzzleComplete = false;
         currentColor = Color.black;
         matchingSurfaceRenderer.material.SetColor("_EmissionColor", matchingColor);
@@ -35,6 +46,7 @@ public class PortalPuzzle : MonoBehaviour
         InitCanister(blueCanisterFluid, Color.blue);
         initialCanisterScale = redCanisterFluid.transform.localScale.y;
         initialCanisterPosition = redCanisterFluid.transform.localPosition.y;
+        UpdateWithCurrentColor();
     }
 
     void InitCanister(GameObject canister, Color color) {
@@ -44,7 +56,7 @@ public class PortalPuzzle : MonoBehaviour
     }
 
     void FixedUpdate() {
-        if(isPuzzleComplete)
+        if(isPuzzleComplete || !isPlayerInteracting)
             return;
 
         HandleInput();
@@ -97,5 +109,44 @@ public class PortalPuzzle : MonoBehaviour
 
     void OnPuzzleComplete() {
         isPuzzleComplete = true;
+        isPlayerInteracting = false;
+        interactionTrigger.gameObject.SetActive(false);
+        //DisableCamera();
+    }
+
+    public void OnPlayerInteract() {
+        if(isPuzzleComplete)
+            return;
+
+        //Pressing the interact key should toggle the boolean
+        //This means the player can try to solve the puzzle or cancel
+        isPlayerInteracting = !isPlayerInteracting;
+        if(isPlayerInteracting) {
+            //EnableCamera();
+        }
+        else {
+            //DisableCamera();
+        }
+
+        if(tooltipCoroutine != null) 
+            StopCoroutine(tooltipCoroutine);
+     
+        tooltip.SetActive(true);
+        tooltipCoroutine = StartCoroutine(HideTooltip());
+    }
+
+    public IEnumerator HideTooltip() {
+        if(isPlayerInteracting && !isPuzzleComplete)
+            yield return new WaitForSeconds(tooltipTime);
+        tooltip.SetActive(false);
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if(Utils.MaskContainsLayer(playerLayer, other.gameObject.layer)) {
+            isPlayerInteracting = false;
+            tooltip.SetActive(false);
+            //DisableCamera();
+        }
     }
 }
