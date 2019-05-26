@@ -21,7 +21,7 @@ public class PortalPuzzle : MonoBehaviour, InteractionObserver
     [Header("Puzzle")]
     public float extractionRate = 0.1f;
     public float epsilon = 1e-14f;
-    public float acceptableError = 0.05f;
+    public float acceptableError = 0.1f;
     private Color currentColor;
     private bool isPuzzleComplete;
     private bool isPlayerInteracting;
@@ -46,12 +46,13 @@ public class PortalPuzzle : MonoBehaviour, InteractionObserver
         tooltipCoroutine = null;
         isPuzzleComplete = false;
         currentColor = Color.black;
-        matchingSurfaceRenderer.material.SetColor("_EmissionColor", matchingColor);
+        matchingSurfaceRenderer.material.SetColor("_EmissionColor", matchingColor * 0.5f);
         InitCanister(redCanisterFluid, Color.red);
         InitCanister(greenCanisterFluid, Color.green);
         InitCanister(blueCanisterFluid, Color.blue);
         initialCanisterScale = redCanisterFluid.transform.localScale.y;
         initialCanisterPosition = redCanisterFluid.transform.localPosition.y;
+        ClampCurrentColor();
         UpdateWithCurrentColor();
     }
 
@@ -66,6 +67,7 @@ public class PortalPuzzle : MonoBehaviour, InteractionObserver
             return;
 
         HandleInput();
+        ClampCurrentColor();
         UpdateWithCurrentColor();
         CheckCompleteness();
     }
@@ -81,14 +83,17 @@ public class PortalPuzzle : MonoBehaviour, InteractionObserver
         if(GameInput.colorInput.B) OnColorChanged(blueCanisterFluid, Color.blue, sign);
     }
 
-    void UpdateWithCurrentColor() {
+    void ClampCurrentColor() {
         currentColor.a = 1f;
         currentColor.r = Mathf.Clamp(currentColor.r, 0f, 1f);
         currentColor.g = Mathf.Clamp(currentColor.g, 0f, 1f);
         currentColor.b = Mathf.Clamp(currentColor.b, 0f, 1f);
+    }
+
+    void UpdateWithCurrentColor() {
         portal.material.SetColor("_EmissionColor", currentColor * 0.5f);
         beam.material.SetColor("_Color", currentColor);
-        beam.material.SetColor("_EmissionColor", currentColor);
+        beam.material.SetColor("_EmissionColor", currentColor * 0.5f);
         pointLight.color = currentColor;
     }
 
@@ -171,12 +176,9 @@ public class PortalPuzzle : MonoBehaviour, InteractionObserver
         float elapsed = 0.0f;
 
         while (elapsed < fadeDuration) {
-            currentColor.a = Mathf.Lerp(1f, 0f, elapsed / fadeDuration);
+            currentColor.a = Mathf.SmoothStep(1f, 0f, elapsed / fadeDuration);
 
-            portal.material.SetColor("_EmissionColor", currentColor * 0.5f);
-            beam.material.SetColor("_Color", currentColor);
-            beam.material.SetColor("_EmissionColor", currentColor);
-            pointLight.color = currentColor;
+            UpdateWithCurrentColor();
             
             elapsed += Time.deltaTime;
             yield return null;
