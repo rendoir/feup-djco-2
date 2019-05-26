@@ -36,6 +36,10 @@ public class PortalPuzzle : MonoBehaviour, InteractionObserver
     private Coroutine tooltipCoroutine;
     public CinemachineFreeLook portalCamera;
 
+    [Header("Reward")]
+    public HolderReward reward;
+    public float fadeDuration = 2f;
+
 
     void Start() {
         interactionTrigger.SetObserver(this);
@@ -114,6 +118,8 @@ public class PortalPuzzle : MonoBehaviour, InteractionObserver
         isPlayerInteracting = false;
         Destroy(GetComponent<InteractionTrigger>());
         DisableCamera();
+        StartCoroutine(FadeColor());
+        reward.OnReward();
     }
 
     public void OnPlayerInteract() {
@@ -158,5 +164,24 @@ public class PortalPuzzle : MonoBehaviour, InteractionObserver
 
     public void EnableCamera() {
         portalCamera.m_Priority = 100;
+    }
+
+    IEnumerator FadeColor()
+    {
+        float elapsed = 0.0f;
+
+        while (elapsed < fadeDuration) {
+            currentColor.a = Mathf.Lerp(1f, 0f, elapsed / fadeDuration);
+
+            portal.material.SetColor("_EmissionColor", currentColor * 0.5f);
+            beam.material.SetColor("_Color", currentColor);
+            beam.material.SetColor("_EmissionColor", currentColor);
+            pointLight.color = currentColor;
+            
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        currentColor.a = 0f;
     }
 }

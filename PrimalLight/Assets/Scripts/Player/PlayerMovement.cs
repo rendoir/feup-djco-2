@@ -64,7 +64,8 @@ public class PlayerMovement : MovingObject, DeathObserver
 		isOnGround = Physics.CheckCapsule(playerColllider.bounds.center,
 			new Vector3(playerColllider.bounds.center.x, playerColllider.bounds.min.y - groundDistance, playerColllider.bounds.center.z),
 			playerColllider.radius,
-			groundLayer.value);
+			groundLayer.value,
+			QueryTriggerInteraction.Ignore);
 	}
 
 	void Move()
