@@ -43,6 +43,7 @@ public class ChestReward : MonoBehaviour, InteractionObserver
         if(canReward) {
             rewardObject.SetActive(false);
             GameManager.OnRewardObtained();
+            interactionTrigger.gameObject.SetActive(false);
         }
     }
 }

@@ -110,7 +110,7 @@ public class PortalPuzzle : MonoBehaviour, InteractionObserver
     void OnPuzzleComplete() {
         isPuzzleComplete = true;
         isPlayerInteracting = false;
-        interactionTrigger.gameObject.SetActive(false);
+        Destroy(GetComponent<InteractionTrigger>());
         //DisableCamera();
     }
 
