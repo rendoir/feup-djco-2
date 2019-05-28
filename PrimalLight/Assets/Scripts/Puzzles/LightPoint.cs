@@ -22,6 +22,8 @@ public class LightPoint : MonoBehaviour, InteractionObserver
 
     public GameObject laserObject;
     public LayerMask mirrorMask;
+    public LayerMask surfaceMask;
+    public LayerMask playerMask;
     public GameObject target;
 
     private GameObject laserClone;
@@ -75,16 +77,20 @@ public class LightPoint : MonoBehaviour, InteractionObserver
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, maxStepDistance, mirrorMask))
         {
-            direction = Vector3.Reflect(direction, hit.normal);
+            
             position = hit.point;
             if(hit.collider.gameObject == target)
                 StartCoroutine(OnPuzzleComplete());
+            else{
+                direction = Vector3.Reflect(direction, hit.normal);
+            }
         }
         else if(!Physics.Raycast(ray, out hit, maxStepDistance))
         {
             position += direction * maxStepDistance;
         }else{
             position = hit.point;
+            direction = new Vector3(0,0,0);
         }
 
         
