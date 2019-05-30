@@ -31,7 +31,7 @@ public class Attack : MonoBehaviour, DeathObserver
         if(isDead)
             return;
 
-        if(GameManager.IsInputCaptured()) {
+        if(GameInput.IsInputCaptured()) {
             StopAttack();
             return;
         }

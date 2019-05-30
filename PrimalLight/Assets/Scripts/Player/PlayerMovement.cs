@@ -47,7 +47,7 @@ public class PlayerMovement : MovingObject, DeathObserver
 			return;
 		}
 
-		if( GameManager.IsInputCaptured() ) {
+		if( GameInput.IsInputCaptured() ) {
 			PhysicsCheck();
 			StopPlayer();
 			Animate();
@@ -80,13 +80,13 @@ public class PlayerMovement : MovingObject, DeathObserver
 			return;
 
 		// the movement direction is the way the came is facing
-		Vector3 Direction = Camera.main.transform.forward * input.z +
-							Vector3.Cross(Camera.main.transform.forward, Vector3.up) *  -input.x;
+		Vector3 Direction = GameInput.cameraForward * input.z +
+							Vector3.Cross(GameInput.cameraForward, Vector3.up) *  -input.x;
 
 		//rotates the player to face in the camera direction if he is moving
 		if(Math.Abs(input.x) > 0.0f || Math.Abs(input.z) > 0.0f)
 		{
-			transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, Camera.main.transform.localEulerAngles.y, transform.localEulerAngles.z);
+			transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, GameInput.cameraEulerAngles.y, transform.localEulerAngles.z);
 		}
 
 		//Walk
@@ -174,8 +174,8 @@ public class PlayerMovement : MovingObject, DeathObserver
 
 		Vector3 blend = input / sprintMultiplier + input * sprint / sprintMultiplier;
 
-		anim.SetFloat("horizontal", !GameManager.IsInputCaptured() ? blend.x : 0f);
-		anim.SetFloat("vertical", !GameManager.IsInputCaptured() ? blend.z : 0f);
+		anim.SetFloat("horizontal", !GameInput.IsInputCaptured() ? blend.x : 0f);
+		anim.SetFloat("vertical", !GameInput.IsInputCaptured() ? blend.z : 0f);
 
 		//anim.SetFloat("movementSpeed", magnitude > Mathf.Epsilon ? magnitude : 1f);
 		anim.SetBool("isJumping", !isOnGround);

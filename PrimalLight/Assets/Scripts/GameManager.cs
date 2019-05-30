@@ -7,7 +7,6 @@ public class GameManager : MonoBehaviour
 {
 	//Singleton
 	static GameManager current;
-    bool isInputCaptured;
 
 	//Player
 	GameObject player;
@@ -57,14 +56,6 @@ public class GameManager : MonoBehaviour
 
 		//Find Checkpoints
 		current.checkpoints = GameObject.FindGameObjectsWithTag("Checkpoint");
-    }
-
-    public static void CaptureInput(bool shouldCapture) {
-        current.isInputCaptured = shouldCapture;
-    }
-
-    public static bool IsInputCaptured() {
-        return current.isInputCaptured;
     }
 
 	public static GameObject GetPlayer() {

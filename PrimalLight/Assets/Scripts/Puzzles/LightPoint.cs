@@ -113,7 +113,7 @@ public class LightPoint : MonoBehaviour, InteractionObserver
         if(isPlayerInteracting) {
             if(inputCoroutine != null)
                 StopCoroutine(inputCoroutine);
-            GameManager.CaptureInput(true);
+            GameInput.CaptureInput(true);
         } else inputCoroutine = StartCoroutine(FreeInput());
 
         if(tooltipCoroutine != null) 
@@ -151,7 +151,7 @@ public class LightPoint : MonoBehaviour, InteractionObserver
 
      public IEnumerator FreeInput() {
         yield return new WaitForSeconds(fadeTime);
-        GameManager.CaptureInput(false);
+        GameInput.CaptureInput(false);
     }
 
     public IEnumerator HideTooltip() {

@@ -4,6 +4,8 @@ using UnityEngine;
 public class GameInput : MonoBehaviour
 {
     static GameInput current;
+	bool isInputCaptured;
+	bool isInputSimulated;
 
 	static public float horizontal;
     static public float vertical;
@@ -13,6 +15,8 @@ public class GameInput : MonoBehaviour
     static public bool attackHeld;
     static public bool interactPressed;
 	static public ColorInput colorInput;
+	static public Vector3 cameraForward;
+	static public Vector3 cameraEulerAngles;
 	
 	public struct ColorInput {
 		public bool R;
@@ -40,19 +44,24 @@ public class GameInput : MonoBehaviour
 		DontDestroyOnLoad(gameObject);
 	}
 
+	void Start() {
+		isInputCaptured = false;
+		isInputSimulated = false;
+	}
+
 	void Update()
 	{
 		//Clear out existing input values
 		ClearInput();
 
-		//Process keyboard and mouse inputs buttons
-		ProcessButtons();
+		if(!isInputSimulated)
+			ProcessButtons(); //Process keyboard and mouse inputs buttons
 	}
 
 	void FixedUpdate()
 	{
-		//Process keyboard and mouse inputs axis
-        ProcessAxis();
+		if(!isInputSimulated)
+        	ProcessAxis(); //Process keyboard and mouse inputs axis
 
 		readyToClear = true;
 	}
@@ -87,6 +96,10 @@ public class GameInput : MonoBehaviour
 		colorInput.G = colorInput.G || Input.GetKey(KeyCode.G);
 		colorInput.B = colorInput.B || Input.GetKey(KeyCode.B);
 		colorInput.remove = colorInput.remove || Input.GetKey(KeyCode.LeftAlt);
+
+		//Update camera
+		cameraForward = Camera.main.transform.forward;
+		cameraEulerAngles = Camera.main.transform.eulerAngles;
 	}
 
     void ProcessAxis()
@@ -96,5 +109,21 @@ public class GameInput : MonoBehaviour
         vertical   = Input.GetAxis("Vertical");
         rotation   = Input.GetAxis("Rotation");
         sprint     = Input.GetAxis("Sprint");
+    }
+
+	public static void CaptureInput(bool shouldCapture) {
+        current.isInputCaptured = shouldCapture;
+    }
+
+    public static bool IsInputCaptured() {
+        return current.isInputCaptured;
+    }
+
+	public static void SimulateInput(bool shouldSimulate) {
+        current.isInputSimulated = shouldSimulate;
+    }
+
+    public static bool IsInputSimulated() {
+        return current.isInputSimulated;
     }
 }

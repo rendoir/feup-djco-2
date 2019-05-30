@@ -74,7 +74,7 @@ public class AppleOfEden : MonoBehaviour, InteractionObserver
         if(isPlayerInteracting) {
             if(inputCoroutine != null)
                 StopCoroutine(inputCoroutine);
-            GameManager.CaptureInput(true);
+            GameInput.CaptureInput(true);
             EnableCamera();
         }
         else {
@@ -100,7 +100,7 @@ public class AppleOfEden : MonoBehaviour, InteractionObserver
 
     public IEnumerator FreeInput() {
         yield return new WaitForSeconds(fadeTime);
-        GameManager.CaptureInput(false);
+        GameInput.CaptureInput(false);
     }
 
     public IEnumerator HideTooltip() {
