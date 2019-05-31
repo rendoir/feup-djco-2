@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
 
 	//Player
 	GameObject player;
+	GameObject sage;
 	Vector3 initialPosition;
 	Quaternion initialRotation;
 
@@ -56,10 +57,17 @@ public class GameManager : MonoBehaviour
 
 		//Find Checkpoints
 		current.checkpoints = GameObject.FindGameObjectsWithTag("Checkpoint");
+
+		//Find Sage
+		current.sage = GameObject.FindGameObjectWithTag("Sage");
     }
 
 	public static GameObject GetPlayer() {
 		return current.player;
+	}
+
+	public static GameObject GetSage() {
+		return current.sage;
 	}
 
 	public static void PlayerDied() {

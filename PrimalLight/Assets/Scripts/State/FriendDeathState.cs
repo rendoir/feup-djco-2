@@ -19,13 +19,15 @@ public class FriendDeathState : State {
     public override void Update() {
         //Turn player to friend
         //Play cinematic or animation?
+
+        //Debug.Log("death update");
         
-        float step = 750f * Time.deltaTime;
+        float step = 300f * Time.deltaTime;
         GameManager.GetPlayer().transform.rotation = Quaternion.RotateTowards(GameManager.GetPlayer().transform.rotation, target, step);
     }
 
     public override State Next() {
         GameInput.CaptureInput(false);
-        return new NullState(); // TODO
+        return new SageState();
     }
 }

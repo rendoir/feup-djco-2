@@ -9,6 +9,7 @@ TagManager:
   - Checkpoint
   - FxTemporaire
   - Pillar
+  - Sage
   layers:
   - Default
   - TransparentFX

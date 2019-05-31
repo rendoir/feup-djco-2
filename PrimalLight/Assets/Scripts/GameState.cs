@@ -35,5 +35,6 @@ public class GameState : MonoBehaviour
     static public void Next()
     {
         current.state = current.state.Next();
+		Debug.Log(current.state.GetType().Name);
     }
 }
