@@ -29,6 +29,6 @@ public class InitialState : State {
 
     public override State Next() {
         GameInput.SimulateInput(false);
-        return new FriendDeathState(); // TODO
+        return new FriendDeathState();
     }
 }

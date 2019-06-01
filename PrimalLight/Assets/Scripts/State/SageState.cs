@@ -36,7 +36,13 @@ public class SageState : State {
             return this;
         } else {
             GameInput.CaptureInput(false);
-            return new NullState(); // TODO
+            return new FindArtifactPiecesState();
         }
+    }
+
+    public override string GetMessage() {
+        if(!enteredTrigger) 
+            return "Find the sage";
+        else return "";
     }
 }

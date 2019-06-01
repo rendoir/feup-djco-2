@@ -19,7 +19,8 @@ public class GameManager : MonoBehaviour
 	GameObject[] checkpoints;
 	public float restartTime = 6f;
 
-	//Artifacts
+	//Artifact
+	public const int NUMBER_PIECES = 3;
 	private int rewards = 0;
 
 	void Awake()
@@ -68,6 +69,10 @@ public class GameManager : MonoBehaviour
 
 	public static GameObject GetSage() {
 		return current.sage;
+	}
+
+	public static int GetNumberPieces() {
+		return current.rewards;
 	}
 
 	public static void PlayerDied() {

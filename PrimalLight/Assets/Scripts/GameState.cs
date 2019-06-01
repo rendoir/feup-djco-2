@@ -24,7 +24,6 @@ public class GameState : MonoBehaviour
 
 	void Start() {
         current.state = new NullState();
-		//current.state = new InitialState();
 	}
 
 	void Update()
@@ -35,6 +34,11 @@ public class GameState : MonoBehaviour
     static public void Next()
     {
         current.state = current.state.Next();
-		Debug.Log(current.state.GetType().Name);
+		//Debug.Log(current.state.GetType().Name);
     }
+
+	static public string GetMessage()
+	{
+		return current.state.GetMessage();
+	}
 }
