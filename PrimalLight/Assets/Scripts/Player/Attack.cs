@@ -12,6 +12,7 @@ public class Attack : MonoBehaviour, DeathObserver
     public float maxDistance = 20f;
     public float rayOffsetY = 0.7f;
     public float rayOffsetForward = 0.9f;
+    public float rayOffsetRight = 0.5f;
     public Animator animator;
     public float animationDelay = 2f;
     private float animationDelayCounter = -1f;
@@ -138,7 +139,7 @@ public class Attack : MonoBehaviour, DeathObserver
             transform.rotation = Quaternion.Slerp(transform.rotation, _lookRotation, Time.deltaTime * rotateSpeed);
         }
 
-        lightning.StartPosition = transform.forward * rayOffsetForward;
+        lightning.StartPosition = transform.forward * rayOffsetForward + transform.right * rayOffsetRight;
         lightning.StartPosition.y = rayOffsetY;
     }
 

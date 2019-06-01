@@ -9568,8 +9568,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1041
   maxDistance: 20
-  rayOffsetY: 1
-  rayOffsetForward: 0.9
+  rayOffsetY: 1.25
+  rayOffsetForward: 0.8
+  rayOffsetRight: 0.3
   animator: {fileID: 95804848747135216}
   animationDelay: 0.25
   rotateSpeed: 20
