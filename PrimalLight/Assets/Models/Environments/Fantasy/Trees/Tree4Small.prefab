@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 432458}
   - component: {fileID: 3358788}
   - component: {fileID: 2375240}
+  - component: {fileID: 4860595964820508916}
+  - component: {fileID: 6427638152389342010}
   m_Layer: 0
   m_Name: Tree4Small
   m_TagString: Untagged
@@ -77,3 +79,30 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!136 &4860595964820508916
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 103068}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 22.167267
+  m_Height: 353.26813
+  m_Direction: 1
+  m_Center: {x: -1.6601906, y: 175.45724, z: -1.2556381}
+--- !u!65 &6427638152389342010
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 103068}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 339.65265, y: 490.5454, z: 373.89133}
+  m_Center: {x: -3.8963623, y: 382.83875, z: 30.524643}
