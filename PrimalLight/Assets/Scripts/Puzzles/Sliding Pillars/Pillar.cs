@@ -24,7 +24,8 @@ public class Pillar : MovingObject
 
     private void SetPadsActiveState(bool state){
     	foreach(Transform pad in transform){
-    		pad.gameObject.SetActive(state);
+            if(pad.gameObject.tag == "pillar")
+    		  pad.gameObject.SetActive(state);
     	}
     }
 }
