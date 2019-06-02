@@ -3,27 +3,29 @@ using System.Threading.Tasks;
 
 public class FriendDeathState : State {
 
-    public int stateDuration = 3;
-    private Quaternion target;
+    public float stateDuration = 3f;
+    public float startTime = Time.time;
+    private GameObject player;
+    private GameObject friend;
     
     public FriendDeathState() {
         GameInput.CaptureInput(true);
-        target = Quaternion.Euler(0f, 90f, 0f);
-
-        //After x seconds, 
-        Task.Delay(stateDuration * 1000).ContinueWith(t => {
-            GameState.Next();
-        });
+        player = GameManager.GetPlayer();
+        friend = GameManager.GetFriend();
+        friend.GetComponent<Animator>().SetTrigger("isDead");
     }
 
     public override void Update() {
-        //Turn player to friend
-        //Play cinematic or animation?
+        if(Time.time - startTime >= stateDuration) {
+            GameState.Next();
+            return;
+        }
 
-        //Debug.Log("death update");
-        
-        float step = 300f * Time.deltaTime;
-        GameManager.GetPlayer().transform.rotation = Quaternion.RotateTowards(GameManager.GetPlayer().transform.rotation, target, step);
+        //Rotate player towards friend
+         Vector3 targetDir = friend.transform.position - player.transform.position;
+        float step = 250f * Time.deltaTime;
+        Vector3 newDir = Vector3.RotateTowards(player.transform.forward, targetDir, step, 0.0f);
+        player.transform.rotation = Quaternion.LookRotation(newDir);
     }
 
     public override State Next() {

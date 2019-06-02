@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
 	//Player
 	GameObject player;
 	GameObject sage;
+	GameObject friend;
 	Vector3 initialPosition;
 	Quaternion initialRotation;
 
@@ -61,6 +62,9 @@ public class GameManager : MonoBehaviour
 
 		//Find Sage
 		current.sage = GameObject.FindGameObjectWithTag("Sage");
+
+		//Find Friend
+		current.friend = GameObject.FindGameObjectWithTag("Friend");
     }
 
 	public static GameObject GetPlayer() {
@@ -69,6 +73,10 @@ public class GameManager : MonoBehaviour
 
 	public static GameObject GetSage() {
 		return current.sage;
+	}
+
+	public static GameObject GetFriend() {
+		return current.friend;
 	}
 
 	public static int GetNumberPieces() {

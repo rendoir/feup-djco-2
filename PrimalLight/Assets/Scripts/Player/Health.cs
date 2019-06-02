@@ -30,6 +30,19 @@ public class Health : MonoBehaviour, DeathObserver
         }
     }
 
+    public void Damage(float damage)
+    {
+        health -= damage;
+
+        //Enemy died
+        if (health < 0) {
+            if (!isDead)
+                GameManager.PlayerDied();
+
+            health = 0;
+        }
+    }
+
     public void ResetHealth() 
     {
         health = initialHealth;

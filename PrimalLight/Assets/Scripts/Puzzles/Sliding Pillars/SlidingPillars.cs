@@ -30,7 +30,7 @@ public class SlidingPillars : MonoBehaviour
 		if(board == null)
 			return;
 
-		float x = position.x, y = position.y-0.55f, z = position.z;
+		float x = position.x, y = position.y, z = position.z;
 		for(int i = 0; i < board.GetLength(0); i++){
 
 			for(int j = 0; j < board.GetLength(1); j++){
@@ -67,7 +67,7 @@ public class SlidingPillars : MonoBehaviour
 
 		int i = 0;
 		foreach(BoardPillar pillar in pillars){
-			Vector3 pos = position + new Vector3(pillar.pos.x*posOffset, 0.95f, pillar.pos.y*posOffset);
+			Vector3 pos = position + new Vector3(pillar.pos.x*posOffset, 0, pillar.pos.y*posOffset);
 			
 			GameObject pillarObj = null;
 			if(pillar.type == BoardPillarType.Regular)
@@ -173,7 +173,7 @@ public class SlidingPillars : MonoBehaviour
 		CheckSolved();
 		
 		//	Get "real" scene pos
-		endPos = position + new Vector3(src.x*posOffset, 0.95f, src.y*posOffset);
+		endPos = position + new Vector3(src.x*posOffset, 0, src.y*posOffset);
 		return canMove;
 	}
 }

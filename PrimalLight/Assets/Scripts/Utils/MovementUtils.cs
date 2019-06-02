@@ -31,5 +31,12 @@ public class MovementUtils
 
 		done(true);
 	}
+
+	public static IEnumerator SmoothRotationConst (GameObject obj, Vector3 offset, float inverseRotationTime){
+		while (true){
+			obj.transform.Rotate(offset, inverseRotationTime * Time.deltaTime);
+			yield return null;
+		}
+	}
 	   
 }
