@@ -11,6 +11,7 @@ public class PlayerMovement : MovingObject, DeathObserver
 	public float jumpForce = 5f;
 	public float sprintMultiplier = 2f;
 	public float airMovementMultiplier = 0.5f;
+	public float turningSpeed = 20f;
 
 	[Header("Physics")]
 	public float groundDistance = 0.1f;
@@ -86,7 +87,8 @@ public class PlayerMovement : MovingObject, DeathObserver
 		//rotates the player to face in the camera direction if he is moving
 		if(Math.Abs(input.x) > 0.0f || Math.Abs(input.z) > 0.0f)
 		{
-			transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, GameInput.cameraEulerAngles.y, transform.localEulerAngles.z);
+			Vector3 lookDirection = new Vector3(GameInput.cameraForward.x, 0f, GameInput.cameraForward.z);
+			transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(lookDirection), Time.deltaTime * turningSpeed);
 		}
 
 		//Walk
