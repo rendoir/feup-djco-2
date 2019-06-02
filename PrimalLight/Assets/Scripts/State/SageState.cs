@@ -4,13 +4,21 @@ using System.Threading.Tasks;
 public class SageState : State {
 
     private bool enteredTrigger;
-    public int stateDuration = 5;
+    public float stateDuration = 5f;
+    public float startTime = Time.time;
     
     public SageState() {
         enteredTrigger = false;
     }
 
     public override void Update() {
+        if(enteredTrigger) {
+            if(Time.time - startTime >= stateDuration) {
+                GameState.Next();
+                return;
+            }
+        }
+
         //if(enteredTrigger) {
             //Walk player towards sage
             //if(isNear)
@@ -23,11 +31,6 @@ public class SageState : State {
     public void OnSageTrigger() {
         enteredTrigger = true;
         GameInput.CaptureInput(true);
-        
-        //After x seconds, 
-        Task.Delay(stateDuration * 1000).ContinueWith(t => {
-            GameState.Next();
-        });
     }
 
     public override State Next() {
