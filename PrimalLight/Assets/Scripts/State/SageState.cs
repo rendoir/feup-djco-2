@@ -4,22 +4,39 @@ using System.Threading.Tasks;
 public class SageState : State {
 
     private bool enteredTrigger;
-    public float talkDuration = 4f;
+    public float talkDuration = 6.5f;
+    public float pointDuration = 2.25f;
     public float startTime = -1;
     private GameObject player;
     private GameObject sage;
+    private bool isNearSage;
+    private bool isPointing;
+    private Quaternion sageTargetRotation;
     
     public SageState() {
         enteredTrigger = false;
+        isNearSage = false;
+        isPointing = false;
         player = GameManager.GetPlayer();
         sage = GameManager.GetSage();
+        sageTargetRotation = Quaternion.Euler(sage.transform.rotation.x, sage.transform.rotation.y + 90f, sage.transform.rotation.z);
     }
 
     public override void Update() {
         if(enteredTrigger) {
-            if(startTime > 0 && Time.time - startTime >= talkDuration) {
-                GameState.Next();
-                return;
+            float elapsed = Time.time - startTime;
+            if(isNearSage && elapsed >= talkDuration) {
+                if(elapsed >= talkDuration + pointDuration) {
+                    GameState.Next();
+                    return;
+                }
+                
+                //Update sage
+                sage.transform.rotation = Quaternion.RotateTowards(sage.transform.rotation, sageTargetRotation, 250f * Time.deltaTime);
+                if(!isPointing) {
+                    sage.GetComponent<Animator>().SetTrigger("isPointing");
+                    isPointing = true;
+                }
             }
 
             //Walk towards the sage
@@ -34,8 +51,11 @@ public class SageState : State {
             } else {
                 GameInput.SimulateInput(false);
                 GameInput.CaptureInput(true);
-                if(startTime < 0)
+                isNearSage = true;
+                if(startTime < 0) {
                    startTime = Time.time;
+                   player.GetComponent<Animator>().SetTrigger("isYelling");
+                }
             }
         }
     }
