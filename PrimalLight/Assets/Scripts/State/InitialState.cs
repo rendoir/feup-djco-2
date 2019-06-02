@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 public class InitialState : State {
 
-    public float walkDuration = 3f;
+    public float walkDuration = 5f;
     public float startTime = Time.time;
     private GameObject friend;
     private Rigidbody friendRB;

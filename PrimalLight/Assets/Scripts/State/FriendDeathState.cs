@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 public class FriendDeathState : State {
 
-    public float stateDuration = 6f;
+    public float stateDuration = 7f;
     public float startTime = Time.time;
     private GameObject player;
     private GameObject friend;
