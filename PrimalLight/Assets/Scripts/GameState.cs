@@ -25,6 +25,7 @@ public class GameState : MonoBehaviour
 	void Start() {
 		//current.state = new InitialState();
 		//current.state = new FindArtifactPiecesState();
+		//current.state = new SageState();
         current.state = new NullState();
 	}
 

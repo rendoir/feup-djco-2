@@ -4,33 +4,45 @@ using System.Threading.Tasks;
 public class SageState : State {
 
     private bool enteredTrigger;
-    public float stateDuration = 5f;
-    public float startTime = Time.time;
+    public float talkDuration = 4f;
+    public float startTime = -1;
+    private GameObject player;
+    private GameObject sage;
     
     public SageState() {
         enteredTrigger = false;
+        player = GameManager.GetPlayer();
+        sage = GameManager.GetSage();
     }
 
     public override void Update() {
         if(enteredTrigger) {
-            if(Time.time - startTime >= stateDuration) {
+            if(startTime > 0 && Time.time - startTime >= talkDuration) {
                 GameState.Next();
                 return;
             }
-        }
 
-        //if(enteredTrigger) {
-            //Walk player towards sage
-            //if(isNear)
-                //Play cinematic or animation?
-                //if(isOver)
-                    //GameState.Next();
-        //}
+            //Walk towards the sage
+            Vector3 targetDir = sage.transform.position - player.transform.position;
+            targetDir.y = 0f;
+            if(targetDir.magnitude > 1.5f) {
+                float step = 50f * Time.deltaTime;
+                Vector3 newDir = Vector3.RotateTowards(player.transform.forward, targetDir, step, 0.0f);
+                GameInput.cameraEulerAngles = Quaternion.LookRotation(newDir).eulerAngles;
+                GameInput.vertical = 1f;
+                GameInput.cameraForward = newDir;
+            } else {
+                GameInput.SimulateInput(false);
+                GameInput.CaptureInput(true);
+                if(startTime < 0)
+                   startTime = Time.time;
+            }
+        }
     }
 
     public void OnSageTrigger() {
         enteredTrigger = true;
-        GameInput.CaptureInput(true);
+        GameInput.SimulateInput(true);
     }
 
     public override State Next() {
@@ -38,6 +50,7 @@ public class SageState : State {
             OnSageTrigger();
             return this;
         } else {
+            GameInput.SimulateInput(false);
             GameInput.CaptureInput(false);
             return new FindArtifactPiecesState();
         }
