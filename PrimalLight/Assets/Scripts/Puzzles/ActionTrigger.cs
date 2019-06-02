@@ -2,26 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Button : MonoBehaviour
+public class ActionTrigger : MonoBehaviour
 {
     public GameObject target;
-
-    void Start()
-    {
-    	
-    }
+    public bool triggerOnce = false;
 
     void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Player" || other.tag == "PushableObject") {
-            target.GetComponent<Door>().Open();
+            target.GetComponent<ActionObject>().Action();
+            if(triggerOnce)
+                gameObject.SetActive(false);
         }
     }
 
     void OnTriggerExit(Collider other)
     {
         if(other.tag == "Player" || other.tag == "PushableObject") {
-            target.GetComponent<Door>().Close();
+            target.GetComponent<ActionObject>().ExitAction();
         }
     }
 }
