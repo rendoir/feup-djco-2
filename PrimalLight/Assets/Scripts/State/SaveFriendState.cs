@@ -9,6 +9,7 @@ public class SaveFriendState : State {
     private BoxCollider friendTrigger;
     private Material friendMaterial;
     private Animator playerAnimator;
+    private PortalGun portalGun;
     private float lightTimer = 0f;
 
     public SaveFriendState() {
@@ -20,6 +21,7 @@ public class SaveFriendState : State {
         friendTrigger = friend.GetComponentInChildren<BoxCollider>();
         friendTrigger.enabled = true;
         playerAnimator = player.GetComponent<Animator>();
+        portalGun = GameManager.GetArtifact().GetComponent<PortalGun>();
     }
 
     public override void Update() {
@@ -41,6 +43,7 @@ public class SaveFriendState : State {
                 //Walk towards the friend
                 Vector3 targetDir = friend.transform.position - player.transform.position;
                 targetDir.y = 0f;
+                targetDir = Quaternion.Euler(0f, -25f, 0f) * targetDir;
                 if(targetDir.magnitude > 1.5f) {
                     float step = 50f * Time.deltaTime;
                     Vector3 newDir = Vector3.RotateTowards(player.transform.forward, targetDir, step, 0.0f);
@@ -52,6 +55,7 @@ public class SaveFriendState : State {
                     GameInput.CaptureInput(true);
                     isNearFriend = true;
                     playerAnimator.SetTrigger("startKneeling");
+                    portalGun.EnableBeam(true);
                 }
                 
             }
@@ -73,6 +77,7 @@ public class SaveFriendState : State {
             playerAnimator.SetBool("isHelping", false);
             GameInput.SimulateInput(false);
             GameInput.CaptureInput(false);
+            portalGun.EnableBeam(false);
             return new NullState();
         }
     }
