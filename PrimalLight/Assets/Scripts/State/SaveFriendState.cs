@@ -3,19 +3,20 @@ using UnityEngine;
 public class SaveFriendState : State {
 
     private bool enteredTrigger;
-    public float stateDuration = 10f;
-    public float startTime = -1;
     private GameObject player;
     private GameObject friend;
     private bool isNearFriend;
     private BoxCollider friendTrigger;
+    private Material friendMaterial;
     private Animator playerAnimator;
+    private float lightTimer = 0f;
 
     public SaveFriendState() {
         enteredTrigger = false;
         isNearFriend = false;
         player = GameManager.GetPlayer();
         friend = GameManager.GetFriend();
+        friendMaterial = friend.GetComponentInChildren<SkinnedMeshRenderer>().material;
         friendTrigger = friend.GetComponentInChildren<BoxCollider>();
         friendTrigger.enabled = true;
         playerAnimator = player.GetComponent<Animator>();
@@ -23,14 +24,18 @@ public class SaveFriendState : State {
 
     public override void Update() {
         if(enteredTrigger) {
-            float elapsed = Time.time - startTime;
             if(isNearFriend) {
-                if(elapsed >= stateDuration) {
+                playerAnimator.SetBool("isHelping", true);
+
+                //Light friend color
+                lightTimer += 0.1f * Time.deltaTime;
+                Color newColor = Color.Lerp(Color.white * 0f, Color.white, lightTimer);
+                friendMaterial.SetColor("_EmissionColor", newColor);
+
+                if(Utils.ColorEquals(Color.white, newColor)) {
                     GameState.Next();
                     return;
                 }
-
-                playerAnimator.SetBool("isHelping", true);
             } else {
                 
                 //Walk towards the friend
@@ -46,10 +51,7 @@ public class SaveFriendState : State {
                     GameInput.SimulateInput(false);
                     GameInput.CaptureInput(true);
                     isNearFriend = true;
-                    if(startTime < 0) {
-                    startTime = Time.time;
                     playerAnimator.SetTrigger("startKneeling");
-                    }
                 }
                 
             }

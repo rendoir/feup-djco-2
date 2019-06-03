@@ -9538,6 +9538,7 @@ MonoBehaviour:
   jumpForce: 275
   sprintMultiplier: 2
   airMovementMultiplier: 0.5
+  turningSpeed: 20
   groundDistance: 0.1
   groundLayer:
     serializedVersion: 2
@@ -11410,11 +11411,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PortalGun
-      objectReference: {fileID: 0}
-    - target: {fileID: 9076606018444646588, guid: 8da9fc7e8bd6a047586680570e76ed04,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1773036810991386273, guid: 8da9fc7e8bd6a047586680570e76ed04,
         type: 3}

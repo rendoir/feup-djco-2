@@ -5,13 +5,11 @@ public class ActivateArtifactState : State {
     private bool enteredTrigger;
     public float activationDuration = 4f;
     public float startTime = -1;
-    private GameObject player;
     private GameObject artifactActivator;
     private BoxCollider artifactActivatorTrigger;
 
     public ActivateArtifactState() {
         enteredTrigger = false;
-        player = GameManager.GetPlayer();
         artifactActivator = GameManager.GetArtifactActivator();
         artifactActivatorTrigger = artifactActivator.GetComponentInChildren<BoxCollider>();
         artifactActivatorTrigger.enabled = true;
@@ -38,6 +36,7 @@ public class ActivateArtifactState : State {
             OnActivatorTrigger();
             return this;
         } else {
+            GiveArtifactToPlayer();
             GameInput.CaptureInput(false);
             return new SaveFriendState();
         }
@@ -47,5 +46,9 @@ public class ActivateArtifactState : State {
         if(!enteredTrigger) 
             return "Find the monument to activate the artifact";
         else return "Activate the artifact";
+    }
+
+    private void GiveArtifactToPlayer() {
+        GameManager.GetArtifact().SetActive(true);
     }
 }

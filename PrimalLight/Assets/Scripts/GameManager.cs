@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
 	GameObject player;
 	GameObject sage;
 	GameObject friend;
+	GameObject artifact;
 	GameObject artifactActivator;
 	Vector3 initialPosition;
 	Quaternion initialRotation;
@@ -69,6 +70,10 @@ public class GameManager : MonoBehaviour
 
 		//Find artifact activator
 		current.artifactActivator = GameObject.FindGameObjectWithTag("ArtifactActivator");
+
+		//Find Artifact
+		current.artifact = GameObject.FindGameObjectWithTag("Artifact");
+		current.artifact.SetActive(false);
     }
 
 	public static GameObject GetPlayer() {
@@ -81,6 +86,10 @@ public class GameManager : MonoBehaviour
 
 	public static GameObject GetFriend() {
 		return current.friend;
+	}
+
+	public static GameObject GetArtifact() {
+		return current.artifact;
 	}
 
 	public static GameObject GetArtifactActivator() {

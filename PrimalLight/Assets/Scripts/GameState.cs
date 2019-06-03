@@ -26,6 +26,7 @@ public class GameState : MonoBehaviour
 		//current.state = new InitialState();
 		//current.state = new SageState();
 		//current.state = new FindArtifactPiecesState();
+		//current.state = new ActivateArtifactState();
 		//current.state = new SaveFriendState();
         current.state = new NullState();
 	}

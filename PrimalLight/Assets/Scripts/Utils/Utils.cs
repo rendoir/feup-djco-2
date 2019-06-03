@@ -13,4 +13,13 @@ static class Utils {
         return plus >= 0 ? plus : minus >= 0 ? minus : 0;
     }
 
+    public static bool ColorEquals(Color color1, Color color2) {
+        return (
+            Mathf.Approximately(color1.r, color2.r) &&
+            Mathf.Approximately(color1.g, color2.g) &&
+            Mathf.Approximately(color1.b, color2.b) &&
+            Mathf.Approximately(color1.a, color2.a)
+        );
+    }
+
 }

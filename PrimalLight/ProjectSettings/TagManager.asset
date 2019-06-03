@@ -12,6 +12,7 @@ TagManager:
   - Sage
   - Friend
   - ArtifactActivator
+  - Artifact
   layers:
   - Default
   - TransparentFX
