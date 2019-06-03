@@ -5,10 +5,11 @@ public class FindArtifactPiecesState : State {
     public override void Update() {
         if(GameManager.GetNumberPieces() >= GameManager.NUMBER_PIECES)
             GameState.Next();
+        //GameManager.OnRewardObtained(); //TODO REMOVE
     }
 
     public override State Next() {
-        return new NullState(); // TODO
+        return new SaveFriendState(); // TODO REPLACE WITH ACTIVATE ARTIFACT STATE
     }
 
     public override string GetMessage() {

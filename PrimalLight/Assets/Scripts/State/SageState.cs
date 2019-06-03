@@ -12,6 +12,7 @@ public class SageState : State {
     private bool isNearSage;
     private bool isPointing;
     private Quaternion sageTargetRotation;
+    private BoxCollider sageTrigger;
     
     public SageState() {
         enteredTrigger = false;
@@ -20,6 +21,8 @@ public class SageState : State {
         player = GameManager.GetPlayer();
         sage = GameManager.GetSage();
         sageTargetRotation = Quaternion.Euler(sage.transform.rotation.x, sage.transform.rotation.y + 90f, sage.transform.rotation.z);
+        sageTrigger = sage.GetComponentInChildren<BoxCollider>();
+        sageTrigger.enabled = true;
     }
 
     public override void Update() {
@@ -61,6 +64,7 @@ public class SageState : State {
     }
 
     public void OnSageTrigger() {
+        sageTrigger.enabled = false;
         enteredTrigger = true;
         GameInput.SimulateInput(true);
     }
