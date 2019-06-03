@@ -3,10 +3,11 @@ using System.Threading.Tasks;
 
 public class InitialState : State {
 
-    public float walkDuration = 3f;
+    public float walkDuration = 5f;
     public float startTime = Time.time;
     private GameObject friend;
     private Rigidbody friendRB;
+    private Material friendMaterial;
     
     public InitialState() {
         GameInput.SimulateInput(true);
@@ -15,6 +16,7 @@ public class InitialState : State {
         startTime = Time.time;
         friend = GameManager.GetFriend();
         friendRB = friend.GetComponent<Rigidbody>();
+        friendMaterial = friend.GetComponentInChildren<SkinnedMeshRenderer>().material;
         friend.GetComponent<Animator>().SetTrigger("isWalking");
     }
 
@@ -28,7 +30,12 @@ public class InitialState : State {
         float t = Time.time - startTime;
         GameInput.vertical = Mathf.SmoothStep(0f, 1f, t);
 
+        //Move friend
         MoveFriend();
+
+        //Ping pong friend color
+        float intensity = Mathf.PingPong(Time.time * 0.5f, 1f);
+        friendMaterial.SetColor("_EmissionColor", Color.white * intensity);
     }
 
     public override State Next() {
