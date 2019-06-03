@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Threading.Tasks;
 
 public class FindArtifactPiecesState : State {
     public override void Update() {
@@ -9,7 +8,7 @@ public class FindArtifactPiecesState : State {
     }
 
     public override State Next() {
-        return new SaveFriendState(); // TODO REPLACE WITH ACTIVATE ARTIFACT STATE
+        return new ActivateArtifactState();
     }
 
     public override string GetMessage() {
