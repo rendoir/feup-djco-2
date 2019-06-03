@@ -4,7 +4,6 @@ public class FindArtifactPiecesState : State {
     public override void Update() {
         if(GameManager.GetNumberPieces() >= GameManager.NUMBER_PIECES)
             GameState.Next();
-        //GameManager.OnRewardObtained(); //TODO REMOVE
     }
 
     public override State Next() {
