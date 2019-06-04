@@ -7,6 +7,7 @@ public class PortalPuzzle : MonoBehaviour, InteractionObserver
     [Header("Matching Color")]
     public Color matchingColor;
     public Renderer matchingSurfaceRenderer;
+    public float emissionIntensity;
 
     [Header("Canisters")]
     public GameObject redCanisterFluid;
@@ -46,7 +47,7 @@ public class PortalPuzzle : MonoBehaviour, InteractionObserver
         tooltipCoroutine = null;
         isPuzzleComplete = false;
         currentColor = Color.black;
-        matchingSurfaceRenderer.material.SetColor("_EmissionColor", matchingColor * 0.5f);
+        matchingSurfaceRenderer.material.SetColor("_EmissionColor", matchingColor * emissionIntensity);
         InitCanister(redCanisterFluid, Color.red);
         InitCanister(greenCanisterFluid, Color.green);
         InitCanister(blueCanisterFluid, Color.blue);
@@ -58,7 +59,7 @@ public class PortalPuzzle : MonoBehaviour, InteractionObserver
 
     void InitCanister(GameObject canister, Color color) {
         Renderer canisterRenderer = canister.GetComponent<Renderer>();
-        canisterRenderer.material.SetColor("_EmissionColor", color * 0.5f);
+        canisterRenderer.material.SetColor("_EmissionColor", color * 0.25f);
         canisterRenderer.material.SetColor("_Color", color);
     }
 
@@ -91,9 +92,9 @@ public class PortalPuzzle : MonoBehaviour, InteractionObserver
     }
 
     void UpdateWithCurrentColor() {
-        portal.material.SetColor("_EmissionColor", currentColor * 0.5f);
+        portal.material.SetColor("_EmissionColor", currentColor * emissionIntensity);
         beam.material.SetColor("_Color", currentColor);
-        beam.material.SetColor("_EmissionColor", currentColor * 0.5f);
+        beam.material.SetColor("_EmissionColor", currentColor * emissionIntensity);
         pointLight.color = currentColor;
     }
 
