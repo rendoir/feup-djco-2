@@ -185,5 +185,6 @@ public class PortalPuzzle : MonoBehaviour, InteractionObserver
         }
 
         currentColor.a = 0f;
+        beam.gameObject.SetActive(false);
     }
 }
