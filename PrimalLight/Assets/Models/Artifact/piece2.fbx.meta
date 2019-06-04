@@ -1,56 +1,26 @@
 fileFormatVersion: 2
-guid: 22cd8fd4c1eb01ae88b76c746fa76b66
+guid: 13d354d2e43561e09865518f7a2b7feb
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: Cube.001
+    100000: Cube.000
     100002: Cube.002
-    100004: Cube.003
-    100006: Cube.004
-    100008: Cube.006
-    100010: Cube.007
-    100012: //RootNode
-    400000: Cube.001
+    100004: //RootNode
+    400000: Cube.000
     400002: Cube.002
-    400004: Cube.003
-    400006: Cube.004
-    400008: Cube.006
-    400010: Cube.007
-    400012: //RootNode
+    400004: //RootNode
     2100000: Detailing
     2100002: Glass
-    2100004: Guts
-    2100006: Body
-    2300000: Cube.001
+    2300000: Cube.000
     2300002: Cube.002
-    2300004: Cube.003
-    2300006: Cube.004
-    2300008: Cube.006
-    2300010: Cube.007
-    3300000: Cube.001
+    3300000: Cube.000
     3300002: Cube.002
-    3300004: Cube.003
-    3300006: Cube.004
-    3300008: Cube.006
-    3300010: Cube.007
-    4300000: Cube.001
-    4300002: Cube.007
-    4300004: Cube.006
-    4300006: Cube.004
-    4300008: Cube.003
-    4300010: Cube.002
-    7400000: Cube.001|CDA:ObIpo.004
-    7400002: Cube.001|CDA:ObIpo.005
-    7400004: Cube.007|CDA:ObIpo.004
-    7400006: Cube.007|CDA:ObIpo.005
-    7400008: Cube.006|CDA:ObIpo.004
-    7400010: Cube.006|CDA:ObIpo.005
-    7400012: Cube.004|CDA:ObIpo.004
-    7400014: Cube.004|CDA:ObIpo.005
-    7400016: Cube.003|CDA:ObIpo.004
-    7400018: Cube.003|CDA:ObIpo.005
-    7400020: Cube.002|CDA:ObIpo.004
-    7400022: Cube.002|CDA:ObIpo.005
+    4300000: Cube.000
+    4300002: Cube.002
+    7400000: Cube.000|CDA:ObIpo.004
+    7400002: Cube.000|CDA:ObIpo.005
+    7400004: Cube.002|CDA:ObIpo.004
+    7400006: Cube.002|CDA:ObIpo.005
     9500000: //RootNode
   externalObjects: {}
   materials:
@@ -129,7 +99,7 @@ ModelImporter:
     feetSpacing: 0
     rootMotionBoneName: 
     hasTranslationDoF: 0
-    hasExtraRoot: 1
+    hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 0
