@@ -6,6 +6,7 @@ public class TempleManager : MonoBehaviour
 {
 
 	private SlidingPillars spPuzzle1;
+    public GameObject elevator;
     
     void Start()
     {
@@ -37,7 +38,8 @@ public class TempleManager : MonoBehaviour
     	spPuzzle1.SetBoard(spPuzzle1Board);
         spPuzzle1.SetPillars(spPuzzle1Pillars);
         spPuzzle1.Generate();
-        
+
+        elevator.GetComponent<TempleElevator>().Set();
     }
 
     // Update is called once per frame

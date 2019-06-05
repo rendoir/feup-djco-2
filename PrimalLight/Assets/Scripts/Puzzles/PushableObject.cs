@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PushableObject : MovingObject
 {
+    public float speedMult;
     public bool bounded;
     public Vector3 relMinBound;
     public Vector3 relMaxBound;
@@ -38,6 +39,6 @@ public class PushableObject : MovingObject
 
     public bool CanPush(Vector3 endPosOffset){
     	Vector3 endPos = rb.position+endPosOffset;
-    	return bounded ? true : CheckInBounds(endPos-initPos);
+    	return bounded ? CheckInBounds(endPos-initPos) : true;
     }
 }

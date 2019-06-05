@@ -26,6 +26,7 @@ public class PlayerMovement : MovingObject, DeathObserver
 	private bool interactButton;
 
 	private Animator anim;
+	private float initPushingSpeed;
 	private GameObject pushableObject = null;
 
 	private bool isDead = false;
@@ -37,6 +38,7 @@ public class PlayerMovement : MovingObject, DeathObserver
 		GameManager.RegisterDeathObserver(this);
 		anim = GetComponent<Animator>();
 		jumpCooldownCounter = 0f;
+		initPushingSpeed = pushingSpeed;
 
 		base.Start();
 	}
@@ -124,14 +126,19 @@ public class PlayerMovement : MovingObject, DeathObserver
 	// Animation Events
 
 	void StopPushingEnd(){
+		pushingSpeed = initPushingSpeed;
 		pushing = false;
 	}
 
 	void StartPushingEnd(){
 		PushableObjectPad pad = pushableObject.GetComponent<PushableObjectPad>();
+		PushableObject pushable = pushableObject.transform.parent.GetComponent<PushableObject>();
+
+		pushingSpeed = pushingSpeed*pushable.speedMult;
 		Vector3 endPos = rb.position+pad.endPosOffset;
 		float inverseMoveTime = pushingSpeed/pad.endPosOffset.magnitude;
-		pushableObject.transform.parent.GetComponent<PushableObject>().Push(pad.endPosOffset,inverseMoveTime);
+
+		pushable.Push(pad.endPosOffset,inverseMoveTime);
 		StartCoroutine(SmoothMovement((bool done) => {
 				anim.SetTrigger("stopPushing");
 		},endPos,inverseMoveTime));
