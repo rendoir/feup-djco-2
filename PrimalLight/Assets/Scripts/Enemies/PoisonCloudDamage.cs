@@ -16,10 +16,10 @@ public class PoisonCloudDamage : MonoBehaviour
         if(Utils.MaskContainsLayer(playerMask, other.gameObject.layer)) {
             
             if(playerHealth) {
-                playerHealth.OnHit(healthLoss);
+                playerHealth.DamageOvertime(healthLoss);
             } else {
                 playerHealth = other.gameObject.GetComponent<Health>();
-                playerHealth.OnHit(healthLoss);
+                playerHealth.DamageOvertime(healthLoss);
             }
 
         }
