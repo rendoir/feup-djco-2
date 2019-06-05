@@ -20,7 +20,7 @@ public class Health : MonoBehaviour, DeathObserver
         health = initialHealth;
         isDead = false;
         GameManager.RegisterDeathObserver(this);
-        OnHealthChange();
+        OnDamage();
     }
 
     void Update() {
@@ -31,10 +31,11 @@ public class Health : MonoBehaviour, DeathObserver
         if(Time.time - lastHitTime > hitCooldown && !isDead) {
             health += Time.deltaTime * regenerationRate; //Regenerate
             health = Mathf.Min(health, initialHealth); //Clamp health
+            UpdateColor();
         }
     } 
 
-    private void OnHealthChange() {
+    private void OnDamage() {
         //Check if player died
         if (health < 0) {
             if (!isDead)
@@ -43,23 +44,26 @@ public class Health : MonoBehaviour, DeathObserver
             health = 0;
         }
 
-        //Update color intensity
-        playerRenderer.material.SetColor("_EmissionColor", Color.white * (health / initialHealth));
+        UpdateColor();
 
         //Restart hit cooldown
         lastHitTime = Time.time;
     }
 
+    private void UpdateColor() {
+        playerRenderer.material.SetColor("_EmissionColor", Color.white * (health / initialHealth));
+    }
+
     public void DamageOvertime(float healthLoss)
     {
         health -= Time.deltaTime * healthLoss;
-        OnHealthChange();
+        OnDamage();
     }
 
     public void Damage(float damage)
     {
         health -= damage;
-        OnHealthChange();
+        OnDamage();
     }
 
     public void ResetHealth() 

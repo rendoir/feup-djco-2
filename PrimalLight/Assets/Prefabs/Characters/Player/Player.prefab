@@ -9713,7 +9713,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27a1a86ec1c02a548bc79c72c03e06dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitCooldown: 2.5
+  regenerationRate: 0.5
   initialHealth: 20
+  playerAnimator: {fileID: 95804848747135216}
+  playerRenderer: {fileID: 7955054790997646725}
 --- !u!114 &1576121209
 MonoBehaviour:
   m_ObjectHideFlags: 0

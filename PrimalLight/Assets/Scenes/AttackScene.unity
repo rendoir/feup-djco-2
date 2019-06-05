@@ -111,7 +111,7 @@ NavMeshSettings:
     accuratePlacement: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: 2d998961e8ccd3b84abbc460953deae6, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 6459b560304e1acccbb840ba66cf2e8b, type: 2}
 --- !u!1 &246743863
 GameObject:
   m_ObjectHideFlags: 0
@@ -342,7 +342,7 @@ PrefabInstance:
     - target: {fileID: 157421143752697229, guid: 71ac4c7b0feb7e156beec66ff4eb18f8,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0004298781
+      value: -0.00042987807
       objectReference: {fileID: 0}
     - target: {fileID: 157421143752697229, guid: 71ac4c7b0feb7e156beec66ff4eb18f8,
         type: 3}
@@ -501,12 +501,12 @@ PrefabInstance:
     - target: {fileID: 7783066642433975168, guid: 844af1052bca09349b82b6a4b29d16f0,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.030880699
+      value: 0.030880697
       objectReference: {fileID: 0}
     - target: {fileID: 7783066642433975168, guid: 844af1052bca09349b82b6a4b29d16f0,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0004294206
+      value: 0.00042942056
       objectReference: {fileID: 0}
     - target: {fileID: 7783066642433975168, guid: 844af1052bca09349b82b6a4b29d16f0,
         type: 3}
@@ -769,14 +769,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 163208629, guid: 14dd171a52655a84e80e7e6c77e81813, type: 3}
-      propertyPath: playerAnimator
-      value: 
-      objectReference: {fileID: 2146136526}
-    - target: {fileID: 163208629, guid: 14dd171a52655a84e80e7e6c77e81813, type: 3}
-      propertyPath: playerRenderer
-      value: 
-      objectReference: {fileID: 2098070219}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14dd171a52655a84e80e7e6c77e81813, type: 3}
 --- !u!4 &1576121206 stripped
@@ -1053,12 +1045,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!137 &2098070219 stripped
-SkinnedMeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 7955054790997646725, guid: 14dd171a52655a84e80e7e6c77e81813,
-    type: 3}
-  m_PrefabInstance: {fileID: 1576121205}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2110801562
 GameObject:
   m_ObjectHideFlags: 0
@@ -1119,12 +1105,6 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 512
---- !u!95 &2146136526 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 95804848747135216, guid: 14dd171a52655a84e80e7e6c77e81813,
-    type: 3}
-  m_PrefabInstance: {fileID: 1576121205}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1677285430726484429
 PrefabInstance:
   m_ObjectHideFlags: 0
