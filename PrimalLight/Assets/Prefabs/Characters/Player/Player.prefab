@@ -9574,8 +9574,8 @@ GameObject:
   - component: {fileID: 340658332}
   - component: {fileID: 1127796202}
   - component: {fileID: 163208629}
-  - component: {fileID: 3537496712648804722}
   - component: {fileID: 5363959148220632810}
+  - component: {fileID: 3537496712648804722}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -9720,6 +9720,27 @@ MonoBehaviour:
   initialHealth: 20
   playerAnimator: {fileID: 95804848747135216}
   playerRenderer: {fileID: 7955054790997646725}
+--- !u!114 &5363959148220632810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1327342949782858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbee0e94986ef6f37b289e9b19eb12fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 95804848747135216}
+  audioSource: {fileID: 3537496712648804722}
+  jumpClip: {fileID: 8300000, guid: a6a6f6194b75bc3f5812b3e7e59a9092, type: 3}
+  footstepClips:
+  - {fileID: 8300000, guid: 0964d37876a82cf468631df29c09d438, type: 3}
+  - {fileID: 8300000, guid: 6ff492ee6e173e5ba9400231fa5140cf, type: 3}
+  - {fileID: 8300000, guid: 623a6f85f958436f7994125e13194593, type: 3}
+  - {fileID: 8300000, guid: eaae654d6c59c1683af189968b6d8d4f, type: 3}
+  - {fileID: 8300000, guid: 71158b793845865fa8824ac50b85bfe6, type: 3}
 --- !u!82 &3537496712648804722
 AudioSource:
   m_ObjectHideFlags: 0
@@ -9816,28 +9837,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &5363959148220632810
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1327342949782858}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbee0e94986ef6f37b289e9b19eb12fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 95804848747135216}
-  audioSource: {fileID: 3537496712648804722}
-  footstepClips:
-  - {fileID: 8300000, guid: 0964d37876a82cf468631df29c09d438, type: 3}
-  - {fileID: 8300000, guid: 6ff492ee6e173e5ba9400231fa5140cf, type: 3}
-  - {fileID: 8300000, guid: 623a6f85f958436f7994125e13194593, type: 3}
-  - {fileID: 8300000, guid: eaae654d6c59c1683af189968b6d8d4f, type: 3}
-  - {fileID: 8300000, guid: 71158b793845865fa8824ac50b85bfe6, type: 3}
-  leftFoot: {fileID: 8035814074597762197}
-  rightFoot: {fileID: 8036295582217219655}
 --- !u!114 &1576121209
 MonoBehaviour:
   m_ObjectHideFlags: 0
