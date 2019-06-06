@@ -18,7 +18,7 @@ public class LightPoint : MonoBehaviour, InteractionObserver
     public float rotateSpeed = 1.5f;
     public float fadeTime = 0.5f;
     public float tooltipTime = 4f;
-    public float removeLaserTime = 3f;
+    public float removeLaserTime = 1f;
 
     public GameObject laserObject;
     public LayerMask mirrorMask;
@@ -31,6 +31,13 @@ public class LightPoint : MonoBehaviour, InteractionObserver
     private float tooltipTimeCounter;
     private Coroutine inputCoroutine;
     private Coroutine tooltipCoroutine;
+
+    public GameObject wallToRemove;
+
+    public Vector3 offset;
+	public IEnumerator movement;
+	public float movementSpeed = 0.5f;
+	private Vector3 initPos;
 
 
     void Start() {
@@ -144,10 +151,27 @@ public class LightPoint : MonoBehaviour, InteractionObserver
         isPuzzleComplete = true;
         isPlayerInteracting = false;
         interactionTrigger.gameObject.SetActive(false);
+
+        
+        
         yield return new WaitForSeconds(removeLaserTime);
+        
+        initPos = wallToRemove.transform.position;
+        WallGoUp();
+
         Destroy(laserClone);
         StartCoroutine(FreeInput());
     }
+
+     public void WallGoUp() {
+         Vector3 targetPos = initPos+offset;
+		if(movement != null)
+			StopCoroutine(movement);
+		movement = MovementUtils.SmoothMovement((bool end) => {
+	        			movement = null;
+	       			},wallToRemove,targetPos,movementSpeed);
+		StartCoroutine(movement);
+     }
 
      public IEnumerator FreeInput() {
         yield return new WaitForSeconds(fadeTime);
