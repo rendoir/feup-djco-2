@@ -9737,10 +9737,8 @@ MonoBehaviour:
   jumpClip: {fileID: 8300000, guid: a6a6f6194b75bc3f5812b3e7e59a9092, type: 3}
   footstepClips:
   - {fileID: 8300000, guid: 0964d37876a82cf468631df29c09d438, type: 3}
-  - {fileID: 8300000, guid: 6ff492ee6e173e5ba9400231fa5140cf, type: 3}
-  - {fileID: 8300000, guid: 623a6f85f958436f7994125e13194593, type: 3}
-  - {fileID: 8300000, guid: eaae654d6c59c1683af189968b6d8d4f, type: 3}
   - {fileID: 8300000, guid: 71158b793845865fa8824ac50b85bfe6, type: 3}
+  - {fileID: 8300000, guid: 623a6f85f958436f7994125e13194593, type: 3}
 --- !u!82 &3537496712648804722
 AudioSource:
   m_ObjectHideFlags: 0
