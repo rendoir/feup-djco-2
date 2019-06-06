@@ -151,8 +151,7 @@ public class LightPoint : MonoBehaviour, InteractionObserver
         isPuzzleComplete = true;
         isPlayerInteracting = false;
         interactionTrigger.gameObject.SetActive(false);
-
-        
+        GameSound.Play("PuzzleComplete");        
         
         yield return new WaitForSeconds(removeLaserTime);
         
