@@ -25,6 +25,7 @@ public class GameState : MonoBehaviour
 	void Start() {
 		//current.state = new InitialState();
         current.state = new NullState();
+		//current.state = new ActivateArtifactState();
 	}
 
 	void Update()
