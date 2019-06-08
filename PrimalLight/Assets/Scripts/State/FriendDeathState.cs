@@ -4,7 +4,9 @@ public class FriendDeathState : State {
 
     public float stateDuration = 7f;
     private float cryingWaitTime = 2f;
+    public float afterStateDelay = 2f;
     private bool crying;
+    private bool stopKneeling;
     public float startTime = Time.time;
     private GameObject player;
     private GameObject friend;
@@ -14,6 +16,7 @@ public class FriendDeathState : State {
     
     public FriendDeathState() {
         crying = false;
+        stopKneeling = false;
         GameInput.CaptureInput(true);
         player = GameManager.GetPlayer();
         friend = GameManager.GetFriend();
@@ -30,7 +33,12 @@ public class FriendDeathState : State {
             crying = true;
         }
 
-        if(elapsed >= stateDuration) {
+        if(elapsed >= stateDuration && !stopKneeling) {
+            player.GetComponent<Animator>().SetTrigger("stopKneeling");
+            stopKneeling = true;
+        }
+
+        if(elapsed >= stateDuration + afterStateDelay) {
             GameState.Next();
             return;
         }
@@ -48,7 +56,6 @@ public class FriendDeathState : State {
     }
 
     public override State Next() {
-        player.GetComponent<Animator>().SetTrigger("stopKneeling");
         GameInput.CaptureInput(false);
         return new SageState();
     }
