@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class ActivateArtifactState : State {
+public class ActivateArtifactState : State, InteractionObserver {
 
     private bool foundMonument;
     public float assemblePiecesDuration = 4f;
@@ -16,13 +16,23 @@ public class ActivateArtifactState : State {
     public Quaternion artifactRotation;
     private float elapsedTime = 0f;
     private int placedPieces = 0;
+    private bool buttonPressed;
+    private ArtifactButton button;
+    private bool artifactAssembled;
+    private InteractionTrigger pickupArtifactTrigger;
 
     public ActivateArtifactState() {
         foundMonument = false;
+        buttonPressed = false;
+        artifactAssembled = false;
         artifactActivator = GameManager.GetArtifactActivator();
         findMonumentTrigger = artifactActivator.GetComponentInChildren<StateTrigger>().gameObject.GetComponent<BoxCollider>();
         findMonumentTrigger.enabled = true;
         artifactPieces = GameObject.FindGameObjectsWithTag("ArtifactPiece");
+        button = artifactActivator.GetComponentInChildren<ArtifactButton>();
+        button.SetState(this);
+        pickupArtifactTrigger = artifactActivator.GetComponentInChildren<InteractionTrigger>();
+        pickupArtifactTrigger.SetObserver(this);
 
         //Calculate centroid
         artifactPosition = new Vector3(
@@ -43,16 +53,21 @@ public class ActivateArtifactState : State {
     public override void Update() {
         if(foundMonument) {
             if(placedPieces >= GameManager.NUMBER_PIECES) {
-                if(elapsedTime >= assemblePiecesDuration) {
-                    GameState.Next();
-                    return;
-                }
+                if(buttonPressed) {
+                    if(!artifactAssembled) {
+                        //Assemble artifact
+                        if(elapsedTime >= assemblePiecesDuration) {
+                            GameState.Next();
+                            return;
+                        }
 
-                //Move and rotate towards one point
-                elapsedTime += Time.deltaTime;
-                for(int i = 0; i < artifactPieces.Length; i++) {
-                    artifactPieces[i].transform.position = Vector3.Lerp(artifactStartPositions[i], artifactPosition, elapsedTime / assemblePiecesDuration);
-                    artifactPieces[i].transform.rotation = Quaternion.Lerp(artifactStartRotations[i], artifactRotation, elapsedTime / assemblePiecesDuration);
+                        //Move and rotate towards one point
+                        elapsedTime += Time.deltaTime;
+                        for(int i = 0; i < artifactPieces.Length; i++) {
+                            artifactPieces[i].transform.position = Vector3.Lerp(artifactStartPositions[i], artifactPosition, elapsedTime / assemblePiecesDuration);
+                            artifactPieces[i].transform.rotation = Quaternion.Lerp(artifactStartRotations[i], artifactRotation, elapsedTime / assemblePiecesDuration);
+                        }
+                    }
                 }
             }
         }
@@ -67,10 +82,10 @@ public class ActivateArtifactState : State {
         if(!foundMonument) {
             OnFoundMonument();
             return this;
-        } else {
+        } else if(!artifactAssembled) {
             OnActivationOver();
-            return new SaveFriendState();
-        }
+            return this;
+        } else return new SaveFriendState();
     }
 
     public override string GetMessage() {
@@ -78,34 +93,34 @@ public class ActivateArtifactState : State {
             return "Find the monument to activate the artifact";
         else if(placedPieces < GameManager.NUMBER_PIECES)
             return "Place the artifact pieces on the pillars " + "(" + placedPieces + "/" + GameManager.NUMBER_PIECES + ")";
-        else return "Activate the artifact";
+        else if(!artifactAssembled) 
+            return "Activate the artifact";
+        else return "Pick up the artifact";
     }
 
     private void OnActivationOver() {
-        GameManager.GetArtifact().SetActive(true);
         GameInput.CaptureInput(false);
+        artifactAssembled = true;
+        pickupArtifactTrigger.GetComponent<BoxCollider>().enabled = true;
     }
 
     public void OnPlayerPlacePiece(int id) {
         artifactPieces[id].SetActive(true);
         placedPieces++;
     }
-}
 
-public class ArtifactPillar : InteractionObserver {
-    private InteractionTrigger placePieceTrigger;
-    private ActivateArtifactState state;
-    private int id;
-
-    public ArtifactPillar(GameObject pillar, int pieceID, ActivateArtifactState artifactState) {
-        placePieceTrigger = pillar.GetComponentInChildren<InteractionTrigger>();
-        placePieceTrigger.SetObserver(this);
-        id = pieceID;
-        state = artifactState;
+    public void OnButtonPressed(bool pressed) {
+        if(placedPieces >= GameManager.NUMBER_PIECES && !artifactAssembled) {
+            buttonPressed = pressed;
+            GameInput.CaptureInput(true);
+        }
     }
 
     public void OnPlayerInteract() {
-        state.OnPlayerPlacePiece(id);
-        placePieceTrigger.gameObject.SetActive(false);
+        foreach (GameObject piece in artifactPieces)
+            piece.SetActive(false);
+        pickupArtifactTrigger.gameObject.SetActive(false);
+        GameManager.GetArtifact().SetActive(true);
+        GameState.Next();
     }
 }
