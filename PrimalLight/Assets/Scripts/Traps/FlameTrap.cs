@@ -15,6 +15,7 @@ public class FlameTrap : MonoBehaviour
 	public float startDelay = 0;
 	public int flame = 0;
 	public float interval = 1f; 
+    public float flameLength = 0.5f;
 	public float flameTime = 1f;
 	private bool ready = true;
 	private bool active = false;
@@ -27,6 +28,7 @@ public class FlameTrap : MonoBehaviour
     		ParticleSystem ps = flameThrower.GetChild(0).GetComponent<ParticleSystem>();
     		var main = ps.main;
         	main.duration = flameTime;
+            main.startLifetime = flameLength;
     	}
     	StartCoroutine(Init());    
     }
