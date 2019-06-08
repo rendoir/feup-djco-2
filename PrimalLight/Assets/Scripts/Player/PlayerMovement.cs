@@ -12,6 +12,7 @@ public class PlayerMovement : MovingObject, DeathObserver
 	public float sprintMultiplier = 2f;
 	public float airMovementMultiplier = 0.5f;
 	public float turningSpeed = 20f;
+	public float clampTurningSpeed = 30f;
 
 	[Header("Physics")]
 	public float groundDistance = 0.1f;
@@ -20,6 +21,7 @@ public class PlayerMovement : MovingObject, DeathObserver
 
 	public bool isOnGround;
 	public bool pushing = false;
+	public bool interacting = false;
 	public float sprint;
 	private Vector3 input;
 
@@ -87,10 +89,12 @@ public class PlayerMovement : MovingObject, DeathObserver
 							Vector3.Cross(GameInput.cameraForward, Vector3.up) *  -input.x;
 
 		//rotates the player to face in the camera direction if he is moving
-		if(Math.Abs(input.x) > 0.0f || Math.Abs(input.z) > 0.0f)
-		{
-			Vector3 lookDirection = new Vector3(GameInput.cameraForward.x, 0f, GameInput.cameraForward.z);
-			transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(lookDirection), Time.deltaTime * turningSpeed);
+		if(!interacting){
+			if(Math.Abs(input.x) > 0.0f || Math.Abs(input.z) > 0.0f)
+			{
+				Vector3 lookDirection = new Vector3(GameInput.cameraForward.x, 0f, GameInput.cameraForward.z);
+				transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(lookDirection), Time.deltaTime * turningSpeed);
+			}
 		}
 
 		//Walk
@@ -144,6 +148,10 @@ public class PlayerMovement : MovingObject, DeathObserver
 		},endPos,inverseMoveTime));
 	}
 
+	void InteractEnd(){
+		interacting = false;
+	}
+
 	// Triggers
 
 	void OnTriggerStay(Collider other)
@@ -166,14 +174,33 @@ public class PlayerMovement : MovingObject, DeathObserver
 			}
 		}
 		else if (other.tag == "Pillar"){
-			if(isOnGround && interactButton){
+			if(!interacting && isOnGround && interactButton){
 				PushableObjectPad pad = other.gameObject.GetComponent<PushableObjectPad>();
 				Pillar pillar = other.gameObject.transform.parent.GetComponent<Pillar>();
+
+				// Align character
+				Quaternion targetRot = Quaternion.Euler(transform.eulerAngles.x, pad.yRot, transform.eulerAngles.z);
+				transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * clampTurningSpeed);
+				
+				interacting = true;
+				anim.SetTrigger("interact");
+				
 				pillar.Move(pad.direction);
 			}
 		}
+		else if(other.gameObject.tag == "Platform"){
+	        transform.parent = other.transform;
+	        //transform.position = other.transform.position;
+ 			//transform.rotation = other.transform.rotation;
+    	}
 
 	}
+     
+    void OnTriggerExit(Collider other){
+     	if(other.gameObject.tag == "Platform"){
+        	transform.parent = null;
+     	}
+    }    
 
 	void Animate()
 	{

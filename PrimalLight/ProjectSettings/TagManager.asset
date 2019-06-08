@@ -13,6 +13,7 @@ TagManager:
   - Friend
   - ArtifactActivator
   - Artifact
+  - Platform
   layers:
   - Default
   - TransparentFX
@@ -28,7 +29,7 @@ TagManager:
   - ShadowsOnly
   - Bloom
   - Mirror
-  - 
+  - Fog
   - 
   - 
   - 
