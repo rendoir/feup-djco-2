@@ -126,6 +126,7 @@ public class PortalPuzzle : MonoBehaviour, InteractionObserver
         DisableCamera();
         StartCoroutine(FadeColor());
         reward.OnReward();
+        GameSound.Play("PuzzleComplete");
     }
 
     public void OnPlayerInteract() {
