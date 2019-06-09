@@ -28,7 +28,7 @@ public class BoulderTrap : ActionObject
     private bool ascending = true;
     private float height = 0;
     private GameObject boulder;
-    private GameObject dust;
+    private ParticleSystem dust;
     private int currMovement = 0;
     private bool move = false;
     private Vector3 initPos;
@@ -38,7 +38,7 @@ public class BoulderTrap : ActionObject
     void Start()
     {
         boulder = transform.GetChild(0).gameObject;
-        dust = transform.GetChild(1).gameObject;
+        dust = transform.GetChild(1).gameObject.GetComponent<ParticleSystem>();
         initPos = transform.position;
 
         if(!trigger)
@@ -87,6 +87,12 @@ public class BoulderTrap : ActionObject
             	StopCoroutine(rotation);
             move = true;
         }, gameObject, endPos, movement.speed));
+
+        //Play or dust ps
+		if(movement.onGround)
+    		dust.Play();
+    	else
+    		dust.Stop();
   	}
 
     public override void ExitAction(){}
@@ -104,7 +110,8 @@ public class BoulderTrap : ActionObject
             if(height >= bumpHeight)
                 ascending = false;
             else if(height <= 0){
-            	dust.SetActive(true);
+            	if(movements[currMovement].onGround)
+            		dust.Play();
                 yield break;
             }
 
@@ -114,7 +121,7 @@ public class BoulderTrap : ActionObject
 
     public void Bump(){
     	if(bump == null){
-    		dust.SetActive(false);
+    		dust.Stop();
             bump = StartCoroutine(BumpRoutine());
     	}
     }	
@@ -122,6 +129,5 @@ public class BoulderTrap : ActionObject
     private void SetActive(bool state){
         active = state;
         boulder.GetComponent<Boulder>().SetColliderTrigger(state);
-        dust.SetActive(state);
     }
 }
