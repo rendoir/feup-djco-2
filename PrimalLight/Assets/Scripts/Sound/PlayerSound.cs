@@ -1,16 +1,24 @@
 using UnityEngine;
 using UnityEngine.Audio;
 
-public class PlayerSound : MonoBehaviour {
+public class PlayerSound : MonoBehaviour, DeathObserver {
     public Animator animator;
     public AudioSource audioSource;
+    public AudioClip cryClip;
+    public AudioClip yellingClip;
     public AudioClip jumpClip;
+    public AudioClip deathClip;
     public AudioClip[] footstepClips;
 
 	private float lastFrameFootstepLeft = 0;
 	private float lastFrameFootstepRight = 0;
     private bool lastFrameJumping = false;
 
+
+    void Start()
+    {
+        GameManager.RegisterDeathObserver(this);
+    }
 
 	void Update () 
     {
@@ -44,7 +52,29 @@ public class PlayerSound : MonoBehaviour {
         audioSource.PlayOneShot(jumpClip);
     }
 
+    public void CrySound()
+    {
+        audioSource.PlayOneShot(cryClip);
+    }
+
+    public void YellingSound()
+    {
+        audioSource.PlayOneShot(yellingClip);
+    }
+
+    public void DeathSound()
+    {
+        audioSource.PlayOneShot(deathClip);
+    }
+
     AudioClip GetRandomClip(AudioClip[] clips) {
         return clips[Random.Range(0, clips.Length)];
     }
+
+    public void OnPlayerDeath()
+    {
+        DeathSound();
+    }
+
+    public void OnPlayerAlive() { }
 }

@@ -63,6 +63,7 @@ public class SaveFriendState : State {
                     GameInput.CaptureInput(true);
                     isNearFriend = true;
                     playerAnimator.SetTrigger("startKneeling");
+                    GameManager.GetArtifact().GetComponent<AudioSource>().PlayDelayed(helpDelay);
                 }
                 
             }

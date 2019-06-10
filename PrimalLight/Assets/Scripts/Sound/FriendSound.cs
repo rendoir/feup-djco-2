@@ -4,6 +4,7 @@ using UnityEngine.Audio;
 public class FriendSound : MonoBehaviour {
     public Animator animator;
     public AudioSource audioSource;
+    public AudioClip deathClip;
     public AudioClip[] footstepClips;
 
 	private float lastFrameFootstepLeft = 0;
@@ -29,6 +30,11 @@ public class FriendSound : MonoBehaviour {
     {
         AudioClip clip = GetRandomClip(footstepClips);
         audioSource.PlayOneShot(clip);
+    }
+
+    public void DeathSound()
+    {
+        audioSource.PlayOneShot(deathClip);
     }
 
     AudioClip GetRandomClip(AudioClip[] clips) {

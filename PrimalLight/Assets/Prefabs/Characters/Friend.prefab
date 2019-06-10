@@ -1904,6 +1904,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 5221657117894400592}
   audioSource: {fileID: 5170146004784682592}
+  deathClip: {fileID: 8300000, guid: d4223163007fb0adf81de4d1e98e66dc, type: 3}
   footstepClips:
   - {fileID: 8300000, guid: 0964d37876a82cf468631df29c09d438, type: 3}
   - {fileID: 8300000, guid: 623a6f85f958436f7994125e13194593, type: 3}

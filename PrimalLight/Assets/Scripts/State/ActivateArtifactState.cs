@@ -102,6 +102,7 @@ public class ActivateArtifactState : State, InteractionObserver {
         GameInput.CaptureInput(false);
         artifactAssembled = true;
         pickupArtifactTrigger.GetComponent<BoxCollider>().enabled = true;
+        artifactActivator.GetComponentInChildren<AudioSource>().Play();
     }
 
     public void OnPlayerPlacePiece(int id) {
