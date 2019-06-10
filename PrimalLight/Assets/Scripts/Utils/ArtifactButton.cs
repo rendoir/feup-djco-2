@@ -23,23 +23,19 @@ public class ArtifactButton : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        if(state == null)
-            return;
-
         if(Utils.MaskContainsLayer(playerLayer, other.gameObject.layer)) {
         	transform.localPosition = activePos;
-            state.OnButtonPressed(true);
+            if(state != null)
+                state.OnButtonPressed(true);
         }
     }
 
     void OnTriggerExit(Collider other)
     {
-        if(state == null)
-            return;
-            
         if(Utils.MaskContainsLayer(playerLayer, other.gameObject.layer)) {
             transform.localPosition = initPos;
-            state.OnButtonPressed(false);
+            if(state != null)
+                state.OnButtonPressed(false);
         }
     }
 

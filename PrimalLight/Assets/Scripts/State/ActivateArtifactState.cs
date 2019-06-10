@@ -20,6 +20,7 @@ public class ActivateArtifactState : State, InteractionObserver {
     private ArtifactButton button;
     private bool artifactAssembled;
     private InteractionTrigger pickupArtifactTrigger;
+    public float piecesScale = 0.2f;
 
     public ActivateArtifactState() {
         foundMonument = false;
@@ -46,7 +47,6 @@ public class ActivateArtifactState : State, InteractionObserver {
             artifactStartPositions.Add(artifactPieces[i].transform.position);
             artifactStartRotations.Add(artifactPieces[i].transform.rotation);
             artifactPillars.Add(new ArtifactPillar(artifactPieces[i].transform.parent.gameObject, i, this));
-            artifactPieces[i].SetActive(false);
         }
     }
 
@@ -106,7 +106,7 @@ public class ActivateArtifactState : State, InteractionObserver {
     }
 
     public void OnPlayerPlacePiece(int id) {
-        artifactPieces[id].SetActive(true);
+        artifactPieces[id].transform.localScale = new Vector3(piecesScale,piecesScale,piecesScale);
         placedPieces++;
     }
 

@@ -8,6 +8,7 @@ public class ArtifactPillar : InteractionObserver {
     public ArtifactPillar(GameObject pillar, int pieceID, ActivateArtifactState artifactState) {
         placePieceTrigger = pillar.GetComponentInChildren<InteractionTrigger>();
         placePieceTrigger.SetObserver(this);
+        placePieceTrigger.gameObject.GetComponent<BoxCollider>().enabled = true;
         id = pieceID;
         state = artifactState;
     }
