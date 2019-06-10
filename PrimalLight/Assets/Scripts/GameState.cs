@@ -4,6 +4,7 @@ public class GameState : MonoBehaviour
 {
     static GameState current;
     State state;
+	string message;
 
     void Awake()
 	{
@@ -25,6 +26,7 @@ public class GameState : MonoBehaviour
 	void Start() {
 		//current.state = new InitialState();
         current.state = new NullState();
+		message = current.state.GetMessage();
 	}
 
 	void Update()
@@ -40,6 +42,10 @@ public class GameState : MonoBehaviour
 
 	static public string GetMessage()
 	{
-		return current.state.GetMessage();
+		string newMessage = current.state.GetMessage();
+		if(newMessage != "" && newMessage != current.message)
+			GameSound.Play("NewObjective");
+		current.message = newMessage;
+		return current.message;
 	}
 }

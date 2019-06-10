@@ -13,6 +13,7 @@ TagManager:
   - Friend
   - ArtifactActivator
   - Artifact
+  - ArtifactPiece
   layers:
   - Default
   - TransparentFX

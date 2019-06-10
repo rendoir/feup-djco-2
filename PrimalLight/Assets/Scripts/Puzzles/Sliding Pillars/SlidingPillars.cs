@@ -12,11 +12,13 @@ public class SlidingPillars : MonoBehaviour
 	
 	public int posOffset;
 	public Vector3 position;
+
+	public GameObject target;
 	
 	private BoardTile[,] board;
 	private BoardPillar[] pillars;
 	
-	private bool solved = false; 
+	private bool solved = false;
 
 	public void SetBoard(BoardTile[,] board){
 		this.board = board;
@@ -136,8 +138,13 @@ public class SlidingPillars : MonoBehaviour
 		}
 
 		solved = true;
-		Debug.Log("Solved");
+		OnSolved();
+
 		return true;
+	}
+
+	private void OnSolved(){
+		target.GetComponent<TempleDualStatueDoor>().Action();
 	}
 
 	public bool Move(int pillarIdx, string dir, out Vector3 endPos){

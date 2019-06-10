@@ -3,44 +3,67 @@ using UnityEngine;
 public class Health : MonoBehaviour, DeathObserver
 {
     [Header("Health")]
-    private float health;
+    public float hitCooldown = 2f;
+    public float regenerationRate = 0.1f;
     public float initialHealth = 20f;
 
+    [Header("Components")]
+    public Animator playerAnimator;
+    public Renderer playerRenderer;
+
     private bool isDead;
-    private Animator anim;
+    private float health;
+    private float lastHitTime;
 
     void Start()
     {
-        anim = GetComponent<Animator>();
         health = initialHealth;
         isDead = false;
         GameManager.RegisterDeathObserver(this);
+        OnDamage();
     }
 
-    public void OnHit(float healthLoss)
-    {
-        health -= Time.deltaTime * healthLoss;
+    void Update() {
+        Regenerate();
+    }
 
-        //Enemy died
+    private void Regenerate() {
+        if(Time.time - lastHitTime > hitCooldown && !isDead) {
+            health += Time.deltaTime * regenerationRate; //Regenerate
+            health = Mathf.Min(health, initialHealth); //Clamp health
+            UpdateColor();
+        }
+    } 
+
+    private void OnDamage() {
+        //Check if player died
         if (health < 0) {
             if (!isDead)
                 GameManager.PlayerDied();
 
             health = 0;
         }
+
+        UpdateColor();
+
+        //Restart hit cooldown
+        lastHitTime = Time.time;
+    }
+
+    private void UpdateColor() {
+        playerRenderer.material.SetColor("_EmissionColor", Color.white * (health / initialHealth));
+    }
+
+    public void DamageOvertime(float healthLoss)
+    {
+        health -= Time.deltaTime * healthLoss;
+        OnDamage();
     }
 
     public void Damage(float damage)
     {
         health -= damage;
-
-        //Enemy died
-        if (health < 0) {
-            if (!isDead)
-                GameManager.PlayerDied();
-
-            health = 0;
-        }
+        OnDamage();
     }
 
     public void ResetHealth() 
@@ -51,12 +74,12 @@ public class Health : MonoBehaviour, DeathObserver
     public void OnPlayerDeath()
     {
         isDead = true;
-        anim.SetTrigger("isDead");
+        playerAnimator.SetTrigger("isDead");
     }
 
     public void OnPlayerAlive() {
         ResetHealth();
 		isDead = false;
-        anim.SetTrigger("isAlive");
+        playerAnimator.SetTrigger("isAlive");
 	}
 }

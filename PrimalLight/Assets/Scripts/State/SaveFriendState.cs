@@ -11,6 +11,8 @@ public class SaveFriendState : State {
     private Animator playerAnimator;
     private PortalGun portalGun;
     private float lightTimer = 0f;
+    public float helpDelay = 2f;
+    private float helpDelayCounter = 0f;
 
     public SaveFriendState() {
         enteredTrigger = false;
@@ -27,17 +29,23 @@ public class SaveFriendState : State {
     public override void Update() {
         if(enteredTrigger) {
             if(isNearFriend) {
-                playerAnimator.SetBool("isHelping", true);
+                
+                helpDelayCounter += Time.deltaTime;
+                if(helpDelayCounter >= helpDelay) {
+                    playerAnimator.SetBool("isHelping", true);
+                    portalGun.EnableBeam(true);
 
-                //Light friend color
-                lightTimer += 0.1f * Time.deltaTime;
-                Color newColor = Color.Lerp(Color.white * 0f, Color.white, lightTimer);
-                friendMaterial.SetColor("_EmissionColor", newColor);
+                    //Light friend color
+                    lightTimer += 0.1f * Time.deltaTime;
+                    Color newColor = Color.Lerp(Color.white * 0f, Color.white, lightTimer);
+                    friendMaterial.SetColor("_EmissionColor", newColor);
 
-                if(Utils.ColorEquals(Color.white, newColor)) {
-                    GameState.Next();
-                    return;
+                    if(Utils.ColorEquals(Color.white, newColor)) {
+                        GameState.Next();
+                        return;
+                    }
                 }
+                
             } else {
                 
                 //Walk towards the friend
@@ -55,7 +63,7 @@ public class SaveFriendState : State {
                     GameInput.CaptureInput(true);
                     isNearFriend = true;
                     playerAnimator.SetTrigger("startKneeling");
-                    portalGun.EnableBeam(true);
+                    GameManager.GetArtifact().GetComponent<AudioSource>().PlayDelayed(helpDelay);
                 }
                 
             }

@@ -21,7 +21,7 @@ public class FlameParticles : MonoBehaviour
 		int enterPs = ps.GetTriggerParticles(ParticleSystemTriggerEventType.Enter, enter);
     	if(enterPs > 0){
     		Health playerHealth = GameObject.FindWithTag("Player").GetComponent<Health>();
-            playerHealth.OnHit(damage);
+            playerHealth.DamageOvertime(damage);
     	}
     }
 }

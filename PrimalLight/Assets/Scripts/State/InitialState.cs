@@ -10,9 +10,10 @@ public class InitialState : State {
     
     public InitialState() {
         GameInput.SimulateInput(true);
-        GameInput.cameraForward = Vector3.forward;
-        GameInput.cameraEulerAngles = Vector3.zero;
         startTime = Time.time;
+        GameObject player = GameManager.GetPlayer();
+        GameInput.cameraEulerAngles = player.transform.eulerAngles;
+        GameInput.cameraForward = player.transform.forward;
         friend = GameManager.GetFriend();
         friendRB = friend.GetComponent<Rigidbody>();
         friendMaterial = friend.GetComponentInChildren<SkinnedMeshRenderer>().material;

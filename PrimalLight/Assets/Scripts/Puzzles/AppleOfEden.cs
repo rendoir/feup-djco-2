@@ -96,6 +96,7 @@ public class AppleOfEden : MonoBehaviour, InteractionObserver
         StartCoroutine(FreeInput());
         DisableCamera();
         reward.OnReward();
+        GameSound.Play("PuzzleComplete");
     }
 
     public IEnumerator FreeInput() {

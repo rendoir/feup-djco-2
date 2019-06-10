@@ -16,7 +16,7 @@ public class InteractionTrigger : MonoBehaviour
         isPlayerInteracting = false;
     }
 
-    void FixedUpdate()
+    void Update()
     {
         if(GameInput.interactPressed && isPlayerInside) {
             isPlayerInteracting = !isPlayerInteracting;

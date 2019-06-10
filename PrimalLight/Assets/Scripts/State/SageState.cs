@@ -57,6 +57,7 @@ public class SageState : State {
                 if(startTime < 0) {
                    startTime = Time.time;
                    player.GetComponent<Animator>().SetTrigger("isYelling");
+                   player.GetComponent<PlayerSound>().YellingSound();
                 }
             }
         }
