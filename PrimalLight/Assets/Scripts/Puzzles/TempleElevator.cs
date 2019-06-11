@@ -36,7 +36,7 @@ public class TempleElevator : ActionObject
 
     	movement = StartCoroutine(MovementUtils.SmoothMovement( (bool done) => { 
             movement = null;
-        }, platform.GetComponent<Rigidbody>(), topPosition, speed));
+        }, platform, topPosition, speed));
     }
 
     public override void ExitAction(){

@@ -189,7 +189,7 @@ public class PlayerMovement : MovingObject, DeathObserver
 			}
 		}
 		else if(other.gameObject.tag == "Platform"){
-	        transform.parent = other.transform;
+	        transform.parent = other.transform.parent.transform;
 	        //transform.position = other.transform.position;
  			//transform.rotation = other.transform.rotation;
     	}
