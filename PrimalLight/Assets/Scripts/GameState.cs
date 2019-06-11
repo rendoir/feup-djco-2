@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameState : MonoBehaviour
 {
@@ -48,4 +49,15 @@ public class GameState : MonoBehaviour
 		current.message = newMessage;
 		return current.message;
 	}
+
+	void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+	void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+		if(current.state != null)
+			current.state.OnSceneLoaded(scene);
+    }
 }

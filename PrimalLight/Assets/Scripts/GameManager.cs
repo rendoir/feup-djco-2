@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
 
+[DefaultExecutionOrder(-200)]
 public class GameManager : MonoBehaviour
 {
 	//Singleton
@@ -25,6 +26,9 @@ public class GameManager : MonoBehaviour
 	//Artifact
 	public const int NUMBER_PIECES = 3;
 	private int rewards = 0;
+
+	//Scenes
+	public static int MAIN_SCENE_INDEX = 0;
 
 	void Awake()
 	{
