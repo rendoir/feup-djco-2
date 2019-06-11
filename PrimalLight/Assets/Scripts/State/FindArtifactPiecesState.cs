@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FindArtifactPiecesState : State {
     public override void Update() {
@@ -7,10 +8,20 @@ public class FindArtifactPiecesState : State {
     }
 
     public override State Next() {
-        return new ActivateArtifactState();
+        if(GameManager.GetNumberPieces() >= GameManager.NUMBER_PIECES && 
+           SceneManager.GetActiveScene().buildIndex == GameManager.MAIN_SCENE_INDEX)
+            return new ActivateArtifactState();
+        else return this;
     }
 
     public override string GetMessage() {
-        return "Find the artifact pieces (" + GameManager.GetNumberPieces() + "/" + GameManager.NUMBER_PIECES + ")";
+        if(GameManager.GetNumberPieces() < GameManager.NUMBER_PIECES)
+            return "Find the artifact pieces (" + GameManager.GetNumberPieces() + "/" + GameManager.NUMBER_PIECES + ")";
+        else return "Find the monument to activate the artifact";
+    }
+
+    public override void OnSceneLoaded(Scene scene) 
+    {
+        GameState.Next();
     }
 }
