@@ -20,7 +20,7 @@ public class ActivateArtifactState : State, InteractionObserver {
     private ArtifactButton button;
     private bool artifactAssembled;
     private InteractionTrigger pickupArtifactTrigger;
-    public float piecesScale = 0.2f;
+    public float piecesScale = 0.008f;
 
     public ActivateArtifactState() {
         foundMonument = false;
