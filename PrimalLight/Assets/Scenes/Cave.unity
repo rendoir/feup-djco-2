@@ -23173,7 +23173,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &970707348
 Transform:
   m_ObjectHideFlags: 0
@@ -29474,17 +29474,17 @@ PrefabInstance:
     - target: {fileID: 7783066640656053879, guid: 844af1052bca09349b82b6a4b29d16f0,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.0016766284
+      value: 0.0016766305
       objectReference: {fileID: 0}
     - target: {fileID: 7783066640656053879, guid: 844af1052bca09349b82b6a4b29d16f0,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.031701434
+      value: -0.03170143
       objectReference: {fileID: 0}
     - target: {fileID: 7783066640656053879, guid: 844af1052bca09349b82b6a4b29d16f0,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0000532026
+      value: -0.000053202657
       objectReference: {fileID: 0}
     - target: {fileID: 7783066640656053879, guid: 844af1052bca09349b82b6a4b29d16f0,
         type: 3}
@@ -31848,7 +31848,7 @@ PrefabInstance:
     - target: {fileID: 5543985434291400468, guid: c041559a9845e1dfc816b60f4d46f328,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.019295763
+      value: -0.019295761
       objectReference: {fileID: 0}
     - target: {fileID: 5543985434291400468, guid: c041559a9845e1dfc816b60f4d46f328,
         type: 3}
@@ -41208,6 +41208,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   sceneIndex: 0
+  overrideTransform: 0
+  initialScenePosition: {x: 0, y: 0, z: 0}
+  initialSceneRotation: {x: 0, y: 0, z: 0}
 --- !u!65 &1826260392
 BoxCollider:
   m_ObjectHideFlags: 0
