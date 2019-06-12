@@ -7,7 +7,20 @@ public class TempleManager : MonoBehaviour
 
 	private SlidingPillars spPuzzle1;
     public GameObject elevator;
+    public GameObject secretDoor;
+    public float setElevatorTime = 5f;
     
+    public static TempleManager instance = null;
+
+    void Awake()
+    {
+        if (instance == null)
+            instance = this;
+
+        else if (instance != this)
+            Destroy(gameObject);    
+    }
+
     void Start()
     {
     	BoardTile[,] spPuzzle1Board = {
@@ -38,13 +51,15 @@ public class TempleManager : MonoBehaviour
     	spPuzzle1.SetBoard(spPuzzle1Board);
         spPuzzle1.SetPillars(spPuzzle1Pillars);
         spPuzzle1.Generate();
-
-        elevator.GetComponent<TempleElevator>().Set();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void OnRewardCollected(){
+        secretDoor.GetComponent<TempleStatueDoor>().Action();
+        StartCoroutine(SetElevator());
+    }
+
+    IEnumerator SetElevator(){
+        yield return new WaitForSeconds(setElevatorTime);
+        elevator.GetComponent<TempleElevator>().Set();
     }
 }
