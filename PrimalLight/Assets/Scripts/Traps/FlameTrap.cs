@@ -15,10 +15,14 @@ public class FlameTrap : MonoBehaviour
 	public float startDelay = 0;
 	public int flame = 0;
 	public float interval = 1f; 
-    public float flameLength = 0.5f;
+    public float flameLength = 1.8f;
+    public float flameSpeed = 5f;
 	public float flameTime = 1f;
 	private bool ready = true;
 	private bool active = false;
+
+	private static float defaultRateOverTime = 100f;
+	private static float defaultStartLifeTime = 1.8f;
 
 
     // Start is called before the first frame update
@@ -27,7 +31,12 @@ public class FlameTrap : MonoBehaviour
     	foreach(Transform flameThrower in transform){
     		ParticleSystem ps = flameThrower.GetChild(0).GetComponent<ParticleSystem>();
     		var main = ps.main;
+    		var em = ps.emission;
+
+    		// Proportionally set emisson rate over time
+        	em.rateOverTime = FlameTrap.defaultRateOverTime*flameTime/FlameTrap.defaultStartLifeTime;
         	main.duration = flameTime;
+        	main.startSpeed = flameSpeed;
             main.startLifetime = flameLength;
     	}
     	StartCoroutine(Init());    
