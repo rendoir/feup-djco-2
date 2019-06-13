@@ -24,6 +24,7 @@ public class InitialState : State {
         playerMovement = GameManager.GetPlayer().GetComponent<PlayerMovement>();
         initialSpeed = playerMovement.movementSpeed;
         playerMovement.movementSpeed = stateSpeed;
+        GameSound.Play("death_scene");
     }
 
     public override void Update() {
