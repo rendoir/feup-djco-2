@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class InitialState : State {
 
-    public float walkDuration = 2f;
+    public float walkDuration = 55f;
     public float startTime = Time.time;
     private GameObject friend;
     private Rigidbody friendRB;
     private Material friendMaterial;
     private float initialSpeed;
-    public float stateSpeed = 0.95f;
+    public float stateSpeed = 0.90f;
     private PlayerMovement playerMovement;
     
     public InitialState() {
@@ -50,6 +50,7 @@ public class InitialState : State {
         GameInput.SimulateInput(false);
         GameState.SaveFriendFinalPosition();
         playerMovement.movementSpeed = initialSpeed;
+        GameSound.FadeOut("death_scene");
         return new FriendDeathState();
     }
 
