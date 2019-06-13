@@ -28,7 +28,7 @@ public class GameSound : MonoBehaviour
 	}
 
 	void Start() {
-        //Play("Theme");
+        Play("MainTheme");
 	}
 
     static public void Play(string name) {
