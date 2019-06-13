@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class InitialState : State {
 
-    public float walkDuration = 5f;
+    public float walkDuration = 30f;
     public float startTime = Time.time;
     private GameObject friend;
     private Rigidbody friendRB;
