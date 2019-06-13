@@ -6,6 +6,7 @@ public class GameState : MonoBehaviour
     static GameState current;
     State state;
 	string message;
+	Vector3 finalFriendPosition;
 
     void Awake()
 	{
@@ -60,4 +61,12 @@ public class GameState : MonoBehaviour
 		if(current.state != null)
 			current.state.OnSceneLoaded(scene);
     }
+
+	public static void SaveFriendFinalPosition() {
+		current.finalFriendPosition = GameManager.GetFriend().transform.position;
+	}
+
+	public static void ResetFriendFinalPosition() {
+		GameManager.GetFriend().transform.position = current.finalFriendPosition;
+	}
 }
