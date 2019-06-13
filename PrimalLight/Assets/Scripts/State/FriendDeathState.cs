@@ -21,6 +21,7 @@ public class FriendDeathState : State {
         player = GameManager.GetPlayer();
         friend = GameManager.GetFriend();
         friend.GetComponent<Animator>().SetTrigger("isDead");
+        friend.GetComponent<Rigidbody>().isKinematic = true;
         friend.GetComponent<FriendSound>().DeathSound();
         player.GetComponent<Animator>().SetTrigger("startKneeling");
         friendMaterial = friend.GetComponentInChildren<SkinnedMeshRenderer>().material;
