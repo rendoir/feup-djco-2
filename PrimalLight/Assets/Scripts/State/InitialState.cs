@@ -41,6 +41,7 @@ public class InitialState : State {
     public override State Next() {
         StopFriend();
         GameInput.SimulateInput(false);
+        GameState.SaveFriendFinalPosition();
         return new FriendDeathState();
     }
 

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 
 public class ActivateArtifactState : State, InteractionObserver {
@@ -123,5 +124,21 @@ public class ActivateArtifactState : State, InteractionObserver {
         pickupArtifactTrigger.gameObject.SetActive(false);
         GameManager.GetArtifact().SetActive(true);
         GameState.Next();
+    }
+
+    public override void OnSceneLoaded(Scene scene) 
+    {
+        InitFriend();
+    }
+
+    public void InitFriend() {
+        if(SceneManager.GetActiveScene().buildIndex == GameManager.MAIN_SCENE_INDEX) {
+            GameObject friend = GameManager.GetFriend();
+            Material friendMaterial = friend.GetComponentInChildren<SkinnedMeshRenderer>().material;
+            friend.GetComponent<Animator>().SetTrigger("isDead");
+            friendMaterial.SetColor("_EmissionColor", Color.white * 0f);
+            friend.GetComponent<Rigidbody>().isKinematic = true;
+            GameState.ResetFriendFinalPosition();
+        }
     }
 }
