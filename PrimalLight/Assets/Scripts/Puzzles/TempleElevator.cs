@@ -21,7 +21,7 @@ public class TempleElevator : ActionObject
     	setPosition = transform.position + new Vector3(0,setHeightOffset,0);;
     	topPosition = transform.position + new Vector3(0,topHeightOffset,0);
     	platform = transform.GetChild(0).gameObject;
-        trigger = platform.transform.GetChild(2).gameObject;
+        trigger = platform.transform.GetChild(2).GetChild(0).gameObject;
     }
 
     public void Set(){
