@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.UI;
 
 public class GameUI : MonoBehaviour
 {
@@ -22,6 +23,14 @@ public class GameUI : MonoBehaviour
 
 		//Persist this object between scene reloads
 		DontDestroyOnLoad(gameObject);
+
+		//Only done once
+		ShowGameName();
+	}
+
+	void ShowGameName() {
+		if(SceneManager.GetActiveScene().buildIndex == GameManager.MAIN_SCENE_INDEX)
+			GameObject.Find("Canvas/GameName").GetComponent<RawImage>().enabled = true;
 	}
 
     void OnEnable()
