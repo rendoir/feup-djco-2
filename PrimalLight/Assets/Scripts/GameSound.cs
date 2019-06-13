@@ -1,6 +1,6 @@
 using UnityEngine;
-using UnityEngine.Audio;
 using System;
+using System.Collections;
 
 public class GameSound : MonoBehaviour
 {
@@ -27,10 +27,6 @@ public class GameSound : MonoBehaviour
 		DontDestroyOnLoad(gameObject);
 	}
 
-	void Start() {
-        //Play("Theme");
-	}
-
     static public void Play(string name) {
         AudioSource source = Array.Find(current.audioSources, s => s.clip.name == name);
         if(source != null) {
@@ -43,5 +39,34 @@ public class GameSound : MonoBehaviour
         if(source != null) {
             source.Stop();
         }
+    }
+
+    public static IEnumerator FadeIn(string name) {
+        AudioSource source = Array.Find(current.audioSources, s => s.clip.name == name);
+        float startVolume = source.volume;
+        source.volume = 0f;
+        source.Play();
+ 
+        while (source.volume < startVolume) {
+            source.volume += startVolume * Time.deltaTime / 5f;
+ 
+            yield return null;
+        }
+ 
+        source.volume = startVolume;
+    }
+
+    public static IEnumerator FadeOut(string name) {
+        AudioSource source = Array.Find(current.audioSources, s => s.clip.name == name);
+        float startVolume = source.volume;
+ 
+        while (source.volume > 0) {
+            source.volume -= startVolume * Time.deltaTime / 5f;
+ 
+            yield return null;
+        }
+ 
+        source.Stop();
+        source.volume = startVolume;
     }
 }

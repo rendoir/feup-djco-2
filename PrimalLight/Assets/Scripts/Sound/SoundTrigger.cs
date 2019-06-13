@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections.Generic;
 
 public class SoundTrigger : MonoBehaviour
 {
@@ -9,14 +8,14 @@ public class SoundTrigger : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         if(Utils.MaskContainsLayer(playerLayer, other.gameObject.layer)) {
-            GameSound.Play(clipName);
+            StartCoroutine(GameSound.FadeIn(clipName));
         }
     }
 
     void OnTriggerExit(Collider other)
     {
         if(Utils.MaskContainsLayer(playerLayer, other.gameObject.layer)) {
-            GameSound.Stop(clipName);
+            StartCoroutine(GameSound.FadeOut(clipName));
         }
     }
 }

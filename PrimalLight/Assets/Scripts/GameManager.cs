@@ -7,7 +7,7 @@ using System.Collections.Generic;
 public class GameManager : MonoBehaviour
 {
 	//Singleton
-	static GameManager current;
+	public static GameManager current;
 
 	//Player
 	GameObject player;
@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour
 	//Handle player dying
 	List<DeathObserver> deathObservers = new List<DeathObserver>();
 	GameObject[] checkpoints;
+	GameObject currCheckpoint = null;
+
 	public float restartTime = 6f;
 
 	//Artifact
@@ -29,6 +31,7 @@ public class GameManager : MonoBehaviour
 
 	//Scenes
 	public static int MAIN_SCENE_INDEX = 0;
+	public bool sequentialCheckpoints = false;
 
 	void Awake()
 	{
@@ -115,7 +118,10 @@ public class GameManager : MonoBehaviour
 	private IEnumerator RestartPlayer() {
         yield return new WaitForSeconds(current.restartTime);
 		
-		MovePlayerToClosestCheckpoint();
+		if(!sequentialCheckpoints)
+			MovePlayerToClosestCheckpoint();
+		else
+			MovePlayerToCurrentCheckpoint();
 
 		//Notify observers that the player is alive
 		foreach (DeathObserver obs in current.deathObservers)
@@ -136,9 +142,24 @@ public class GameManager : MonoBehaviour
 			}
 		}
 
-		current.player.transform.position = closestCheckpoint;
+		SetPlayerPosition(closestCheckpoint);
+	}
+
+	private void MovePlayerToCurrentCheckpoint(){
+		if(currCheckpoint == null)
+			SetPlayerPosition(current.initialPosition);
+		else
+			SetPlayerPosition(currCheckpoint.transform.position);
+	}
+
+	private void SetPlayerPosition(Vector3 pos){
+		current.player.transform.position = pos;
 		current.player.transform.localRotation = current.initialRotation;
-	} 
+	}
+
+	public void SetCurrentCheckpoint(GameObject checkpoint){
+		current.currCheckpoint = checkpoint;
+	}
 
 	public static void RegisterDeathObserver(DeathObserver obs) {
 		current.deathObservers.Add(obs);

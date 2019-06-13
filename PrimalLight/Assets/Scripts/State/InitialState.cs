@@ -2,11 +2,14 @@ using UnityEngine;
 
 public class InitialState : State {
 
-    public float walkDuration = 5f;
+    public float walkDuration = 53f;
     public float startTime = Time.time;
     private GameObject friend;
     private Rigidbody friendRB;
     private Material friendMaterial;
+    private float initialSpeed;
+    public float stateSpeed = 0.95f;
+    private PlayerMovement playerMovement;
     
     public InitialState() {
         GameInput.SimulateInput(true);
@@ -18,6 +21,10 @@ public class InitialState : State {
         friendRB = friend.GetComponent<Rigidbody>();
         friendMaterial = friend.GetComponentInChildren<SkinnedMeshRenderer>().material;
         friend.GetComponent<Animator>().SetTrigger("isWalking");
+        playerMovement = GameManager.GetPlayer().GetComponent<PlayerMovement>();
+        initialSpeed = playerMovement.movementSpeed;
+        playerMovement.movementSpeed = stateSpeed;
+        GameSound.Play("death_scene");
     }
 
     public override void Update() {
@@ -41,6 +48,8 @@ public class InitialState : State {
     public override State Next() {
         StopFriend();
         GameInput.SimulateInput(false);
+        GameState.SaveFriendFinalPosition();
+        playerMovement.movementSpeed = initialSpeed;
         return new FriendDeathState();
     }
 
@@ -55,7 +64,7 @@ public class InitialState : State {
         friend.transform.localEulerAngles = new Vector3(friend.transform.localEulerAngles.x, GameInput.cameraEulerAngles.y, friend.transform.localEulerAngles.z);
 
         //Walk
-        float finalSpeed = 3f;
+        float finalSpeed = stateSpeed;
         Vector3 velocity = Direction.normalized * finalSpeed;
         velocity = Vector3.ClampMagnitude(velocity, finalSpeed); //Clamp velocity
         velocity.y = friendRB.velocity.y;

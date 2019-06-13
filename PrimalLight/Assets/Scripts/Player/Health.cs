@@ -56,6 +56,7 @@ public class Health : MonoBehaviour, DeathObserver
 
     public void DamageOvertime(float healthLoss)
     {
+        Debug.Log("hit");
         health -= Time.deltaTime * healthLoss;
         OnDamage();
     }
