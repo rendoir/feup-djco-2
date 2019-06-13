@@ -15,9 +15,10 @@ public class TempleDualStatue : MonoBehaviour
     }
 
     public void UnlockedDoor(){
-		if(!leftDoor.locked && !rightDoor.locked){
-			leftDoor.Open();
-			rightDoor.Open();
-		}
+  		if(!leftDoor.locked && !rightDoor.locked){
+        GameSound.Play("PuzzleComplete");
+  			leftDoor.Open();
+  			rightDoor.Open();
+  		}
     }
 }

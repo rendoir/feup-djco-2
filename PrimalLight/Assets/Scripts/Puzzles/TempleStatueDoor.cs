@@ -21,7 +21,7 @@ public class TempleStatueDoor : ActionObject
     	gem = transform.GetChild(0).gameObject;
     	gemRend = gem.GetComponent<Renderer>();
     	initGemShader = gemRend.material.shader;
-    	glowGemShader = Shader.Find("MK/Glow/Luminance/Sprites/Default");
+    	glowGemShader = Shader.Find("MK/Glow/Selective/Standard");
     }
     
     public override void Action(){

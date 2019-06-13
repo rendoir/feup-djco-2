@@ -38,7 +38,7 @@ public class LightPoint : MonoBehaviour, InteractionObserver
 	public IEnumerator movement;
 	public float movementSpeed = 0.5f;
 	private Vector3 initPos;
-
+    private Shader glowShader;
 
     void Start() {
         interactionTrigger.SetObserver(this);
@@ -47,6 +47,7 @@ public class LightPoint : MonoBehaviour, InteractionObserver
         playerCancelled = false;
         tooltipTimeCounter = tooltipTime;
         inputCoroutine = null;
+        glowShader = Shader.Find("MK/Glow/Selective/Standard");
     }
 
     void FixedUpdate(){
@@ -151,7 +152,8 @@ public class LightPoint : MonoBehaviour, InteractionObserver
         isPuzzleComplete = true;
         isPlayerInteracting = false;
         interactionTrigger.gameObject.SetActive(false);
-        GameSound.Play("PuzzleComplete");        
+        target.GetComponent<Renderer>().material.shader = glowShader;
+        GameSound.Play("PuzzleComplete");       
         
         yield return new WaitForSeconds(removeLaserTime);
         
