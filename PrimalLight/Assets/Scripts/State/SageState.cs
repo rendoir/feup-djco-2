@@ -19,7 +19,7 @@ public class SageState : State {
         isPointing = false;
         player = GameManager.GetPlayer();
         sage = GameManager.GetSage();
-        sageTargetRotation = Quaternion.Euler(sage.transform.rotation.x, sage.transform.rotation.y + 90f, sage.transform.rotation.z);
+        sageTargetRotation = Quaternion.Euler(sage.transform.rotation.eulerAngles.x, sage.transform.rotation.eulerAngles.y - 90f, sage.transform.rotation.eulerAngles.z);
         sageTrigger = sage.GetComponentInChildren<BoxCollider>();
         sageTrigger.enabled = true;
     }
