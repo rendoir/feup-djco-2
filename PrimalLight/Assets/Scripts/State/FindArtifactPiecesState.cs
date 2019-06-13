@@ -22,6 +22,18 @@ public class FindArtifactPiecesState : State {
 
     public override void OnSceneLoaded(Scene scene) 
     {
+        InitFriend();
         GameState.Next();
+    }
+
+    public void InitFriend() {
+        if(SceneManager.GetActiveScene().buildIndex == GameManager.MAIN_SCENE_INDEX) {
+            GameObject friend = GameManager.GetFriend();
+            Material friendMaterial = friend.GetComponentInChildren<SkinnedMeshRenderer>().material;
+            friend.GetComponent<Rigidbody>().isKinematic = true;
+            friend.GetComponent<Animator>().SetTrigger("isDead");
+            friendMaterial.SetColor("_EmissionColor", Color.white * 0f);
+            GameState.ResetFriendFinalPosition();
+        }
     }
 }

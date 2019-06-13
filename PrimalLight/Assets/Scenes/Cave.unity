@@ -29474,7 +29474,7 @@ PrefabInstance:
     - target: {fileID: 7783066640656053879, guid: 844af1052bca09349b82b6a4b29d16f0,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.0016766305
+      value: 0.0016766284
       objectReference: {fileID: 0}
     - target: {fileID: 7783066640656053879, guid: 844af1052bca09349b82b6a4b29d16f0,
         type: 3}
@@ -29484,7 +29484,7 @@ PrefabInstance:
     - target: {fileID: 7783066640656053879, guid: 844af1052bca09349b82b6a4b29d16f0,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000053202657
+      value: -0.00005320259
       objectReference: {fileID: 0}
     - target: {fileID: 7783066640656053879, guid: 844af1052bca09349b82b6a4b29d16f0,
         type: 3}
@@ -31848,7 +31848,7 @@ PrefabInstance:
     - target: {fileID: 5543985434291400468, guid: c041559a9845e1dfc816b60f4d46f328,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.019295761
+      value: -0.019295763
       objectReference: {fileID: 0}
     - target: {fileID: 5543985434291400468, guid: c041559a9845e1dfc816b60f4d46f328,
         type: 3}
@@ -31858,12 +31858,12 @@ PrefabInstance:
     - target: {fileID: 5543985434291400468, guid: c041559a9845e1dfc816b60f4d46f328,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.0000038146973
       objectReference: {fileID: 0}
     - target: {fileID: 5543985434291400468, guid: c041559a9845e1dfc816b60f4d46f328,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.000015258789
       objectReference: {fileID: 0}
     - target: {fileID: 5543985434291400468, guid: c041559a9845e1dfc816b60f4d46f328,
         type: 3}
@@ -41208,9 +41208,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   sceneIndex: 0
-  overrideTransform: 0
-  initialScenePosition: {x: 0, y: 0, z: 0}
-  initialSceneRotation: {x: 0, y: 0, z: 0}
+  overrideTransform: 1
+  initialScenePosition: {x: 48.63, y: -0.41, z: -247.37}
+  initialSceneRotation: {x: 0, y: 180, z: 0}
 --- !u!65 &1826260392
 BoxCollider:
   m_ObjectHideFlags: 0
