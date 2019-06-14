@@ -145,7 +145,10 @@ public class PlayerMovement : MovingObject, DeathObserver
 		pushable.Push(pad.endPosOffset,inverseMoveTime);
 		StartCoroutine(SmoothMovement((bool done) => {
 				anim.SetTrigger("stopPushing");
+				GameSound.Stop("Push");
 		},endPos,inverseMoveTime));
+
+		GameSound.Play("Push");
 	}
 
 	void InteractEnd(){
@@ -186,12 +189,11 @@ public class PlayerMovement : MovingObject, DeathObserver
 				anim.SetTrigger("interact");
 				
 				pillar.Move(pad.direction);
+				GameSound.Play("Slide");
 			}
 		}
 		else if(other.gameObject.tag == "Platform"){
 	        transform.parent = other.transform.parent.transform;
-	        //transform.position = other.transform.position;
- 			//transform.rotation = other.transform.rotation;
     	}
 
 	}
