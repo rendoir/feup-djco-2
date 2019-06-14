@@ -147,9 +147,10 @@ public class SlidingPillars : MonoBehaviour
 		target.GetComponent<TempleDualStatueDoor>().Action();
 	}
 
-	public bool Move(int pillarIdx, string dir, out Vector3 endPos){
+	public bool Move(int pillarIdx, string dir, out Vector3 endPos, out bool target){
 		if(solved){
 			endPos = Vector3.zero;
+			target = false;
 			return false;
 		}
 
@@ -178,7 +179,13 @@ public class SlidingPillars : MonoBehaviour
 
 		// Check if puzzle is solved
 		CheckSolved();
-		
+
+		//Check if dest pos is target
+		if(board[(int) src.x, (int) src.y].type == BoardTileType.Target)
+			target = true;
+		else
+			target = false;
+
 		//	Get "real" scene pos
 		endPos = position + new Vector3(src.x*posOffset, 0, src.y*posOffset);
 		return canMove;
