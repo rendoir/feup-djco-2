@@ -30,7 +30,7 @@ public class ActivateArtifactState : State, InteractionObserver {
         artifactActivator = GameManager.GetArtifactActivator();
         findMonumentTrigger = artifactActivator.GetComponentInChildren<StateTrigger>().gameObject.GetComponent<BoxCollider>();
         findMonumentTrigger.enabled = true;
-        artifactPieces = GameObject.FindGameObjectsWithTag("ArtifactPiece");
+        artifactPieces = GameObject.FindGameObjectsWithTag("ArtifactPieceActivator");
         button = artifactActivator.GetComponentInChildren<ArtifactButton>();
         button.SetState(this);
         pickupArtifactTrigger = artifactActivator.GetComponentInChildren<InteractionTrigger>();

@@ -699,6 +699,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Piece1
       objectReference: {fileID: 0}
+    - target: {fileID: 4484889885133418644, guid: 122ff6fd53aeeb20cbc6f7694efcc3ae,
+        type: 3}
+      propertyPath: m_TagString
+      value: ArtifactPieceActivator
+      objectReference: {fileID: 0}
     - target: {fileID: 4484889885133418645, guid: 122ff6fd53aeeb20cbc6f7694efcc3ae,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -778,10 +783,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1756408646985648596}
     m_Modifications:
-    - target: {fileID: 100000, guid: 9db397b927cc082ff8b8ea870a54ec16, type: 3}
-      propertyPath: m_Name
-      value: Pillar3
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 9db397b927cc082ff8b8ea870a54ec16, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.75
@@ -838,6 +839,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 9db397b927cc082ff8b8ea870a54ec16, type: 3}
+      propertyPath: m_Name
+      value: Pillar3
+      objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: 9db397b927cc082ff8b8ea870a54ec16, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
@@ -871,6 +876,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Piece2
+      objectReference: {fileID: 0}
+    - target: {fileID: 192468457018418373, guid: f75c0e694f2c17053a5cbb1d86ff8810,
+        type: 3}
+      propertyPath: m_TagString
+      value: ArtifactPieceActivator
       objectReference: {fileID: 0}
     - target: {fileID: 192468457018418374, guid: f75c0e694f2c17053a5cbb1d86ff8810,
         type: 3}
@@ -951,10 +961,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1756408646985648596}
     m_Modifications:
-    - target: {fileID: 100000, guid: 9db397b927cc082ff8b8ea870a54ec16, type: 3}
-      propertyPath: m_Name
-      value: Pillar2
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 9db397b927cc082ff8b8ea870a54ec16, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1011,6 +1017,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 9db397b927cc082ff8b8ea870a54ec16, type: 3}
+      propertyPath: m_Name
+      value: Pillar2
+      objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: 9db397b927cc082ff8b8ea870a54ec16, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
@@ -1040,10 +1050,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1756408646985648596}
     m_Modifications:
-    - target: {fileID: 100000, guid: 9db397b927cc082ff8b8ea870a54ec16, type: 3}
-      propertyPath: m_Name
-      value: Pillar1
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 9db397b927cc082ff8b8ea870a54ec16, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.75
@@ -1100,6 +1106,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 9db397b927cc082ff8b8ea870a54ec16, type: 3}
+      propertyPath: m_Name
+      value: Pillar1
+      objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: 9db397b927cc082ff8b8ea870a54ec16, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
@@ -1133,6 +1143,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Piece3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8629276960686098018, guid: 1a479c87c99b338328b5f0f1291ce49c,
+        type: 3}
+      propertyPath: m_TagString
+      value: ArtifactPieceActivator
       objectReference: {fileID: 0}
     - target: {fileID: 8629276960686098017, guid: 1a479c87c99b338328b5f0f1291ce49c,
         type: 3}

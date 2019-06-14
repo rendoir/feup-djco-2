@@ -14,6 +14,7 @@ TagManager:
   - ArtifactActivator
   - Artifact
   - ArtifactPiece
+  - ArtifactPieceActivator
   layers:
   - Default
   - TransparentFX
