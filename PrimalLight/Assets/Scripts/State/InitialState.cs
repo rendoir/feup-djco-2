@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class InitialState : State {
 
-    public float walkDuration = 55f;
+    public float walkDuration = 3f;
     public float startTime = Time.time;
     private GameObject friend;
     private Rigidbody friendRB;
@@ -50,7 +50,6 @@ public class InitialState : State {
         GameInput.SimulateInput(false);
         GameState.SaveFriendFinalPosition();
         playerMovement.movementSpeed = initialSpeed;
-        GameSound.FadeOut("death_scene");
         return new FriendDeathState();
     }
 

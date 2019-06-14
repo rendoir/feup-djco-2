@@ -78,7 +78,6 @@ public class SageState : State {
         } else {
             GameInput.SimulateInput(false);
             GameInput.CaptureInput(false);
-            GameSound.FadeOut("Sage_Scene");
             return new FindArtifactPiecesState();
         }
     }
