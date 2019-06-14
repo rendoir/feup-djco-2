@@ -22,6 +22,8 @@ public class SageState : State {
         sageTargetRotation = Quaternion.Euler(sage.transform.rotation.eulerAngles.x, sage.transform.rotation.eulerAngles.y - 90f, sage.transform.rotation.eulerAngles.z);
         sageTrigger = sage.GetComponentInChildren<BoxCollider>();
         sageTrigger.enabled = true;
+        GameSound.Stop("death_scene");
+        GameSound.Play("Sage_Scene");
     }
 
     public override void Update() {
@@ -76,6 +78,7 @@ public class SageState : State {
         } else {
             GameInput.SimulateInput(false);
             GameInput.CaptureInput(false);
+            GameSound.FadeOut("Sage_Scene");
             return new FindArtifactPiecesState();
         }
     }
