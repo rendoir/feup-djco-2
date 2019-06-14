@@ -37,6 +37,7 @@ public class LightPoint : MonoBehaviour, InteractionObserver
     public Vector3 offset;
 	public IEnumerator movement;
 	public float movementSpeed = 0.5f;
+    public Color targetEmissionColor;
 	private Vector3 initPos;
     private Shader glowShader;
 
@@ -153,6 +154,7 @@ public class LightPoint : MonoBehaviour, InteractionObserver
         isPlayerInteracting = false;
         interactionTrigger.gameObject.SetActive(false);
         target.GetComponent<Renderer>().material.shader = glowShader;
+        target.GetComponent<Renderer>().material.SetColor("_EmissionColor", targetEmissionColor);
         GameSound.Play("PuzzleComplete");       
         
         yield return new WaitForSeconds(removeLaserTime);

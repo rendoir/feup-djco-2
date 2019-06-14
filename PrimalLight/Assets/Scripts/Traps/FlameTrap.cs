@@ -24,6 +24,10 @@ public class FlameTrap : MonoBehaviour
 	private static float defaultRateOverTime = 100f;
 	private static float defaultStartLifeTime = 1.8f;
 
+	// Audio
+
+	private AudioSource flameShotAudio;
+
 
     // Start is called before the first frame update
     void Start()
@@ -39,6 +43,8 @@ public class FlameTrap : MonoBehaviour
         	main.startSpeed = flameSpeed;
             main.startLifetime = flameLength;
     	}
+
+    	flameShotAudio = GetComponent<AudioSource>();
     	StartCoroutine(Init());    
     }
 
@@ -58,6 +64,7 @@ public class FlameTrap : MonoBehaviour
 
         	ParticleSystem ps = transform.GetChild(flame).GetChild(0).GetComponent<ParticleSystem>();
         	ps.Play();
+        	flameShotAudio.Play();
 
         	flame++;
         	if(flame > 2)
