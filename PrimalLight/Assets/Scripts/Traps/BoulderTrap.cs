@@ -33,6 +33,9 @@ public class BoulderTrap : ActionObject
     private bool move = false;
     private Vector3 initPos;
 
+    // Audio
+    private AudioSource rollingAudio;
+    private AudioSource impactAudio;
 
     // Start is called before the first frame update
     void Start()
@@ -40,6 +43,10 @@ public class BoulderTrap : ActionObject
         boulder = transform.GetChild(0).gameObject;
         dust = transform.GetChild(1).gameObject.GetComponent<ParticleSystem>();
         initPos = transform.position;
+
+        AudioSource[] audios = GetComponents<AudioSource>();
+        rollingAudio = audios[0];
+        impactAudio = audios[1];
 
         if(!trigger)
         	StartCoroutine(Init());
@@ -57,6 +64,8 @@ public class BoulderTrap : ActionObject
     	if(currMovement >= movements.Length){
         	if(!loop){
         		SetActive(false);
+        		dust.Stop();
+        		impactAudio.Play();
         		return;
         	}
         	else{
@@ -85,14 +94,20 @@ public class BoulderTrap : ActionObject
     	StartCoroutine(MovementUtils.SmoothMovement( (bool done) => {
     		if(rotation != null)
             	StopCoroutine(rotation);
+        	if(!movement.onGround)
+        		impactAudio.Play();
             move = true;
         }, gameObject, endPos, movement.speed));
 
         //Play or dust ps
-		if(movement.onGround)
+		if(movement.onGround){
+			rollingAudio.Play();
     		dust.Play();
-    	else
+		}
+    	else{
+    		rollingAudio.Stop();
     		dust.Stop();
+    	}
   	}
 
     public override void ExitAction(){}

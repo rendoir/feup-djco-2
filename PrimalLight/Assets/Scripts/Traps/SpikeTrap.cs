@@ -17,12 +17,17 @@ public class SpikeTrap : MonoBehaviour
 	private Vector3 upPos;
 	private Vector3 downPos;
 
+    // Audio
+    private AudioSource spikeRisingAudio;
+
     // Start is called before the first frame update
     void Start()
     {
 	    spikes = transform.GetChild(0).gameObject;
 	    upPos = spikes.transform.position+offset;
 	    downPos = spikes.transform.position;
+
+        spikeRisingAudio = GetComponent<AudioSource>();
 	    StartCoroutine(Init());
     }
 
@@ -45,6 +50,7 @@ public class SpikeTrap : MonoBehaviour
     		StartCoroutine(MovementUtils.SmoothMovement( (bool done) => {
 	            StartCoroutine(Deactivate()); 
         	}, spikes, upPos, speed));
+            spikeRisingAudio.Play();
 		
     		StartCoroutine(WaitCoolDown());
 		}

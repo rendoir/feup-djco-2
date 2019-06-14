@@ -27,16 +27,20 @@ public class TempleElevator : ActionObject
     public void Set(){
     	StartCoroutine(MovementUtils.SmoothMovement( (bool done) => { 
             trigger.SetActive(true);
+            GameSound.Stop("ElevatorMovement");
         }, gameObject, setPosition, speed));
+        GameSound.Play("ElevatorMovement");
     }
 
     public override void Action(){
     	if(movement != null)
     		StopCoroutine(movement);
 
-    	movement = StartCoroutine(MovementUtils.SmoothMovement( (bool done) => { 
+    	movement = StartCoroutine(MovementUtils.SmoothMovement( (bool done) => {  
+            GameSound.Stop("ElevatorMovement");
             movement = null;
         }, platform, topPosition, speed));
+        GameSound.Play("ElevatorMovement");
     }
 
     public override void ExitAction(){
@@ -44,7 +48,9 @@ public class TempleElevator : ActionObject
     		StopCoroutine(movement);
 
     	movement =  StartCoroutine(MovementUtils.SmoothMovement( (bool done) => { 
+            GameSound.Stop("ElevatorMovement");
             movement = null;
         }, platform, setPosition, speed));
+        GameSound.Play("ElevatorMovement");
     }
 }
