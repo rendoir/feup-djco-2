@@ -22,7 +22,6 @@ public class PushableObject : MovingObject
     }
     
     private bool CheckInBounds(Vector3 relPos){
-    	Debug.Log(relPos);
     	bool minBound = false;
     	bool maxBound = false;
 
@@ -32,8 +31,6 @@ public class PushableObject : MovingObject
     	if(relPos.x >= relMinBound.x && relPos.y >= relMinBound.y && relPos.z >= relMinBound.z)
     		minBound = true;
 
-    	Debug.Log(minBound);
-    	Debug.Log(maxBound);
     	return minBound && maxBound;
     }
 
