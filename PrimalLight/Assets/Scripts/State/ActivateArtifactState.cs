@@ -41,7 +41,7 @@ public class ActivateArtifactState : State, InteractionObserver {
             (artifactPieces[0].transform.parent.position.x + artifactPieces[1].transform.parent.position.x + artifactPieces[2].transform.parent.position.x)/3,
             (artifactPieces[0].transform.parent.position.y + artifactPieces[1].transform.parent.position.y + artifactPieces[2].transform.parent.position.y)/3 + 2f,
             (artifactPieces[0].transform.parent.position.z + artifactPieces[1].transform.parent.position.z + artifactPieces[2].transform.parent.position.z)/3);
-        artifactRotation = Quaternion.Euler(Vector3.zero);
+        artifactRotation = Quaternion.Euler(0f, 90f, 0f);
 
         //Save initial transform
         for(int i = 0; i < artifactPieces.Length; i++) {
