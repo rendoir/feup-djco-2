@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
 	private int rewards = 0;
 
 	//Scenes
-	public static int MAIN_SCENE_INDEX = 0;
+	public static int MAIN_SCENE_INDEX = 3;
 	public bool sequentialCheckpoints = false;
 
 	void Awake()
@@ -59,8 +59,16 @@ public class GameManager : MonoBehaviour
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
+	void OnDestroy()
+	{
+		SceneManager.sceneLoaded -= OnSceneLoaded;
+	}
+
 	void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+		if(SceneManager.GetActiveScene().buildIndex == MenuManager.MENU_SCENE_INDEX)
+			return;
+
 		//Find Player
 		current.player = GameObject.FindGameObjectWithTag("Player");
 		current.initialPosition = current.player.transform.position;

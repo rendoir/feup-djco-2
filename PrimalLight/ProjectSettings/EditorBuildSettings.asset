@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TempleInterior.unity
     guid: fa8e30edce1244b4a8dab75e74ef91f4
+  - enabled: 1
+    path: Assets/Scenes/Menu.unity
+    guid: 3d95b37a1a010af3f9d216a91a80c08c
   m_configObjects: {}

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SaveFriendState : State {
 
@@ -86,6 +87,7 @@ public class SaveFriendState : State {
             GameInput.SimulateInput(false);
             GameInput.CaptureInput(false);
             portalGun.EnableBeam(false);
+            SceneManager.LoadScene(MenuManager.MENU_SCENE_INDEX);
             return new NullState();
         }
     }

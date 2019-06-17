@@ -56,8 +56,16 @@ public class GameState : MonoBehaviour
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
+	void OnDestroy()
+	{
+		SceneManager.sceneLoaded -= OnSceneLoaded;
+	}
+
 	void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+		if(SceneManager.GetActiveScene().buildIndex == MenuManager.MENU_SCENE_INDEX)
+			return;
+
 		if(current.state != null)
 			current.state.OnSceneLoaded(scene);
     }

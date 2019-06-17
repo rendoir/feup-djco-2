@@ -23,23 +23,23 @@ public class GameUI : MonoBehaviour
 
 		//Persist this object between scene reloads
 		DontDestroyOnLoad(gameObject);
-
-		//Only done once
-		ShowGameName();
-	}
-
-	void ShowGameName() {
-		if(SceneManager.GetActiveScene().buildIndex == GameManager.MAIN_SCENE_INDEX)
-			GameObject.Find("Canvas/GameName").GetComponent<RawImage>().enabled = true;
 	}
 
     void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
+	
+	void OnDestroy()
+	{
+		SceneManager.sceneLoaded -= OnSceneLoaded;
+	}
 
 	void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+		if(SceneManager.GetActiveScene().buildIndex == MenuManager.MENU_SCENE_INDEX)
+			return;
+
 		//Find Objective Text
 		current.objective = GameObject.Find("Canvas/Objective").GetComponent<TextMeshProUGUI>();
     }

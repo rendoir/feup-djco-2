@@ -24,6 +24,11 @@ public class SceneTrigger : MonoBehaviour
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
+    void OnDestroy()
+	{
+		SceneManager.sceneLoaded -= OnSceneLoaded;
+	}
+
 	void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         if(loadingScene) {
