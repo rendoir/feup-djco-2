@@ -6,8 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/MainScene.unity
-    guid: 8fb8722af9acf0344923ce9d7a8a2953
+    path: Assets/Scenes/Menu.unity
+    guid: 3d95b37a1a010af3f9d216a91a80c08c
   - enabled: 1
     path: Assets/Scenes/Cave.unity
     guid: d26713d609161f953a874ccac9f6599d
@@ -15,6 +15,6 @@ EditorBuildSettings:
     path: Assets/Scenes/TempleInterior.unity
     guid: fa8e30edce1244b4a8dab75e74ef91f4
   - enabled: 1
-    path: Assets/Scenes/Menu.unity
-    guid: 3d95b37a1a010af3f9d216a91a80c08c
+    path: Assets/Scenes/MainScene.unity
+    guid: 8fb8722af9acf0344923ce9d7a8a2953
   m_configObjects: {}
