@@ -74,6 +74,9 @@ public class GameManager : MonoBehaviour
 			sequentialCheckpoints = true;
 		else sequentialCheckpoints = false;
 
+		//Remove all observers
+		deathObservers.Clear();
+
 		//Find Player
 		current.player = GameObject.FindGameObjectWithTag("Player");
 		current.initialPosition = current.player.transform.position;
