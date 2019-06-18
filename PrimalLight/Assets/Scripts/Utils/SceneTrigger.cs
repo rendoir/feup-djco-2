@@ -14,20 +14,11 @@ public class SceneTrigger : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         if(Utils.MaskContainsLayer(playerLayer, other.gameObject.layer)) {
-            SceneManager.LoadSceneAsync(sceneIndex);
+            SceneManager.sceneLoaded += OnSceneLoaded;
             loadingScene = true;
+            SceneManager.LoadSceneAsync(sceneIndex);
         }
     }
-
-    void OnEnable()
-    {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
-    void OnDestroy()
-	{
-		SceneManager.sceneLoaded -= OnSceneLoaded;
-	}
 
 	void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
@@ -38,6 +29,8 @@ public class SceneTrigger : MonoBehaviour
                 GameManager.GetPlayer().transform.position = initialScenePosition;
                 GameManager.GetPlayer().transform.rotation = Quaternion.Euler(initialSceneRotation);
             }
+
+            SceneManager.sceneLoaded -= OnSceneLoaded;
         }
     } 
 }
