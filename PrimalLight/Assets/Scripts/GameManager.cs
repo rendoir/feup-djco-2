@@ -31,7 +31,8 @@ public class GameManager : MonoBehaviour
 
 	//Scenes
 	public static int MAIN_SCENE_INDEX = 3;
-	public bool sequentialCheckpoints = false;
+	public static int TEMPLE_SCENE_INDEX = 2;
+	bool sequentialCheckpoints = false;
 
 	void Awake()
 	{
@@ -66,8 +67,12 @@ public class GameManager : MonoBehaviour
 
 	void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-		if(SceneManager.GetActiveScene().buildIndex == MenuManager.MENU_SCENE_INDEX)
+		if(scene.buildIndex == MenuManager.MENU_SCENE_INDEX)
 			return;
+
+		if(scene.buildIndex == TEMPLE_SCENE_INDEX)
+			sequentialCheckpoints = true;
+		else sequentialCheckpoints = false;
 
 		//Find Player
 		current.player = GameObject.FindGameObjectWithTag("Player");
