@@ -25,6 +25,11 @@ public class InitialState : State {
         initialSpeed = playerMovement.movementSpeed;
         playerMovement.movementSpeed = stateSpeed;
         GameSound.Play("death_scene");
+        GameObject[] ui = GameObject.FindGameObjectsWithTag("IntroFade");
+        MonoBehaviour gameName = ui[0].GetComponentInChildren<MonoBehaviour>();
+        gameName.enabled = true;
+        MonoBehaviour titleCard = ui[1].GetComponentInChildren<MonoBehaviour>();
+        titleCard.enabled = true;
     }
 
     public override void Update() {

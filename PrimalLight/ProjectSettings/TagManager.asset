@@ -15,6 +15,7 @@ TagManager:
   - Artifact
   - ArtifactPiece
   - ArtifactPieceActivator
+  - IntroFade
   layers:
   - Default
   - TransparentFX
