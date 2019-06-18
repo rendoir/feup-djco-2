@@ -27,7 +27,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 8
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &3689279065076938778
 Transform:
@@ -56,7 +56,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   restartTime: 6
-  sequentialCheckpoints: 0
 --- !u!114 &3689279065076938779
 MonoBehaviour:
   m_ObjectHideFlags: 0
