@@ -53,7 +53,6 @@ public class GameManager : MonoBehaviour
 
 	void Start() {
 		Cursor.lockState = CursorLockMode.Locked;
-		Time.timeScale = 5f;
 	}
 
 	void OnEnable()
