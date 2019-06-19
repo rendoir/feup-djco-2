@@ -13,7 +13,7 @@ public class SceneTrigger : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if(Utils.MaskContainsLayer(playerLayer, other.gameObject.layer)) {
+        if(Utils.MaskContainsLayer(playerLayer, other.gameObject.layer) && !loadingScene) {
             SceneManager.sceneLoaded += OnSceneLoaded;
             loadingScene = true;
             SceneManager.LoadSceneAsync(sceneIndex);

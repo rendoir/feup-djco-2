@@ -43,7 +43,7 @@ public class HolderReward : MonoBehaviour, InteractionObserver
     public void OnPlayerInteract() {
         if(canReward) {
             rewardObject.SetActive(false);
-            GameManager.OnRewardObtained();
+            GameManager.OnRewardObtained(Reward.COLOR_MATCH_PUZZLE);
             interactionTrigger.gameObject.SetActive(false);
         }
     }

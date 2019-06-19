@@ -13,7 +13,7 @@ public class MirrorReward : MonoBehaviour, InteractionObserver
     
     public void OnPlayerInteract() {
             rewardObject.SetActive(false);
-            GameManager.OnRewardObtained();
+            GameManager.OnRewardObtained(Reward.REFLECTION_PUZZLE);
             TempleManager.instance.OnRewardCollected();
             interactionTrigger.gameObject.SetActive(false);
     }

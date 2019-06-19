@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
 
 	//Artifact
 	public const int NUMBER_PIECES = 3;
-	private int rewards = 0;
+	private HashSet<Reward> rewards = new HashSet<Reward>();
 
 	//Scenes
 	public static int MAIN_SCENE_INDEX = 3;
@@ -120,7 +120,7 @@ public class GameManager : MonoBehaviour
 	}
 
 	public static int GetNumberPieces() {
-		return current.rewards;
+		return current.rewards.Count;
 	}
 
 	public static void PlayerDied() {
@@ -181,7 +181,7 @@ public class GameManager : MonoBehaviour
 		current.deathObservers.Add(obs);
 	}
 
-	public static void OnRewardObtained() {
-		current.rewards++;
+	public static void OnRewardObtained(Reward reward) {
+		current.rewards.Add(reward);
 	}
 }

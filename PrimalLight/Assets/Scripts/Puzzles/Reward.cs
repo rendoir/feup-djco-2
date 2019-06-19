@@ -1,0 +1,6 @@
+public enum Reward
+{
+    LIGHT_MATCH_PUZZLE,
+    COLOR_MATCH_PUZZLE,
+    REFLECTION_PUZZLE
+}

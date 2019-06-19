@@ -42,7 +42,7 @@ public class ChestReward : MonoBehaviour, InteractionObserver
     public void OnPlayerInteract() {
         if(canReward) {
             rewardObject.SetActive(false);
-            GameManager.OnRewardObtained();
+            GameManager.OnRewardObtained(Reward.LIGHT_MATCH_PUZZLE);
             interactionTrigger.gameObject.SetActive(false);
         }
     }
