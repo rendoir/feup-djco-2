@@ -47,6 +47,7 @@ public class BoulderTrap : ActionObject
         AudioSource[] audios = GetComponents<AudioSource>();
         rollingAudio = audios[0];
         impactAudio = audios[1];
+        //impactAudio.Play()
 
         if(!trigger)
         	StartCoroutine(Init());
@@ -65,7 +66,9 @@ public class BoulderTrap : ActionObject
         	if(!loop){
         		SetActive(false);
         		dust.Stop();
-        		impactAudio.Play();
+                rollingAudio.Stop();
+        		PlaySoundInterval(impactAudio,0,0.5f);
+                move = false;
         		return;
         	}
         	else{
@@ -75,7 +78,6 @@ public class BoulderTrap : ActionObject
         }
 
         Move();
-        currMovement++;
     }
 
     public override void Action(){
@@ -95,7 +97,8 @@ public class BoulderTrap : ActionObject
     		if(rotation != null)
             	StopCoroutine(rotation);
         	if(!movement.onGround)
-        		impactAudio.Play();
+        		PlaySoundInterval(impactAudio,0,0.5f);
+            currMovement++;
             move = true;
         }, gameObject, endPos, movement.speed));
 
@@ -144,5 +147,12 @@ public class BoulderTrap : ActionObject
     private void SetActive(bool state){
         active = state;
         boulder.GetComponent<Boulder>().SetColliderTrigger(state);
+    }
+
+    void PlaySoundInterval(AudioSource audioSource, float fromSeconds, float toSeconds)
+    {
+        audioSource.time = fromSeconds;
+        audioSource.Play();
+        audioSource.SetScheduledEndTime(AudioSettings.dspTime+(toSeconds-fromSeconds));
     }
 }
