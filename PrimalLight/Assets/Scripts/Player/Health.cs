@@ -79,6 +79,7 @@ public class Health : MonoBehaviour, DeathObserver
 
     public void OnPlayerAlive() {
         ResetHealth();
+        UpdateColor();
 		isDead = false;
         playerAnimator.SetTrigger("isAlive");
 	}
