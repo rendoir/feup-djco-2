@@ -41,8 +41,10 @@ public class MovingPlatform : ActionObject
     		return;
 
     	if(currMovement >= movements.Length){
-        	if(!loop)
+        	if(!loop){
+        		move = false;
         		return;
+        	}
         	else{
         		transform.position = initPos;
         		currMovement = 0;

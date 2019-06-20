@@ -264,6 +264,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 834d7179872fc444691d34892b7c0946, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isKey: 0
+  gemEmissionColor: {r: 0, g: 0, b: 0, a: 0}
   index: 0
   puzzle: {fileID: 0}
   pos: {x: 0, y: 0}
@@ -497,7 +499,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!64 &2498588680801282618
 MeshCollider:
