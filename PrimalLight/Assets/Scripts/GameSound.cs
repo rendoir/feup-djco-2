@@ -8,7 +8,7 @@ public class GameSound : MonoBehaviour
 
     static GameSound current;
     
-    public AudioSource[] audioSources;
+    private AudioSource[] audioSources;
 
     void Awake()
 	{
@@ -25,6 +25,9 @@ public class GameSound : MonoBehaviour
 
 		//Persist this object between scene reloads
 		DontDestroyOnLoad(gameObject);
+
+        //Get audio sources
+        audioSources = GetComponents<AudioSource>();
 	}
 
     static public void Play(string name) {
