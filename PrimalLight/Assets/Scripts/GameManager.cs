@@ -81,6 +81,7 @@ public class GameManager : MonoBehaviour
 		current.player = GameObject.FindGameObjectWithTag("Player");
 		current.initialPosition = current.player.transform.position;
 		current.initialRotation = current.player.transform.localRotation;
+		current.player.GetComponent<PlayerSound>().SetHardSurface(scene.buildIndex != MAIN_SCENE_INDEX);
 
 		//Find Checkpoints
 		current.checkpoints = GameObject.FindGameObjectsWithTag("Checkpoint");

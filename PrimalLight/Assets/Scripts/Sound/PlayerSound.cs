@@ -6,13 +6,16 @@ public class PlayerSound : MonoBehaviour, DeathObserver {
     public AudioSource audioSource;
     public AudioClip cryClip;
     public AudioClip yellingClip;
-    public AudioClip jumpClip;
+    public AudioClip jumpClipNormal;
+    public AudioClip jumpClipHard;
     public AudioClip deathClip;
-    public AudioClip[] footstepClips;
+    public AudioClip[] footstepClipsNormal;
+    public AudioClip[] footstepClipsHard;
 
 	private float lastFrameFootstepLeft = 0;
 	private float lastFrameFootstepRight = 0;
     private bool lastFrameJumping = false;
+    private bool hardSurface = false;
 
 
     void Start()
@@ -43,13 +46,18 @@ public class PlayerSound : MonoBehaviour, DeathObserver {
 
     public void StepSound()
     {
-        AudioClip clip = GetRandomClip(footstepClips);
+        AudioClip clip;
+        if(!hardSurface)
+            clip = GetRandomClip(footstepClipsNormal);
+        else clip = GetRandomClip(footstepClipsHard);
         audioSource.PlayOneShot(clip);
     }
 
     public void JumpSound()
     {
-        audioSource.PlayOneShot(jumpClip);
+        if(!hardSurface)
+            audioSource.PlayOneShot(jumpClipNormal);
+        else audioSource.PlayOneShot(jumpClipHard);
     }
 
     public void CrySound()
@@ -69,6 +77,11 @@ public class PlayerSound : MonoBehaviour, DeathObserver {
 
     AudioClip GetRandomClip(AudioClip[] clips) {
         return clips[Random.Range(0, clips.Length)];
+    }
+
+    public void SetHardSurface(bool hard)
+    {
+        hardSurface = hard;
     }
 
     public void OnPlayerDeath()
