@@ -2,6 +2,12 @@
 
 Primal Light is an open-world story-driven adventure video game, developed for the Computer Games Development (DJCO) class of the Integrated Master's Degree in Informatics and Computing Engineering (MIEIC) at the Faculty of Engineering of the University of Porto (FEUP).
 
+- [Game Design Document](https://github.com/rendoir/feup-djco-2/releases/download/v1.0/GameDesignDocument.pdf)
+- [Game Concept Document](https://github.com/rendoir/feup-djco-2/releases/download/v1.0/GameConceptDocument.pdf)
+- [Installation Document](https://github.com/rendoir/feup-djco-2/releases/download/v1.0/Installation.pdf)
+- [Game Executables](https://github.com/rendoir/feup-djco-2/releases/download/v1.0/Executables.zip)
+- [Trailer](https://www.youtube.com/watch?v=Xh6YvC_zXA0)
+
 
 
 ## Installation and Usage
