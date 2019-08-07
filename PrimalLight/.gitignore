@@ -47,6 +47,6 @@ sysinfo.txt
 crashlytics-build.properties
 
 # Asset conflicts
-Assets/ThirdParty/MKGlowFree/Legacy_3_0_7/MKGlowFree_3_0_7.unitypackage.meta
-Assets/ThirdParty/MKGlowFree/Shaders/VariantsSelective/SelectiveParticleStandard_2017_3_Or_Higher.unitypackage.meta
-
+Assets/ThirdParty/*
+!Assets/ThirdParty/thirdparty.unitypackage
+!Assets/ThirdParty/thirdparty.unitypackage.meta
